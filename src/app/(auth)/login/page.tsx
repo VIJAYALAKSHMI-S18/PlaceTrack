@@ -6,6 +6,7 @@ import { Sparkles, Lock, Mail, Shield, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
+import { RathinamLogo } from "@/components/common/RathinamLogo";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -53,12 +54,7 @@ export default function LoginPage() {
         {/* Rathinam Branding & Logo */}
         <div className="text-center space-y-4">
           <div className="flex justify-center transition-transform duration-300 hover:scale-105">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/rgu-logo.svg"
-              alt="Rathinam Global University - NAAC A++ Accredited"
-              className="h-16 sm:h-20 w-auto object-contain max-w-[440px] drop-shadow-[0_8px_24px_rgba(139,36,144,0.35)]"
-            />
+            <RathinamLogo className="h-16 sm:h-20 w-auto max-w-[440px] drop-shadow-[0_8px_24px_rgba(139,36,144,0.35)]" />
           </div>
           <div>
             <h1 className="text-xl font-black tracking-wide text-[#F8FAFC]">

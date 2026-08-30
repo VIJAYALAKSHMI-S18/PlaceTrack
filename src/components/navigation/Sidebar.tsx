@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { Role, SessionUser } from "@/types";
 import { cn } from "@/lib/utils";
+import { RathinamLogo } from "@/components/common/RathinamLogo";
 
 interface SidebarProps {
   role: Role;
@@ -104,12 +105,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Sidebar Header / Rathinam Branding */}
         <div className="flex flex-col border-b border-[#1E293B] px-3.5 py-4 bg-gradient-to-b from-[#7C2D87]/20 via-[#0F172A] to-[#111827]">
           <Link href={`/${role.toLowerCase().replace("_", "-")}/dashboard`} className="flex items-center justify-center transition-transform duration-200 hover:scale-105">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/rgu-logo.svg"
-              alt="Rathinam Global University"
-              className="w-full h-auto max-h-12 object-contain"
-            />
+            <RathinamLogo className="w-full h-auto max-h-12" />
           </Link>
         </div>
 
