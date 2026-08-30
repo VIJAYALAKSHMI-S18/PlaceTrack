@@ -255,12 +255,14 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
             className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
           >
             <option value="ALL">All Departments</option>
-            <option value="CSE">Computer Science (CSE)</option>
-            <option value="IT">Information Tech (IT)</option>
+            <option value="Computer Science">Computer Science (CSE)</option>
+            <option value="Information Technology">Information Tech (IT)</option>
+            <option value="Cyber Security">Cyber Security</option>
+            <option value="Business Administration">Business Administration (MBA/BBA)</option>
+            <option value="Electronics and Communication">Electronics & Comm (ECE)</option>
             <option value="AIDS">AI & Data Science (AIDS)</option>
-            <option value="ECE">Electronics (ECE)</option>
-            <option value="MECH">Mechanical (MECH)</option>
-            <option value="EEE">Electrical (EEE)</option>
+            <option value="Mechanical">Mechanical (MECH)</option>
+            <option value="Electrical">Electrical (EEE)</option>
           </select>
 
           <select
@@ -272,6 +274,8 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
             className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
           >
             <option value="ALL">All Student Types</option>
+            <option value="Day Scholar">Day Scholar (53)</option>
+            <option value="Hostel">Hosteller / Hostel (47)</option>
             <option value="Regular">Regular</option>
             <option value="Lateral Entry">Lateral Entry</option>
           </select>
@@ -285,8 +289,8 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
             className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
           >
             <option value="ALL">All Placement Statuses</option>
-            <option value="NOT_PLACED">Not Placed</option>
-            <option value="PLACED">Placed</option>
+            <option value="PLACED">Placed Candidates (70)</option>
+            <option value="NOT_PLACED">Not Placed (30)</option>
             <option value="MULTIPLE_OFFERS">Multiple Offers</option>
             <option value="WITHDRAWN">Withdrawn</option>
           </select>

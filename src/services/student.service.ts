@@ -20,36 +20,102 @@ export async function getStudents(params: StudentFilterParams) {
   const limit = Math.max(1, Math.min(100, params.limit || 10));
   const skip = (page - 1) * limit;
 
-  const where: Prisma.StudentWhereInput = {};
+  const andConditions: Prisma.StudentWhereInput[] = [];
 
   if (params.isTerminated) {
-    where.deleted_at = { not: null };
+    andConditions.push({ deleted_at: { not: null } });
   } else {
-    where.deleted_at = null;
+    andConditions.push({ deleted_at: null });
   }
 
   if (params.department && params.department !== "ALL") {
-    where.department = { equals: params.department };
+    const dept = params.department.trim();
+    const deptUpper = dept.toUpperCase();
+
+    if (deptUpper === "CSE" || deptUpper.includes("COMPUTER SCIENCE")) {
+      andConditions.push({
+        OR: [{ department: { contains: "Computer Science" } }, { department: { contains: "CSE" } }],
+      });
+    } else if (deptUpper === "IT" || deptUpper.includes("INFORMATION TECH")) {
+      andConditions.push({
+        OR: [{ department: { contains: "Information Technology" } }, { department: { contains: "IT" } }],
+      });
+    } else if (
+      deptUpper === "AIDS" ||
+      deptUpper.includes("AI") ||
+      deptUpper.includes("DATA SCIENCE") ||
+      deptUpper.includes("ARTIFICIAL")
+    ) {
+      andConditions.push({
+        OR: [
+          { department: { contains: "AI" } },
+          { department: { contains: "Data Science" } },
+          { department: { contains: "AIDS" } },
+          { department: { contains: "Artificial" } },
+        ],
+      });
+    } else if (deptUpper === "ECE" || deptUpper.includes("ELECTRONIC")) {
+      andConditions.push({
+        OR: [{ department: { contains: "Electronics" } }, { department: { contains: "ECE" } }],
+      });
+    } else if (deptUpper === "EEE" || deptUpper.includes("ELECTRICAL")) {
+      andConditions.push({
+        OR: [{ department: { contains: "Electrical" } }, { department: { contains: "EEE" } }],
+      });
+    } else if (deptUpper === "MECH" || deptUpper.includes("MECHANICAL")) {
+      andConditions.push({
+        OR: [{ department: { contains: "Mechanical" } }, { department: { contains: "MECH" } }],
+      });
+    } else if (deptUpper === "CYBER" || deptUpper.includes("CYBER")) {
+      andConditions.push({
+        OR: [{ department: { contains: "Cyber Security" } }, { department: { contains: "Cyber" } }],
+      });
+    } else if (deptUpper === "MBA" || deptUpper === "BBA" || deptUpper.includes("BUSINESS")) {
+      andConditions.push({
+        OR: [
+          { department: { contains: "Business Administration" } },
+          { department: { contains: "MBA" } },
+          { department: { contains: "BBA" } },
+        ],
+      });
+    } else {
+      andConditions.push({ department: { contains: dept } });
+    }
   }
 
   if (params.studentType && params.studentType !== "ALL") {
-    where.student_type = { equals: params.studentType };
+    const sType = params.studentType.trim().toUpperCase();
+    if (sType === "HOSTEL" || sType === "HOSTELLER") {
+      andConditions.push({
+        OR: [{ student_type: { contains: "Hostel" } }, { student_type: { contains: "Hosteller" } }],
+      });
+    } else if (sType.includes("DAY") || sType === "DAY_SCHOLAR") {
+      andConditions.push({
+        OR: [{ student_type: { contains: "Day Scholar" } }, { student_type: { contains: "Day" } }],
+      });
+    } else {
+      andConditions.push({ student_type: { contains: params.studentType.trim() } });
+    }
   }
 
   if (params.placementStatus && params.placementStatus !== "ALL") {
-    where.placement_status = params.placementStatus as PlacementStatus;
+    andConditions.push({ placement_status: params.placementStatus as PlacementStatus });
   }
 
   if (params.search && params.search.trim()) {
     const term = params.search.trim();
-    where.OR = [
-      { name: { contains: term } },
-      { register_number: { contains: term } },
-      { email: { contains: term } },
-      { phone_number: { contains: term } },
-      { department: { contains: term } },
-    ];
+    andConditions.push({
+      OR: [
+        { name: { contains: term } },
+        { register_number: { contains: term } },
+        { email: { contains: term } },
+        { phone_number: { contains: term } },
+        { department: { contains: term } },
+      ],
+    });
   }
+
+  const where: Prisma.StudentWhereInput = andConditions.length > 0 ? { AND: andConditions } : {};
 
   const orderBy: Prisma.StudentOrderByWithRelationInput = {};
   const sortField = params.sortBy || "created_at";
