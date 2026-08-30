@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 110" width="100%" height="100%">
+  <defs>
+    <!-- Gradients for Rings -->
+    <linearGradient id="ringOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+    <linearGradient id="ringGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="ringBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="rguGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A855F7"/>
+      <stop offset="50%" stop-color="#EC4899"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Left: Rathinam Iconic 3-Rings Emblem -->
+  <g transform="translate(10, 12)">
+    <!-- Top Ring (Orange) -->
+    <circle cx="38" cy="24" r="16" fill="none" stroke="url(#ringOrange)" stroke-width="7" />
+    <!-- Bottom Left Ring (Green) -->
+    <circle cx="22" cy="52" r="16" fill="none" stroke="url(#ringGreen)" stroke-width="7" />
+    <!-- Bottom Right Ring (Blue) -->
+    <circle cx="54" cy="52" r="16" fill="none" stroke="url(#ringBlue)" stroke-width="7" />
+    <!-- Center Dot Connector -->
+    <circle cx="38" cy="43" r="4" fill="#FFFFFF" />
+
+    <!-- "RATHINAM" brand text under emblem -->
+    <text x="38" y="80" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="11" fill="#FFFFFF" letter-spacing="1.5">RATHINAM</text>
+  </g>
+
+  <!-- Vertical Divider -->
+  <line x1="95" y1="18" x2="95" y2="92" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Right: RGU & Global University Typography -->
+  <!-- RGU Big Bold Letters -->
+  <text x="110" y="62" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="52" fill="url(#rguGrad)" letter-spacing="2" filter="url(#glow)">RGU</text>
+
+  <!-- University Subtitle -->
+  <g transform="translate(250, 24)">
+    <text x="0" y="16" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="15" fill="#FFFFFF" letter-spacing="1.2">GLOBAL</text>
+    <text x="0" y="32" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="11" fill="#94A3B8" letter-spacing="0.8">DEEMED TO BE</text>
+    <text x="0" y="47" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="14" fill="#38BDF8" letter-spacing="1">UNIVERSITY</text>
+  </g>
+
+  <!-- Placement Portal Tagline Strip -->
+  <rect x="110" y="76" width="350" height="20" rx="6" fill="#1E1B4B" stroke="#6366F1" stroke-width="1" stroke-opacity="0.4"/>
+  <circle cx="122" cy="86" r="3" fill="#10B981" />
+  <text x="132" y="90" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="9.5" fill="#A5B4FC" letter-spacing="1.2">CAMPUS PLACEMENT &amp; CAREER CELL</text>
+</svg>

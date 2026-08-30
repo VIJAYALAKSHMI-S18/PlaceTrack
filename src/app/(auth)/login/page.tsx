@@ -52,12 +52,12 @@ export default function LoginPage() {
       <div className="w-full max-w-md space-y-6">
         {/* Rathinam Branding & Logo */}
         <div className="text-center space-y-4">
-          <div className="inline-flex rounded-3xl bg-white/95 p-4 shadow-2xl shadow-purple-900/50 border border-white/30 backdrop-blur-xl transition-transform duration-300 hover:scale-[1.02]">
+          <div className="inline-flex rounded-3xl bg-gradient-to-b from-[#1E1B4B]/80 via-[#0F172A]/90 to-[#0B0F19] p-5 shadow-2xl shadow-purple-950/60 border border-purple-500/30 backdrop-blur-xl transition-transform duration-300 hover:scale-[1.02]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/rgu-logo.webp"
+              src="/images/rgu-logo.svg"
               alt="Rathinam Global University Logo"
-              className="h-14 w-auto object-contain max-w-[320px] drop-shadow-md"
+              className="h-16 w-auto object-contain max-w-[340px] drop-shadow-[0_8px_20px_rgba(168,85,247,0.3)]"
             />
           </div>
           <div>
