@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireApiAuth, handleAuthError } from "@/lib/rbac";
+import { requireApiAuth, requireApiRole, handleAuthError } from "@/lib/rbac";
 import { getCompanies, createCompany } from "@/services/company.service";
 import { companyCreateSchema } from "@/validators/company.validator";
 
@@ -32,8 +32,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    // Admin, Manager, or Placement Team can create/submit a company
-    const user = await requireApiAuth();
+    // Only Admin and Placement Team can create/submit a company (Manager has view-only access)
+    const user = await requireApiRole(["ADMIN", "PLACEMENT_TEAM"]);
     const body = await req.json();
 
     const validated = companyCreateSchema.safeParse(body);

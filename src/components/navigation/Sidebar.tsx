@@ -110,18 +110,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Action Button for non-admin */}
-        {role === "MANAGER" && (
-          <div className="px-4 pt-4">
-            <Link
-              href="/manager/submit-company"
-              className="flex w-full items-center justify-center gap-2 rounded-lg rgu-btn-gradient px-3.5 py-2 text-xs font-semibold text-white shadow-md shadow-purple-950/30 transition"
-            >
-              <PlusCircle className="h-4 w-4" />
-              Submit Company
-            </Link>
-          </div>
-        )}
-
         {role === "PLACEMENT_TEAM" && (
           <div className="px-4 pt-4">
             <Link

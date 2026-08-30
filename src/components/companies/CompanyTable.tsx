@@ -150,10 +150,12 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
 
         <div className="flex items-center gap-2.5">
           <ExportButtons onExportExcel={handleExportExcel} onExportPdf={handleExportPdf} />
-          <Button size="sm" onClick={() => setIsAddOpen(true)}>
-            <Plus className="h-4 w-4" />
-            {isAdmin ? "Add Company" : "Submit Company for Approval"}
-          </Button>
+          {role !== "MANAGER" && (
+            <Button size="sm" onClick={() => setIsAddOpen(true)}>
+              <Plus className="h-4 w-4" />
+              {isAdmin ? "Add Company" : "Submit Company for Approval"}
+            </Button>
+          )}
         </div>
       </div>
 
