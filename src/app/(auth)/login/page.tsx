@@ -55,9 +55,9 @@ export default function LoginPage() {
           <div className="flex justify-center transition-transform duration-300 hover:scale-105">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/rgu-logo.png"
+              src="/rgu-logo.svg"
               alt="Rathinam Global University - NAAC A++ Accredited"
-              className="h-16 sm:h-20 w-auto object-contain max-w-[440px] drop-shadow-[0_8px_24px_rgba(124,45,135,0.4)]"
+              className="h-16 sm:h-20 w-auto object-contain max-w-[440px] drop-shadow-[0_8px_24px_rgba(139,36,144,0.35)]"
             />
           </div>
           <div>

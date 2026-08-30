@@ -78,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="hidden sm:flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/rgu-logo.png"
+            src="/rgu-logo.svg"
             alt="Rathinam Global University"
             className="h-8 w-auto object-contain"
           />

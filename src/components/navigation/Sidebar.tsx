@@ -106,7 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <Link href={`/${role.toLowerCase().replace("_", "-")}/dashboard`} className="flex items-center justify-center transition-transform duration-200 hover:scale-105">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/rgu-logo.png"
+              src="/rgu-logo.svg"
               alt="Rathinam Global University"
               className="w-full h-auto max-h-12 object-contain"
             />
