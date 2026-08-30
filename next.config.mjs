@@ -3,6 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     serverComponentsExternalPackages: ["@prisma/client", "bcryptjs"],
+    outputFileTracingIncludes: {
+      "/**": ["./prisma/**/*"],
+    },
   },
 };
 

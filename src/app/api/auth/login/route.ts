@@ -64,14 +64,18 @@ export async function POST(req: NextRequest) {
         ? "/manager/dashboard"
         : "/placement-team/dashboard";
 
-    await logAudit({
-      userId: user.id,
-      userEmail: user.email,
-      role: user.role,
-      action: "LOGIN",
-      entity: "User",
-      entityId: user.id,
-    });
+    try {
+      await logAudit({
+        userId: user.id,
+        userEmail: user.email,
+        role: user.role,
+        action: "LOGIN",
+        entity: "User",
+        entityId: user.id,
+      });
+    } catch (auditErr) {
+      console.warn("Non-fatal audit log warning on login:", auditErr);
+    }
 
     return NextResponse.json({
       success: true,
@@ -85,7 +89,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        message: "An unexpected error occurred during login.",
+        message: error?.message || "An unexpected error occurred during login.",
       },
       { status: 500 }
     );
