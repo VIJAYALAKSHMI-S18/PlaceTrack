@@ -161,14 +161,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="border-t border-[#1E293B] p-3 space-y-2">
           <div className="flex items-center gap-3 rounded-xl bg-[#0F172A] p-2.5 border border-[#1E293B]">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#334155] text-sm font-bold text-[#F8FAFC]">
-              {user?.name ? user.name.charAt(0).toUpperCase() : role.charAt(0)}
+              {user?.name ? user.name.charAt(0).toUpperCase() : (user?.role || role).charAt(0)}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-bold text-[#F8FAFC] truncate">
                 {user?.name || (role === "ADMIN" ? "Dr. Sivasubramaniam" : role === "MANAGER" ? "Jeyakannan" : "Prof. M. Anbarasan")}
               </p>
               <p className="text-[10px] font-semibold text-[#818CF8] tracking-wider uppercase">
-                {role.replace("_", " ")}
+                {(user?.role || role).replace("_", " ")}
               </p>
             </div>
           </div>

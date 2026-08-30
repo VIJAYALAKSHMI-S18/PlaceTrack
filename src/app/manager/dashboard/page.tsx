@@ -29,11 +29,6 @@ export default async function ManagerDashboardPage() {
               Welcome, {user.name}. Institutional placement metrics and analytics overview.
             </p>
           </div>
-          <Link href="/manager/submit-company">
-            <Button size="sm">
-              <PlusCircle className="h-4 w-4" /> Submit Company for Approval
-            </Button>
-          </Link>
         </div>
 
         {/* Summary Metric Cards with Click Popups */}
