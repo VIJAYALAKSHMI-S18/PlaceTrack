@@ -78,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="hidden sm:flex items-center gap-3">
           <div className="flex flex-col">
             <span className="text-xs font-bold text-[#F8FAFC]">
-              Rathinam Global University
+              Rathinam Global Deemed to be University
             </span>
             <span className="text-[10px] text-[#0EA5E9] font-medium">
               Placement & Career Development Cell

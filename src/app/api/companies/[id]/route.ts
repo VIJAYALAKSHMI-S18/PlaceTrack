@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth, requireRole, handleAuthError, ForbiddenError } from "@/lib/rbac";
+import { requireApiAuth, requireApiRole, handleAuthError, ForbiddenError } from "@/lib/rbac";
 import { getCompanyById, updateCompany, softDeleteCompany } from "@/services/company.service";
 import { companyUpdateSchema } from "@/validators/company.validator";
 
@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    await requireAuth();
+    await requireApiAuth();
     const company = await getCompanyById(params.id);
     if (!company) {
       return NextResponse.json(
@@ -30,7 +30,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const user = await requireAuth();
+    const user = await requireApiAuth();
     const existing = await getCompanyById(params.id);
     if (!existing) {
       return NextResponse.json(
@@ -74,7 +74,7 @@ export async function DELETE(
 ) {
   try {
     // Critical RBAC: Only ADMIN can delete companies. Manager and Placement Team receive 403.
-    const user = await requireRole(["ADMIN"]);
+    const user = await requireApiRole(["ADMIN"]);
     const deleted = await softDeleteCompany(params.id, user);
 
     return NextResponse.json({

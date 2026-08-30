@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireRole, handleAuthError } from "@/lib/rbac";
+import { requireApiRole, handleAuthError } from "@/lib/rbac";
 import prisma from "@/lib/prisma";
 import { logAudit } from "@/lib/audit";
 
@@ -36,7 +36,7 @@ export async function GET() {
 export async function PUT(req: NextRequest) {
   try {
     // Critical RBAC: Only Admin can modify settings
-    const user = await requireRole(["ADMIN"]);
+    const user = await requireApiRole(["ADMIN"]);
     const body = await req.json();
 
     const updated = await prisma.systemSettings.upsert({

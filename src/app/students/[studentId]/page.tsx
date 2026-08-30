@@ -21,8 +21,12 @@ import {
   Briefcase,
   Sparkles,
   ExternalLink,
+  Image as ImageIcon,
 } from "lucide-react";
 import { formatLPA, formatDate, formatPercentage, parseJsonSafe } from "@/lib/utils";
+import { StudentProfileExport } from "@/components/students/StudentProfileExport";
+import { StudentInteractiveMetricCards } from "@/components/students/StudentInteractiveMetricCards";
+import { CandidatePhotoBadge } from "@/components/students/CandidatePhotoBadge";
 
 export const dynamic = "force-dynamic";
 
@@ -45,13 +49,20 @@ export default async function StudentDetailPage({
       <div className="space-y-6">
         {/* Back navigation & Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3.5">
             <Link
               href={`/${user.role.toLowerCase().replace("_", "-")}/students`}
               className="rounded-lg border border-[#1E293B] bg-[#111827] p-2 text-[#94A3B8] transition hover:bg-[#1E293B] hover:text-[#F8FAFC]"
             >
               <ArrowLeft className="h-4 w-4" />
             </Link>
+
+            {/* Conditionally show student photo when available */}
+            <CandidatePhotoBadge
+              photoUrl={(student as any).photo_url}
+              name={student.name}
+            />
+
             <div>
               <div className="flex items-center gap-2.5">
                 <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
@@ -75,7 +86,12 @@ export default async function StudentDetailPage({
               </p>
             </div>
           </div>
+
+          <StudentProfileExport student={student} />
         </div>
+
+        {/* Candidate Recruitment & Companies Attended Interactive Summary */}
+        <StudentInteractiveMetricCards student={student} />
 
         {/* Top Grid: Personal & Academic Info */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -197,6 +213,21 @@ export default async function StudentDetailPage({
                 </a>
               )}
 
+              {(student as any).photo_url && (
+                <a
+                  href={(student as any).photo_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-3 text-xs transition hover:border-purple-500"
+                >
+                  <div className="flex items-center gap-2 text-purple-400">
+                    <ImageIcon className="h-4 w-4" />
+                    <span className="font-semibold text-[#F8FAFC]">Official Student Photo</span>
+                  </div>
+                  <ExternalLink className="h-3.5 w-3.5 text-[#64748B]" />
+                </a>
+              )}
+
               <div className="flex items-center gap-2 pt-2">
                 {student.linkedin_url && (
                   <a
@@ -296,71 +327,79 @@ export default async function StudentDetailPage({
         </Card>
 
         {/* ATS Evaluation History */}
-        <Card className="space-y-4">
-          <CardHeader>
-            <div>
-              <CardTitle>ATS Evaluation & Candidate Matching History</CardTitle>
-              <CardDescription>Drive-specific resume evaluation results and scores</CardDescription>
-            </div>
-          </CardHeader>
+        {(() => {
+          const completedEvaluations = student.evaluations.filter(
+            (e) => e.drive?.company?.status === "APPROVED" && e.drive?.drive_status === "COMPLETED"
+          );
 
-          {student.evaluations.length === 0 ? (
-            <p className="py-4 text-center text-xs text-[#64748B]">
-              No ATS evaluations generated yet for this student.
-            </p>
-          ) : (
-            <div className="table-container">
-              <table className="w-full text-left text-xs">
-                <thead className="table-header">
-                  <tr>
-                    <th className="px-4 py-3">RECRUITMENT DRIVE</th>
-                    <th className="px-4 py-3">COMPANY</th>
-                    <th className="px-4 py-3">ATS SCORE</th>
-                    <th className="px-4 py-3">SKILL MATCH</th>
-                    <th className="px-4 py-3">ELIGIBILITY STATUS</th>
-                    <th className="px-4 py-3 text-right">EVALUATED AT</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#1E293B]">
-                  {student.evaluations.map((ev) => (
-                    <tr key={ev.id} className="table-row">
-                      <td className="px-4 py-3 font-semibold text-[#F8FAFC]">
-                        <Link href={`/drives/${ev.placement_drive_id}`} className="hover:text-[#818CF8]">
-                          {ev.drive?.job_title}
-                        </Link>
-                      </td>
-                      <td className="px-4 py-3 text-[#94A3B8]">
-                        {ev.drive?.company?.company_name}
-                      </td>
-                      <td className="px-4 py-3 font-bold text-[#818CF8]">
-                        {ev.ats_score} / 100
-                      </td>
-                      <td className="px-4 py-3 text-[#10B981] font-semibold">
-                        {ev.skill_match_score} / 50
-                      </td>
-                      <td className="px-4 py-3">
-                        <Badge
-                          variant={
-                            ev.eligibility_status === "ELIGIBLE"
-                              ? "success"
-                              : ev.eligibility_status === "CONDITIONALLY_ELIGIBLE"
-                              ? "warning"
-                              : "danger"
-                          }
-                        >
-                          {ev.eligibility_status?.replace("_", " ")}
-                        </Badge>
-                      </td>
-                      <td className="px-4 py-3 text-right text-[#94A3B8]">
-                        {formatDate(ev.evaluated_at)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </Card>
+          return (
+            <Card className="space-y-4">
+              <CardHeader>
+                <div>
+                  <CardTitle>Completed Recruitment Drives & Matching History ({completedEvaluations.length})</CardTitle>
+                  <CardDescription>Participation results across all 19 approved campus recruitment drives</CardDescription>
+                </div>
+              </CardHeader>
+
+              {completedEvaluations.length === 0 ? (
+                <p className="py-4 text-center text-xs text-[#64748B]">
+                  No completed drive evaluations recorded for this student.
+                </p>
+              ) : (
+                <div className="table-container">
+                  <table className="w-full text-left text-xs">
+                    <thead className="table-header">
+                      <tr>
+                        <th className="px-4 py-3">RECRUITMENT DRIVE</th>
+                        <th className="px-4 py-3">COMPANY</th>
+                        <th className="px-4 py-3">ATS SCORE</th>
+                        <th className="px-4 py-3">SKILL MATCH</th>
+                        <th className="px-4 py-3">ELIGIBILITY STATUS</th>
+                        <th className="px-4 py-3 text-right">EVALUATED AT</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#1E293B]">
+                      {completedEvaluations.map((ev) => (
+                        <tr key={ev.id} className="table-row">
+                          <td className="px-4 py-3 font-semibold text-[#F8FAFC]">
+                            <Link href={`/drives/${ev.placement_drive_id}`} className="hover:text-[#818CF8]">
+                              {ev.drive?.job_title}
+                            </Link>
+                          </td>
+                          <td className="px-4 py-3 text-[#94A3B8]">
+                            {ev.drive?.company?.company_name}
+                          </td>
+                          <td className="px-4 py-3 font-bold text-[#818CF8]">
+                            {ev.ats_score} / 100
+                          </td>
+                          <td className="px-4 py-3 text-[#10B981] font-semibold">
+                            {ev.skill_match_score} / 50
+                          </td>
+                          <td className="px-4 py-3">
+                            <Badge
+                              variant={
+                                ev.eligibility_status === "ELIGIBLE"
+                                  ? "success"
+                                  : ev.eligibility_status === "CONDITIONALLY_ELIGIBLE"
+                                  ? "warning"
+                                  : "danger"
+                              }
+                            >
+                              {ev.eligibility_status?.replace("_", " ")}
+                            </Badge>
+                          </td>
+                          <td className="px-4 py-3 text-right text-[#94A3B8]">
+                            {formatDate(ev.evaluated_at)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </Card>
+          );
+        })()}
       </div>
     </DashboardShell>
   );

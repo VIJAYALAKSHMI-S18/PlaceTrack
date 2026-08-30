@@ -237,9 +237,19 @@ export async function evaluateAllStudentsForDrive(driveId: string) {
 
   const students = await prisma.student.findMany({
     where: { deleted_at: null },
+    include: {
+      offers: {
+        include: {
+          company: true,
+          drive: true,
+        },
+      },
+    },
   });
 
   const criteria: DriveEligibilityCriteria = {
+    driveId: drive.id,
+    companyName: drive.company?.company_name,
     eligibleDepartments: parseJsonSafe<string[]>(drive.eligible_departments, []),
     minimumCgpa: drive.minimum_cgpa,
     maximumBacklogs: drive.maximum_backlogs,
@@ -256,6 +266,7 @@ export async function evaluateAllStudentsForDrive(driveId: string) {
   const results = [];
 
   for (const student of students) {
+    const acceptedOffer = student.offers?.[0];
     const studentInput: StudentEligibilityInput = {
       department: student.department,
       studentType: student.student_type,
@@ -268,6 +279,9 @@ export async function evaluateAllStudentsForDrive(driveId: string) {
       graduationYear: student.graduation_year,
       resumeText: student.parsed_resume_text || `${student.name} skills: ${student.skills || ""}`,
       skills: parseJsonSafe<string[]>(student.skills, []),
+      placementStatus: student.placement_status,
+      placedCompanyName: acceptedOffer?.company?.company_name || null,
+      placedDriveId: acceptedOffer?.placement_drive_id || null,
     };
 
     const evalResult = evaluateStudentEligibility(studentInput, criteria);

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireRole, handleAuthError } from "@/lib/rbac";
+import { requireApiRole, handleAuthError } from "@/lib/rbac";
 import prisma from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
   try {
     // Critical RBAC: Only Admin can view audit logs
-    await requireRole(["ADMIN"]);
+    await requireApiRole(["ADMIN"]);
 
     const searchParams = req.nextUrl.searchParams;
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));

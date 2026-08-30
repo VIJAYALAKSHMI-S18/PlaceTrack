@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth, requireRole, handleAuthError, ForbiddenError } from "@/lib/rbac";
+import { requireApiAuth, requireApiRole, handleAuthError, ForbiddenError } from "@/lib/rbac";
 import { updateOffer, syncStudentPlacementStatus } from "@/services/offer.service";
 import { offerUpdateSchema } from "@/validators/offer.validator";
 import prisma from "@/lib/prisma";
@@ -10,7 +10,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const user = await requireAuth();
+    const user = await requireApiAuth();
 
     // Critical RBAC: Manager cannot edit offers
     if (user.role === "MANAGER") {
@@ -47,7 +47,7 @@ export async function DELETE(
 ) {
   try {
     // Only Admin can delete offers
-    const user = await requireRole(["ADMIN"]);
+    const user = await requireApiRole(["ADMIN"]);
     const offer = await prisma.offer.findUnique({ where: { id: params.id } });
     if (!offer) {
       return NextResponse.json({ success: false, message: "Offer not found." }, { status: 404 });

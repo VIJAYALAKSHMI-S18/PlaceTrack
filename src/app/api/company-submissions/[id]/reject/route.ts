@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireRole, handleAuthError } from "@/lib/rbac";
+import { requireApiRole, handleAuthError } from "@/lib/rbac";
 import { rejectCompanySubmission } from "@/services/company.service";
 import { companyRejectSchema } from "@/validators/company.validator";
 
@@ -9,7 +9,7 @@ export async function POST(
 ) {
   try {
     // Critical RBAC: Only Admin can reject companies
-    const user = await requireRole(["ADMIN"]);
+    const user = await requireApiRole(["ADMIN"]);
     const body = await req.json();
 
     const validated = companyRejectSchema.safeParse(body);

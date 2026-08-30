@@ -18,6 +18,8 @@ import { Badge } from "../ui/Badge";
 import { Card } from "../ui/Card";
 import { Role } from "@/types";
 import { CompanyFormModal } from "./CompanyFormModal";
+import { ExportButtons } from "@/components/common/ExportButtons";
+import { exportTableToExcel, exportTableToPdf } from "@/lib/export-utils";
 
 interface CompanyTableProps {
   role: Role;
@@ -36,6 +38,55 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
   const [isAddOpen, setIsAddOpen] = useState(false);
 
   const isAdmin = role === "ADMIN";
+
+  const handleExportExcel = async () => {
+    const res = await fetch("/api/companies?limit=500");
+    const json = await res.json();
+    const list = json.data || [];
+    const headers = [
+      "Company Name",
+      "Industry",
+      "Location",
+      "Approval Status",
+      "HR Contact",
+      "Contact Email",
+      "Contact Phone",
+      "Website",
+    ];
+    const rows = list.map((c: any) => [
+      c.company_name,
+      c.industry || "Technology",
+      c.location || "Coimbatore / Virtual",
+      c.status,
+      c.contact_person || "HR Team",
+      c.contact_email || "hr@company.com",
+      c.contact_phone || "N/A",
+      c.website || "N/A",
+    ]);
+    exportTableToExcel("RGU_Companies_Directory", "Companies", headers, rows);
+  };
+
+  const handleExportPdf = async () => {
+    const res = await fetch("/api/companies?limit=500");
+    const json = await res.json();
+    const list = json.data || [];
+    const headers = ["Company Name", "Industry", "Location", "Status", "HR Contact", "Contact Email"];
+    const rows = list.map((c: any) => [
+      c.company_name,
+      c.industry || "Technology",
+      c.location || "Campus / Virtual",
+      c.status,
+      c.contact_person || "HR Team",
+      c.contact_email || "careers@company.com",
+    ]);
+    exportTableToPdf({
+      title: "RGU Corporate Recruitment Partners Directory",
+      subtitle: `Official Registered Corporate Partners (${list.length} Total Organizations)`,
+      filename: "RGU_Companies_Directory",
+      headers,
+      data: rows,
+    });
+  };
 
   const fetchCompanies = async () => {
     setLoading(true);
@@ -97,10 +148,13 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
           </p>
         </div>
 
-        <Button size="sm" onClick={() => setIsAddOpen(true)}>
-          <Plus className="h-4 w-4" />
-          {isAdmin ? "Add Company" : "Submit Company for Approval"}
-        </Button>
+        <div className="flex items-center gap-2.5">
+          <ExportButtons onExportExcel={handleExportExcel} onExportPdf={handleExportPdf} />
+          <Button size="sm" onClick={() => setIsAddOpen(true)}>
+            <Plus className="h-4 w-4" />
+            {isAdmin ? "Add Company" : "Submit Company for Approval"}
+          </Button>
+        </div>
       </div>
 
       {/* Search & Filter Bar */}

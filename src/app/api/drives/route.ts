@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth, requireRole, handleAuthError } from "@/lib/rbac";
+import { requireApiAuth, requireApiRole, handleAuthError } from "@/lib/rbac";
 import { getPlacementDrives, createPlacementDrive } from "@/services/drive.service";
 import { driveCreateSchema } from "@/validators/drive.validator";
 import { logAudit } from "@/lib/audit";
 
 export async function GET(req: NextRequest) {
   try {
-    await requireAuth();
+    await requireApiAuth();
     const searchParams = req.nextUrl.searchParams;
 
     const filters = {
@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     // Admin or Placement Team can create drives
-    const user = await requireRole(["ADMIN", "PLACEMENT_TEAM"]);
+    const user = await requireApiRole(["ADMIN", "PLACEMENT_TEAM"]);
     const body = await req.json();
 
     const validated = driveCreateSchema.safeParse(body);

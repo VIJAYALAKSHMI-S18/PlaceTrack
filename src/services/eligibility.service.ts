@@ -13,9 +13,14 @@ export interface StudentEligibilityInput {
   graduationYear?: number | null;
   resumeText: string;
   skills?: string[];
+  placementStatus?: string;
+  placedCompanyName?: string | null;
+  placedDriveId?: string | null;
 }
 
 export interface DriveEligibilityCriteria {
+  driveId?: string;
+  companyName?: string;
   eligibleDepartments: string[];
   minimumCgpa?: number | null;
   maximumBacklogs?: number | null;
@@ -30,6 +35,50 @@ export interface DriveEligibilityCriteria {
   conditionalTolerance?: number; // e.g. 5 points
 }
 
+const DEPARTMENT_ALIASES: Record<string, string[]> = {
+  CSE: ["CSE", "COMPUTER SCIENCE", "COMPUTER SCIENCE AND ENGINEERING", "CS", "CYBER SECURITY", "SOFTWARE ENGINEERING"],
+  IT: ["IT", "INFORMATION TECHNOLOGY", "INFO TECH"],
+  AIDS: ["AIDS", "AI&DS", "AI & DS", "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE", "ARTIFICIAL INTELLIGENCE & DATA SCIENCE", "DATA SCIENCE", "AI", "ML"],
+  ECE: ["ECE", "ELECTRONICS AND COMMUNICATION", "ELECTRONICS AND COMMUNICATION ENGINEERING", "ELECTRONICS & COMMUNICATION"],
+  EEE: ["EEE", "ELECTRICAL AND ELECTRONICS", "ELECTRICAL AND ELECTRONICS ENGINEERING", "ELECTRICAL & ELECTRONICS"],
+  MECH: ["MECH", "MECHANICAL", "MECHANICAL ENGINEERING"],
+  CIVIL: ["CIVIL", "CIVIL ENGINEERING"],
+  BBA: ["BBA", "BUSINESS ADMINISTRATION", "MANAGEMENT", "MBA"],
+  COMMERCE: ["COMMERCE", "B.COM", "BCOM", "FINANCE"],
+  BIOTECH: ["BIOTECH", "BIOTECHNOLOGY", "BIO TECH"],
+};
+
+export function isDepartmentEligible(studentDeptRaw: string, eligibleDeptsRaw: string[]): boolean {
+  if (!eligibleDeptsRaw || eligibleDeptsRaw.length === 0) return true;
+  const eligibleUpper = eligibleDeptsRaw.map((d) => d.trim().toUpperCase());
+  if (eligibleUpper.includes("ALL")) return true;
+
+  const sUpper = studentDeptRaw.trim().toUpperCase();
+
+  // 1. Direct match
+  if (eligibleUpper.includes(sUpper)) return true;
+
+  // 2. Substring & Alias matching
+  for (const eligible of eligibleUpper) {
+    if (eligible === sUpper) return true;
+    const aliases = DEPARTMENT_ALIASES[eligible] || [];
+    if (aliases.some((a) => a === sUpper || sUpper.includes(a) || a.includes(sUpper))) {
+      return true;
+    }
+  }
+
+  // 3. Reverse lookup
+  for (const [canonical, aliases] of Object.entries(DEPARTMENT_ALIASES)) {
+    if (aliases.some((a) => a === sUpper || sUpper.includes(a))) {
+      if (eligibleUpper.includes(canonical) || eligibleUpper.some((e) => aliases.includes(e))) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
 export function evaluateStudentEligibility(
   student: StudentEligibilityInput,
   drive: DriveEligibilityCriteria
@@ -37,14 +86,20 @@ export function evaluateStudentEligibility(
   const reasons: string[] = [];
   let passedAcademic = true;
 
-  // 1. Department Check
-  const normalizedEligibleDepts = drive.eligibleDepartments.map((d) => d.trim().toUpperCase());
-  const studentDept = student.department.trim().toUpperCase();
-  if (
-    normalizedEligibleDepts.length > 0 &&
-    !normalizedEligibleDepts.includes("ALL") &&
-    !normalizedEligibleDepts.includes(studentDept)
-  ) {
+  // 0. Institutional Policy: Placed Students are NOT eligible for other company drives
+  const isAlreadyPlaced = student.placementStatus === "PLACED" || student.placementStatus === "MULTIPLE_OFFERS";
+  const isDifferentDrive = drive.driveId && student.placedDriveId && student.placedDriveId !== drive.driveId;
+  const isDifferentCompany = drive.companyName && student.placedCompanyName && student.placedCompanyName.toLowerCase() !== drive.companyName.toLowerCase();
+
+  if (isAlreadyPlaced && (isDifferentDrive || isDifferentCompany)) {
+    passedAcademic = false;
+    reasons.push(
+      `Already Placed at ${student.placedCompanyName || "another corporate partner"} — Ineligible for other drives under Institutional One Student, One Job Policy`
+    );
+  }
+
+  // 1. Department Check with full alias resolution
+  if (!isDepartmentEligible(student.department, drive.eligibleDepartments)) {
     passedAcademic = false;
     reasons.push(`Department mismatch: Expected ${drive.eligibleDepartments.join(", ")}, got ${student.department}`);
   }

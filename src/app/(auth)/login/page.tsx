@@ -62,7 +62,7 @@ export default function LoginPage() {
           </div>
           <div>
             <h1 className="text-xl font-black tracking-wide text-[#F8FAFC]">
-              RATHINAM GLOBAL UNIVERSITY
+              RATHINAM GLOBAL DEEMED TO BE UNIVERSITY
             </h1>
             <p className="text-[11px] font-bold tracking-widest text-[#0EA5E9] uppercase mt-0.5">
               Placement & Career Development Cell

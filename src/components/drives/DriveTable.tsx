@@ -20,6 +20,8 @@ import { Card } from "../ui/Card";
 import { Role } from "@/types";
 import { formatLPA, formatDate, parseJsonSafe } from "@/lib/utils";
 import { DriveFormModal } from "./DriveFormModal";
+import { ExportButtons } from "@/components/common/ExportButtons";
+import { exportTableToExcel, exportTableToPdf } from "@/lib/export-utils";
 
 interface DriveTableProps {
   role: Role;
@@ -38,6 +40,57 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
 
   const isAdmin = role === "ADMIN";
   const canCreate = role === "ADMIN" || role === "PLACEMENT_TEAM";
+
+  const handleExportExcel = async () => {
+    const res = await fetch("/api/drives?limit=500");
+    const json = await res.json();
+    const list = json.data || [];
+    const headers = [
+      "Company",
+      "Job Title",
+      "CTC (LPA)",
+      "Drive Date",
+      "Location",
+      "Drive Type",
+      "Min UG %",
+      "Min ATS",
+      "Status",
+    ];
+    const rows = list.map((d: any) => [
+      d.company?.company_name,
+      d.job_title,
+      d.ctc_lpa,
+      formatDate(d.drive_date),
+      d.drive_location || "Campus / Virtual",
+      d.drive_type,
+      d.minimum_ug_percentage || 60,
+      d.minimum_ats_score || 70,
+      d.company?.status === "PENDING_APPROVAL" ? "APPROVAL PENDING" : d.drive_status,
+    ]);
+    exportTableToExcel("RGU_Placement_Drives_Schedule", "Drives", headers, rows);
+  };
+
+  const handleExportPdf = async () => {
+    const res = await fetch("/api/drives?limit=500");
+    const json = await res.json();
+    const list = json.data || [];
+    const headers = ["Company", "Job Title", "CTC", "Drive Date", "Location", "Status"];
+    const rows = list.map((d: any) => [
+      d.company?.company_name,
+      d.job_title,
+      `${d.ctc_lpa} LPA`,
+      formatDate(d.drive_date),
+      d.drive_location || "Campus",
+      d.company?.status === "PENDING_APPROVAL" ? "APPROVAL PENDING" : d.drive_status,
+    ]);
+    exportTableToPdf({
+      title: "RGU Campus Recruitment Drives Master Schedule",
+      subtitle: `Corporate Campus Recruitment Schedule (${list.length} Drives Tracked)`,
+      filename: "RGU_Placement_Drives_Schedule",
+      headers,
+      data: rows,
+    });
+  };
 
   const fetchDrives = async () => {
     setLoading(true);
@@ -98,12 +151,15 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
           </p>
         </div>
 
-        {canCreate && (
-          <Button size="sm" onClick={() => setIsAddOpen(true)}>
-            <Plus className="h-4 w-4" />
-            Schedule New Drive
-          </Button>
-        )}
+        <div className="flex items-center gap-2.5">
+          <ExportButtons onExportExcel={handleExportExcel} onExportPdf={handleExportPdf} />
+          {canCreate && (
+            <Button size="sm" onClick={() => setIsAddOpen(true)}>
+              <Plus className="h-4 w-4" />
+              Schedule New Drive
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Search & Filter Bar */}
@@ -216,19 +272,25 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
                       </div>
                     </td>
                     <td className="px-4 py-3.5">
-                      <Badge
-                        variant={
-                          drive.drive_status === "COMPLETED"
-                            ? "success"
-                            : drive.drive_status === "ONGOING"
-                            ? "warning"
-                            : drive.drive_status === "UPCOMING"
-                            ? "info"
-                            : "danger"
-                        }
-                      >
-                        {drive.drive_status}
-                      </Badge>
+                      {drive.company?.status === "PENDING_APPROVAL" ? (
+                        <Badge variant="warning" className="text-[10px] font-bold">
+                          APPROVAL PENDING
+                        </Badge>
+                      ) : (
+                        <Badge
+                          variant={
+                            drive.drive_status === "COMPLETED"
+                              ? "success"
+                              : drive.drive_status === "ONGOING"
+                              ? "warning"
+                              : drive.drive_status === "UPCOMING"
+                              ? "info"
+                              : "danger"
+                          }
+                        >
+                          {drive.drive_status}
+                        </Badge>
+                      )}
                     </td>
                     <td className="px-4 py-3.5 text-right space-x-1">
                       <Link

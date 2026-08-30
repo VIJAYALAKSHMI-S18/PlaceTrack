@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth, handleAuthError } from "@/lib/rbac";
+import { requireApiAuth, handleAuthError } from "@/lib/rbac";
 import { getCompanies, createCompany } from "@/services/company.service";
 import { companyCreateSchema } from "@/validators/company.validator";
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await requireAuth();
+    const user = await requireApiAuth();
     const searchParams = req.nextUrl.searchParams;
 
     const filters = {
@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     // Admin, Manager, or Placement Team can create/submit a company
-    const user = await requireAuth();
+    const user = await requireApiAuth();
     const body = await req.json();
 
     const validated = companyCreateSchema.safeParse(body);

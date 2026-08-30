@@ -20,6 +20,7 @@ import {
   Award,
 } from "lucide-react";
 import { formatLPA, formatDate, parseJsonSafe } from "@/lib/utils";
+import { CompanyJdViewer } from "@/components/companies/CompanyJdViewer";
 
 export const dynamic = "force-dynamic";
 
@@ -203,80 +204,8 @@ export default async function CompanyDetailPage({
           </Card>
         </div>
 
-        {/* Job Opportunities / JDs Section */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-lg font-bold text-[#F8FAFC]">
-                Job Opportunities & Recruitment JDs ({company.drives.length})
-              </h2>
-              <p className="text-xs text-[#94A3B8]">
-                Multiple positions and placement drive tracks offered by {company.company_name}
-              </p>
-            </div>
-          </div>
-
-          {company.drives.length === 0 ? (
-            <Card className="p-8 text-center text-xs text-[#64748B]">
-              No job opportunities scheduled yet for this company.
-            </Card>
-          ) : (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {company.drives.map((drive) => {
-                const depts = parseJsonSafe<string[]>(drive.eligible_departments, []);
-                return (
-                  <Card key={drive.id} hoverEffect className="flex flex-col justify-between space-y-4 p-5">
-                    <div className="space-y-2">
-                      <div className="flex items-start justify-between">
-                        <Badge
-                          variant={
-                            drive.drive_status === "COMPLETED"
-                              ? "success"
-                              : drive.drive_status === "ONGOING"
-                              ? "warning"
-                              : "info"
-                          }
-                        >
-                          {drive.drive_status}
-                        </Badge>
-                        <span className="text-base font-extrabold text-[#10B981]">
-                          {formatLPA(drive.ctc_lpa)}
-                        </span>
-                      </div>
-
-                      <h3 className="text-sm font-bold text-[#F8FAFC]">{drive.job_title}</h3>
-                      <p className="text-xs text-[#94A3B8]">
-                        {drive.drive_location || "Campus / Virtual"} • {drive.drive_type.replace("_", " ")}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1 pt-1">
-                        {depts.map((d) => (
-                          <span
-                            key={d}
-                            className="rounded bg-[#0F172A] px-1.5 py-0.5 text-[10px] font-bold text-[#94A3B8]"
-                          >
-                            {d}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between border-t border-[#1E293B] pt-3">
-                      <span className="text-[11px] text-[#64748B]">
-                        Min ATS: {drive.minimum_ats_score}%
-                      </span>
-                      <Link href={`/companies/${company.id}/jobs/${drive.id}`}>
-                        <Button size="sm" variant="outline" className="text-xs">
-                          View JD <ExternalLink className="h-3 w-3" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-          )}
-        </div>
+        {/* Company-Specific Job Descriptions & Attached JD Documents */}
+        <CompanyJdViewer company={company} />
       </div>
     </DashboardShell>
   );

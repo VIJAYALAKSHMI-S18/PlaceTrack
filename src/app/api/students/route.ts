@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth, requireRole, handleAuthError } from "@/lib/rbac";
+import { requireApiAuth, requireApiRole, handleAuthError } from "@/lib/rbac";
 import { getStudents, createStudent } from "@/services/student.service";
 import { studentCreateSchema } from "@/validators/student.validator";
 import { logAudit } from "@/lib/audit";
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await requireAuth();
+    const user = await requireApiAuth();
     const searchParams = req.nextUrl.searchParams;
 
     const filters = {
@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     // Only Admin can create individual student records
-    const user = await requireRole(["ADMIN"]);
+    const user = await requireApiRole(["ADMIN"]);
     const body = await req.json();
 
     const validated = studentCreateSchema.safeParse(body);

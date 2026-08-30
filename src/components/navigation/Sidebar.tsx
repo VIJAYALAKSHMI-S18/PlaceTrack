@@ -158,18 +158,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 href={item.href}
                 onClick={onCloseMobile}
                 className={cn(
-                  "group flex items-center gap-3 rounded-lg px-3.5 py-2.5 text-xs font-medium transition-all duration-150",
+                  "group flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-medium transition-all duration-200",
                   isActive
-                    ? "bg-[#7C2D87]/20 text-[#D8B4FE] font-semibold border border-[#7C2D87]/40 shadow-sm"
-                    : "text-[#94A3B8] hover:bg-[#1E293B]/70 hover:text-[#F8FAFC]"
+                    ? "bg-gradient-to-r from-[#7C2D87]/30 via-[#7C2D87]/15 to-[#0EA5E9]/10 text-white font-bold border border-[#7C2D87]/40 shadow-lg shadow-purple-950/20"
+                    : "text-[#94A3B8] hover:bg-white/[0.04] hover:text-white"
                 )}
               >
                 <Icon
                   className={cn(
                     "h-4 w-4 transition-colors",
                     isActive
-                      ? "text-[#0EA5E9]"
-                      : "text-[#64748B] group-hover:text-[#F8FAFC]"
+                      ? "text-[#38BDF8]"
+                      : "text-[#64748B] group-hover:text-white"
                   )}
                 />
                 <span>{item.label}</span>

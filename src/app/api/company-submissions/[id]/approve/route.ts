@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireRole, handleAuthError } from "@/lib/rbac";
+import { requireApiRole, handleAuthError } from "@/lib/rbac";
 import { approveCompanySubmission } from "@/services/company.service";
 
 export async function POST(
@@ -8,7 +8,7 @@ export async function POST(
 ) {
   try {
     // Critical RBAC: Only Admin can approve companies
-    const user = await requireRole(["ADMIN"]);
+    const user = await requireApiRole(["ADMIN"]);
     const result = await approveCompanySubmission(params.id, user);
 
     return NextResponse.json({

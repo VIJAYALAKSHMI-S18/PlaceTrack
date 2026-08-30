@@ -25,6 +25,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { formatLPA, formatDate, parseJsonSafe } from "@/lib/utils";
 import { AtsEvaluationViewer } from "@/components/drives/AtsEvaluationViewer";
+import { ExportButtons } from "@/components/common/ExportButtons";
+import { exportTableToExcel, exportTableToPdf } from "@/lib/export-utils";
 
 export default function DrivePortalPage() {
   const params = useParams();
@@ -97,6 +99,58 @@ export default function DrivePortalPage() {
     }
   };
 
+  const handleExportAtsExcel = () => {
+    if (!drive) return;
+    const headers = [
+      "Student Name",
+      "Register Number",
+      "Department",
+      "UG %",
+      "CGPA",
+      "ATS Score",
+      "Skill Match",
+      "Eligibility Status",
+      "Evaluated At",
+    ];
+    const rows = filteredEvaluations.map((ev) => [
+      ev.student?.name,
+      ev.student?.register_number,
+      ev.student?.department,
+      ev.student?.ug_percentage,
+      ev.student?.cgpa || "N/A",
+      ev.ats_score,
+      ev.skill_match_score,
+      ev.eligibility_status,
+      formatDate(ev.evaluated_at),
+    ]);
+    exportTableToExcel(
+      `${drive.company?.company_name || "Drive"}_ATS_Evaluation_Roster`,
+      "ATS Candidates",
+      headers,
+      rows
+    );
+  };
+
+  const handleExportAtsPdf = () => {
+    if (!drive) return;
+    const headers = ["Candidate", "Reg No", "Department", "UG %", "ATS Score", "Eligibility"];
+    const rows = filteredEvaluations.map((ev) => [
+      ev.student?.name,
+      ev.student?.register_number,
+      ev.student?.department,
+      `${ev.student?.ug_percentage}%`,
+      `${ev.ats_score}/100`,
+      ev.eligibility_status?.replace("_", " "),
+    ]);
+    exportTableToPdf({
+      title: `${drive.company?.company_name} — Candidate ATS Shortlist`,
+      subtitle: `Role: ${drive.job_title} | CTC: ${drive.ctc_lpa} LPA | Total Evaluated: ${filteredEvaluations.length}`,
+      filename: `${drive.company?.company_name || "Drive"}_ATS_Evaluation_Roster`,
+      headers,
+      data: rows,
+    });
+  };
+
   if (loading && !drive) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#0F172A] text-xs text-[#818CF8]">
@@ -107,11 +161,24 @@ export default function DrivePortalPage() {
 
   if (!drive) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-[#0F172A] p-6 text-center">
-        <h2 className="text-base font-bold text-[#F8FAFC]">Placement Drive Not Found</h2>
-        <Button onClick={() => router.back()} className="mt-4" size="sm">
-          Go Back
-        </Button>
+      <div className="flex min-h-screen flex-col items-center justify-center bg-[#0B0F19] p-6 text-center space-y-3">
+        <div className="h-12 w-12 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center">
+          <Briefcase className="h-6 w-6" />
+        </div>
+        <h2 className="text-lg font-bold text-[#F8FAFC]">Placement Drive Record Not Found</h2>
+        <p className="text-xs text-[#94A3B8] max-w-md">
+          This recruitment drive link might be from a previous session or the database was refreshed.
+        </p>
+        <div className="flex items-center gap-3 pt-2">
+          <Link href="/manager/drives">
+            <Button size="sm" className="text-xs">
+              Browse Active Drives
+            </Button>
+          </Link>
+          <Button onClick={() => router.back()} variant="outline" size="sm" className="text-xs">
+            Go Back
+          </Button>
+        </div>
       </div>
     );
   }
@@ -154,17 +221,24 @@ export default function DrivePortalPage() {
                 <h1 className="text-lg font-bold tracking-tight text-[#F8FAFC]">
                   {drive.company?.company_name} — {drive.job_title}
                 </h1>
-                <Badge
-                  variant={
-                    drive.drive_status === "COMPLETED"
-                      ? "success"
-                      : drive.drive_status === "ONGOING"
-                      ? "warning"
-                      : "info"
-                  }
-                >
-                  {drive.drive_status}
-                </Badge>
+                {drive.company?.status === "PENDING_APPROVAL" ? (
+                  <Badge variant="warning" size="md">
+                    APPROVAL PENDING
+                  </Badge>
+                ) : (
+                  <Badge
+                    variant={
+                      drive.drive_status === "COMPLETED"
+                        ? "success"
+                        : drive.drive_status === "ONGOING"
+                        ? "warning"
+                        : "info"
+                    }
+                    size="md"
+                  >
+                    {drive.drive_status}
+                  </Badge>
+                )}
               </div>
               <p className="text-xs text-[#94A3B8]">
                 {formatLPA(drive.ctc_lpa)} • {drive.drive_location || "Campus / Virtual"} • Date: {formatDate(drive.drive_date)}
@@ -433,14 +507,17 @@ export default function DrivePortalPage() {
                   </select>
                 </div>
 
-                <Button
-                  size="sm"
-                  onClick={handleBulkEvaluate}
-                  isLoading={evaluatingBulk}
-                  className="whitespace-nowrap"
-                >
-                  <RefreshCw className="h-4 w-4" /> Run Eligibility Check
-                </Button>
+                <div className="flex items-center gap-2">
+                  <ExportButtons onExportExcel={handleExportAtsExcel} onExportPdf={handleExportAtsPdf} />
+                  <Button
+                    size="sm"
+                    onClick={handleBulkEvaluate}
+                    isLoading={evaluatingBulk}
+                    className="whitespace-nowrap"
+                  >
+                    <RefreshCw className="h-4 w-4" /> Run Eligibility Check
+                  </Button>
+                </div>
               </div>
             </Card>
 

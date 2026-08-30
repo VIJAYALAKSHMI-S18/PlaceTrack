@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth, requireRole, handleAuthError, ForbiddenError } from "@/lib/rbac";
+import { requireApiAuth, requireApiRole, handleAuthError, ForbiddenError } from "@/lib/rbac";
 import { getPlacementDriveById, updatePlacementDrive } from "@/services/drive.service";
 import { driveUpdateSchema } from "@/validators/drive.validator";
 import prisma from "@/lib/prisma";
@@ -10,7 +10,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    await requireAuth();
+    await requireApiAuth();
     const drive = await getPlacementDriveById(params.id);
     if (!drive) {
       return NextResponse.json(
@@ -32,7 +32,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const user = await requireAuth();
+    const user = await requireApiAuth();
 
     // Critical RBAC: Manager cannot edit placement drives
     if (user.role === "MANAGER") {
@@ -80,7 +80,7 @@ export async function DELETE(
 ) {
   try {
     // Critical RBAC: Only Admin can delete placement drives
-    const user = await requireRole(["ADMIN"]);
+    const user = await requireApiRole(["ADMIN"]);
 
     const deleted = await prisma.placementDrive.update({
       where: { id: params.id },

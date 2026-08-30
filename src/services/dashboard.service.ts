@@ -17,6 +17,10 @@ export async function getAdminDashboardStats() {
     departments,
     recentDrives,
     recentSubmissions,
+    studentsList,
+    companiesList,
+    drivesList,
+    offersList,
   ] = await Promise.all([
     prisma.student.count({ where: { deleted_at: null } }),
     prisma.student.count({ where: { deleted_at: null, placement_status: "PLACED" } }),
@@ -24,9 +28,9 @@ export async function getAdminDashboardStats() {
     prisma.company.count({ where: { deleted_at: null } }),
     prisma.company.count({ where: { deleted_at: null, status: "PENDING_APPROVAL" } }),
     prisma.company.count({ where: { deleted_at: null, status: "APPROVED" } }),
-    prisma.placementDrive.count({ where: { deleted_at: null, drive_status: "COMPLETED" } }),
-    prisma.placementDrive.count({ where: { deleted_at: null, drive_status: "UPCOMING" } }),
-    prisma.placementDrive.count({ where: { deleted_at: null, drive_status: "ONGOING" } }),
+    prisma.placementDrive.count({ where: { deleted_at: null, drive_status: "COMPLETED", company: { status: "APPROVED" } } }),
+    prisma.placementDrive.count({ where: { deleted_at: null, drive_status: "UPCOMING", company: { status: "APPROVED" } } }),
+    prisma.placementDrive.count({ where: { deleted_at: null, drive_status: "ONGOING", company: { status: "APPROVED" } } }),
     prisma.offer.count(),
     prisma.offer.findMany({ select: { ctc_lpa: true, company: { select: { company_name: true } } } }),
     prisma.user.count({ where: { role: "PLACEMENT_TEAM", isActive: true, deletedAt: null } }),
@@ -36,7 +40,7 @@ export async function getAdminDashboardStats() {
       _count: true,
     }),
     prisma.placementDrive.findMany({
-      where: { deleted_at: null },
+      where: { deleted_at: null, company: { status: "APPROVED" } },
       take: 5,
       orderBy: { created_at: "desc" },
       include: { company: true },
@@ -46,6 +50,23 @@ export async function getAdminDashboardStats() {
       take: 5,
       orderBy: { created_at: "desc" },
       include: { company: true, submittedBy: true },
+    }),
+    prisma.student.findMany({
+      where: { deleted_at: null },
+      orderBy: { register_number: "asc" },
+    }),
+    prisma.company.findMany({
+      where: { deleted_at: null, status: "APPROVED" },
+      orderBy: { company_name: "asc" },
+    }),
+    prisma.placementDrive.findMany({
+      where: { deleted_at: null, drive_status: "COMPLETED", company: { status: "APPROVED" } },
+      include: { company: true },
+      orderBy: { drive_date: "desc" },
+    }),
+    prisma.offer.findMany({
+      include: { student: true, company: true },
+      orderBy: { offer_date: "desc" },
     }),
   ]);
 
@@ -124,6 +145,10 @@ export async function getAdminDashboardStats() {
     companyOfferStats,
     recentDrives,
     recentSubmissions,
+    studentsList,
+    companiesList,
+    drivesList,
+    offersList,
   };
 }
 
@@ -145,22 +170,36 @@ export async function getManagerDashboardStats() {
     departmentPlacementStats: stats.departmentPlacementStats,
     packageDistribution: stats.packageDistribution,
     recentDrives: stats.recentDrives,
+    studentsList: stats.studentsList,
+    companiesList: stats.companiesList,
+    drivesList: stats.drivesList,
+    offersList: stats.offersList,
   };
 }
 
 export async function getPlacementTeamDashboardStats(userId: string) {
   const stats = await getAdminDashboardStats();
-  const mySubmissions = await prisma.companySubmission.findMany({
+  let mySubmissions = await prisma.companySubmission.findMany({
     where: { submitted_by_id: userId },
     take: 5,
     orderBy: { created_at: "desc" },
     include: { company: true },
   });
 
+  // If this specific officer hasn't created one yet, show recent placement team submissions
+  if (mySubmissions.length === 0) {
+    mySubmissions = await prisma.companySubmission.findMany({
+      take: 5,
+      orderBy: { created_at: "desc" },
+      include: { company: true },
+    });
+  }
+
   return {
     overview: {
       totalStudents: stats.overview.totalStudents,
       totalCompanies: stats.overview.totalCompanies,
+      approvedCompanies: stats.overview.approvedCompanies,
       pendingApprovals: stats.overview.pendingCompanies,
       upcomingDrives: stats.overview.upcomingDrives,
       completedDrives: stats.overview.completedDrives,
@@ -171,5 +210,9 @@ export async function getPlacementTeamDashboardStats(userId: string) {
     recentDrives: stats.recentDrives,
     mySubmissions,
     companyOfferStats: stats.companyOfferStats,
+    studentsList: stats.studentsList,
+    companiesList: stats.companiesList,
+    drivesList: stats.drivesList,
+    offersList: stats.offersList,
   };
 }

@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/auth";
 import { Role, SessionUser } from "@/types";
 
 export class AuthError extends Error {
   statusCode: number;
-  constructor(message: string, statusCode: number = 401) {
+  constructor(message: string = "Authentication required. Please log in.", statusCode: number = 401) {
     super(message);
     this.statusCode = statusCode;
     this.name = "AuthError";
@@ -21,10 +22,37 @@ export class ForbiddenError extends Error {
 }
 
 /**
- * Server-side guard to guarantee user is authenticated.
- * Returns SessionUser or throws/returns 401.
+ * Server-side guard for Page Components: guarantees user is authenticated, otherwise redirects to /login.
  */
 export async function requireAuth(): Promise<SessionUser> {
+  const user = await getSessionUser();
+  if (!user) {
+    redirect("/login");
+  }
+  return user;
+}
+
+/**
+ * Server-side guard for Page Components: guarantees user has permitted role, otherwise redirects to user's portal or /unauthorized.
+ */
+export async function requireRole(allowedRoles: Role[]): Promise<SessionUser> {
+  const user = await requireAuth();
+  if (!allowedRoles.includes(user.role)) {
+    if (user.role === "MANAGER") {
+      redirect("/manager/dashboard");
+    } else if (user.role === "PLACEMENT_TEAM") {
+      redirect("/placement-team/dashboard");
+    } else {
+      redirect("/unauthorized");
+    }
+  }
+  return user;
+}
+
+/**
+ * API Route Handler guard: throws AuthError (401) if not logged in.
+ */
+export async function requireApiAuth(): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user) {
     throw new AuthError("Authentication required. Please log in.");
@@ -33,11 +61,10 @@ export async function requireAuth(): Promise<SessionUser> {
 }
 
 /**
- * Server-side guard to guarantee user has one of the allowed roles.
- * Returns SessionUser or throws 403 ForbiddenError.
+ * API Route Handler guard: throws ForbiddenError (403) if role not permitted.
  */
-export async function requireRole(allowedRoles: Role[]): Promise<SessionUser> {
-  const user = await requireAuth();
+export async function requireApiRole(allowedRoles: Role[]): Promise<SessionUser> {
+  const user = await requireApiAuth();
   if (!allowedRoles.includes(user.role)) {
     throw new ForbiddenError("You do not have permission to perform this action.");
   }
@@ -48,6 +75,15 @@ export async function requireRole(allowedRoles: Role[]): Promise<SessionUser> {
  * Helper to handle auth errors and return standard JSON error responses.
  */
 export function handleAuthError(error: unknown): NextResponse {
+  // If it's a Next.js redirect signal, rethrow so Next.js redirects seamlessly
+  if (
+    error &&
+    typeof error === "object" &&
+    "digest" in error &&
+    String((error as any).digest).startsWith("NEXT_REDIRECT")
+  ) {
+    throw error;
+  }
   if (error instanceof ForbiddenError) {
     return NextResponse.json(
       {

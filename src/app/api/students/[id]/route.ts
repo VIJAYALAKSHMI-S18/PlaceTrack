@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth, requireRole, handleAuthError } from "@/lib/rbac";
+import { requireApiAuth, requireApiRole, handleAuthError } from "@/lib/rbac";
 import { getStudentById, updateStudent, softDeleteStudent } from "@/services/student.service";
 import { studentUpdateSchema } from "@/validators/student.validator";
 import { logAudit } from "@/lib/audit";
@@ -9,7 +9,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    await requireAuth();
+    await requireApiAuth();
     const student = await getStudentById(params.id);
     if (!student) {
       return NextResponse.json(
@@ -32,7 +32,7 @@ export async function PUT(
 ) {
   try {
     // Critical RBAC: Only ADMIN can edit students. Managers and Placement Team receive 403.
-    const user = await requireRole(["ADMIN"]);
+    const user = await requireApiRole(["ADMIN"]);
     const body = await req.json();
 
     const validated = studentUpdateSchema.safeParse(body);
@@ -75,7 +75,7 @@ export async function DELETE(
 ) {
   try {
     // Critical RBAC: Only ADMIN can delete students
-    const user = await requireRole(["ADMIN"]);
+    const user = await requireApiRole(["ADMIN"]);
     const deleted = await softDeleteStudent(params.id);
 
     await logAudit({

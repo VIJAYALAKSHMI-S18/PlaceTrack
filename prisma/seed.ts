@@ -2,8 +2,10 @@ import * as XLSX from "xlsx";
 import prisma from "../src/lib/prisma";
 import bcrypt from "bcryptjs";
 import { evaluateAtsScore } from "../src/services/ats.service";
+import { parseJsonSafe } from "../src/lib/utils";
+import { isDepartmentEligible } from "../src/services/eligibility.service";
 
-async function main() {
+async function seedFromExcel() {
   console.log("=================================================");
   console.log("SEEDING PLACETRACK FROM USER EXCEL FILES");
   console.log("=================================================");
@@ -227,12 +229,26 @@ async function main() {
     }
 
     const cgpa = Math.round((ug / 10) * 100) / 100;
-    const studentSkills = [
-      dept.includes("AI") || dept.includes("Data") ? ["Python", "Machine Learning", "SQL", "Pandas", "PyTorch", "Git"]
-      : dept.includes("CS") || dept.includes("IT") ? ["Java", "Python", "React", "TypeScript", "SQL", "Docker", "Git"]
-      : dept.includes("EC") ? ["Embedded C", "C++", "IoT", "MATLAB", "Microcontrollers", "Python"]
-      : ["AutoCAD", "SolidWorks", "ANSYS", "Python", "MATLAB"],
-    ][0];
+    const deptUpper = dept.toUpperCase();
+    const studentSkills =
+      deptUpper.includes("CYBER")
+        ? ["Python", "SQL", "Network Security", "Application Security", "Linux", "Git", "Cloud Security", "Cryptography", "Data Structures"]
+        : deptUpper.includes("AI") || deptUpper.includes("DATA")
+        ? ["Python", "Machine Learning", "SQL", "Pandas", "PyTorch", "Data Structures", "Git", "Data Science", "TensorFlow", "Deep Learning"]
+        : deptUpper.includes("CS") || deptUpper.includes("COMPUTER") || deptUpper.includes("IT") || deptUpper.includes("INFORMATION")
+        ? ["Python", "Java", "SQL", "Data Structures", "Git", "React", "TypeScript", "Cloud", "REST API", "Docker", "Database", "Linux"]
+        : deptUpper.includes("EC") || deptUpper.includes("ELECTRONIC") || deptUpper.includes("EEE") || deptUpper.includes("ELECTRICAL")
+        ? ["Embedded C", "C++", "Python", "Microcontrollers", "IoT", "MATLAB", "Hardware", "SQL", "Git", "Data Structures"]
+        : deptUpper.includes("BUSINESS") || deptUpper.includes("MANAGEMENT") || deptUpper.includes("BBA")
+        ? ["Business Analysis", "Financial Operations", "Agile", "Excel", "Data Analytics", "Management", "Operations", "FinOps", "SQL"]
+        : ["AutoCAD", "SolidWorks", "ANSYS", "Python", "MATLAB", "Project Management", "Git", "Data Structures"];
+
+    const resumeText = `Name: ${name}
+Register Number: ${rollNo}
+Department: ${dept}
+Education: B.Tech / B.E in ${dept} with UG percentage ${ug}%, HSC ${hsc}%, SSLC ${sslc}%.
+Technical Skills: ${studentSkills.join(", ")}.
+Projects & Experience: Completed advanced capstone projects, hands-on labs, software engineering internships, and applied industry domain assignments using ${studentSkills.slice(0, 4).join(", ")}.`;
 
     const studentRecord = await prisma.student.create({
       data: {
@@ -250,12 +266,12 @@ async function main() {
         linkedin_url: linkedin,
         github_url: github,
         portfolio_url: portfolio,
-        cgpa,
-        backlogs: 0,
-        graduation_year: 2025,
         placement_status: placementStatus,
+        cgpa,
         skills: JSON.stringify(studentSkills),
-        parsed_resume_text: `${name} - Academic aggregate UG ${ug}%, skilled in ${studentSkills.join(", ")}. Developed projects using REST APIs, databases, algorithms, and Git version control.`,
+        parsed_resume_text: resumeText,
+        graduation_year: 2026,
+        backlogs: 0,
       },
     });
 
@@ -313,7 +329,11 @@ async function main() {
     const rawJobStatus = String(getCompCol(row, "Job Status") || "APPROVED").trim();
     const placedStudentsDetail = String(getCompCol(row, "Placed Students Details") || "").trim();
     const jdSummary = String(getCompCol(row, "Job Description Summary") || `Recruitment drive for ${jobTitle} at ${companyName}.`).trim();
-    const jdPdfUrl = getCompCol(row, "JD PDF Link (Rendering)") ? String(getCompCol(row, "JD PDF Link (Rendering)")) : null;
+    const GOOGLE_DRIVE_JD_URL = "https://drive.google.com/drive/folders/1gRwKWhM8tWiPA4fAJOXtjqvXSux8kqdw";
+    const rawJdPdf = getCompCol(row, "JD PDF Link (Rendering)");
+    const jdPdfUrl = rawJdPdf && String(rawJdPdf).startsWith("http") && !String(rawJdPdf).includes("example.com")
+      ? String(rawJdPdf)
+      : GOOGLE_DRIVE_JD_URL;
     const careersUrl = getCompCol(row, "Official Careers Link") ? String(getCompCol(row, "Official Careers Link")) : null;
     const contactEmail = getCompCol(row, "Contact Email") ? String(getCompCol(row, "Contact Email")) : null;
     const contactPhone = getCompCol(row, "Contact Mobile") ? String(getCompCol(row, "Contact Mobile")) : null;
@@ -323,7 +343,7 @@ async function main() {
     else if (rawJobStatus.toUpperCase().includes("REJECT")) companyStatus = "REJECTED";
 
     let driveStatus = "COMPLETED";
-    if (rawOppStatus.toUpperCase().includes("UPCOMING")) driveStatus = "UPCOMING";
+    if (rawOppStatus.toUpperCase().includes("WARM") || rawOppStatus.toUpperCase().includes("UPCOMING")) driveStatus = "UPCOMING";
     else if (rawOppStatus.toUpperCase().includes("ONGOING") || rawOppStatus.toUpperCase().includes("ACTIVE")) driveStatus = "ONGOING";
 
     // Get or Create Company
@@ -516,6 +536,45 @@ async function main() {
     console.log(`Successfully mapped ${offerCreatedCount} individual student offers from Placements & Drives sheet!`);
   }
 
+  // Ensure one pending approval company is in the system
+  const pendingSample = await prisma.company.create({
+    data: {
+      company_name: "Vertex AI Solutions",
+      location: "Bengaluru, India",
+      status: "PENDING_APPROVAL",
+      company_description: "Enterprise AI solutions provider proposing campus hiring for AI/ML and Cloud Engineer tracks.",
+      industry: "Artificial Intelligence & Cloud Computing",
+      created_by_id: placementOfficer!.id,
+    },
+  });
+
+  await prisma.companySubmission.create({
+    data: {
+      company_id: pendingSample.id,
+      submitted_by_id: placementOfficer!.id,
+      status: "PENDING",
+    },
+  });
+
+  await prisma.placementDrive.create({
+    data: {
+      company_id: pendingSample.id,
+      job_title: "AI & Cloud Solutions Engineer",
+      job_role: "AI & Cloud Solutions Engineer",
+      ctc_lpa: 14.0,
+      drive_location: "Campus / Virtual",
+      drive_date: new Date(Date.now() + 15 * 86400000),
+      drive_status: "UPCOMING",
+      opportunity_status: "WARM",
+      eligible_departments: JSON.stringify(["CSE", "IT", "AIDS", "ECE"]),
+      required_skills: JSON.stringify(["Python", "PyTorch", "AWS", "Docker", "Machine Learning", "Git"]),
+      minimum_ug_percentage: 65,
+      minimum_ats_score: 70,
+      job_description_summary: "Proposed campus recruitment drive for AI & Cloud Solutions Engineer at Vertex AI Solutions. Seeking high-caliber graduates with deep expertise in neural architectures, cloud microservices, and distributed inference.",
+      created_by_id: placementOfficer!.id,
+    },
+  });
+
   // Ensure at least one rejected company is in the system
   const rejectedSample = await prisma.company.create({
     data: {
@@ -539,37 +598,82 @@ async function main() {
 
   console.log(`Successfully imported ${createdCompaniesMap.size} companies & ${createdDrivesList.length} placement drives from Companies_List.xlsx!`);
 
-  // 6. Generate Realistic ATS Evaluations across all imported students and drives
-  console.log("\nGenerating ATS resume evaluations for imported student records...");
-  const allStudents = Array.from(createdStudentsMap.values());
+  // 6. Generate Realistic ATS Evaluations across all 100 imported students and drives
+  console.log("\nGenerating ATS resume evaluations for all 100 imported student records...");
+  const allStudentsWithOffers = await prisma.student.findMany({
+    where: { deleted_at: null },
+    include: {
+      offers: {
+        include: {
+          company: true,
+          drive: true,
+        },
+      },
+    },
+  });
+
   for (const drive of createdDrivesList) {
-    for (let i = 0; i < Math.min(30, allStudents.length); i++) {
-      const st = allStudents[i];
-      const reqSkills = ["Python", "SQL", "Data Structures", "Git"];
-      const studentSkills: string[] = JSON.parse(st.skills || "[]");
+    const driveDepts = parseJsonSafe<string[]>(drive.eligible_departments, ["CSE", "IT", "AIDS", "ECE", "MECH", "EEE"]);
+    const driveReqSkills = parseJsonSafe<string[]>(drive.required_skills, ["Python", "SQL", "Data Structures", "Git"]);
 
-      const matched = reqSkills.filter((rs) =>
-        studentSkills.some((ss) => ss.toLowerCase().includes(rs.toLowerCase()))
+    for (let i = 0; i < allStudentsWithOffers.length; i++) {
+      const st = allStudentsWithOffers[i];
+      const studentSkills: string[] = parseJsonSafe<string[]>(st.skills, []);
+      const acceptedOffer = st.offers?.[0];
+
+      const matched = driveReqSkills.filter((rs) =>
+        studentSkills.some((ss) => ss.toLowerCase().includes(rs.toLowerCase()) || rs.toLowerCase().includes(ss.toLowerCase()))
       );
-      const missing = reqSkills.filter(
-        (rs) => !studentSkills.some((ss) => ss.toLowerCase().includes(rs.toLowerCase()))
+      const missing = driveReqSkills.filter(
+        (rs) => !studentSkills.some((ss) => ss.toLowerCase().includes(rs.toLowerCase()) || rs.toLowerCase().includes(ss.toLowerCase()))
       );
 
-      const skillScore = Math.round((matched.length / reqSkills.length) * 50);
+      const skillRatio = driveReqSkills.length > 0 ? matched.length / driveReqSkills.length : 0.8;
+      const skillScore = Math.round(skillRatio * 50);
       const semScore = 18;
       const eduScore = Math.min(10, Math.round(st.cgpa || 7.5));
-      const expScore = 8;
-      const projScore = 8;
-      const totalAts = Math.min(100, skillScore + semScore + eduScore + expScore + projScore);
+      const expScore = 9;
+      const projScore = 9;
+      const totalAts = Math.min(100, Math.max(45, skillScore + semScore + eduScore + expScore + projScore));
 
-      const passedAcademic = (st.ug_percentage || 0) >= (drive.minimum_ug_percentage || 60) && st.backlogs === 0;
+      const isDeptEligible = isDepartmentEligible(st.department, driveDepts);
+      let passedAcademic = isDeptEligible && (st.ug_percentage || 0) >= (drive.minimum_ug_percentage || 60) && st.backlogs === 0;
+
       let status = "NOT_ELIGIBLE";
-      if (!passedAcademic) {
-        status = "NOT_ELIGIBLE";
-      } else if (totalAts >= drive.minimum_ats_score) {
-        status = "ELIGIBLE";
-      } else if (totalAts >= drive.minimum_ats_score - 5) {
-        status = "CONDITIONALLY_ELIGIBLE";
+      const reasons: string[] = [];
+
+      // Check One Student One Job Policy:
+      const isPlaced = st.placement_status === "PLACED" || st.placement_status === "MULTIPLE_OFFERS";
+      const isOfferDrive = acceptedOffer && acceptedOffer.placement_drive_id === drive.id;
+
+      if (isPlaced && !isOfferDrive) {
+        passedAcademic = false;
+        reasons.push(
+          `Already Placed at ${acceptedOffer?.company?.company_name || "another corporate partner"} — Ineligible for other drives under One Student, One Job Policy`
+        );
+      }
+
+      if (!isDeptEligible) {
+        reasons.push(`Department mismatch: ${st.department} not in [${driveDepts.join(", ")}]`);
+      }
+      if ((st.ug_percentage || 0) < (drive.minimum_ug_percentage || 60)) {
+        reasons.push(`UG percentage ${st.ug_percentage}% below required ${drive.minimum_ug_percentage || 60}%`);
+      }
+      if (st.backlogs > 0) {
+        reasons.push(`Active backlogs: ${st.backlogs}`);
+      }
+
+      if (passedAcademic) {
+        if (totalAts >= (drive.minimum_ats_score || 70)) {
+          status = "ELIGIBLE";
+          reasons.push(`Academic prerequisites & ATS threshold passed (${totalAts}/100)`);
+        } else if (totalAts >= (drive.minimum_ats_score || 70) - 5) {
+          status = "CONDITIONALLY_ELIGIBLE";
+          reasons.push(`Conditionally eligible (ATS ${totalAts} within tolerance)`);
+        } else {
+          status = "NOT_ELIGIBLE";
+          reasons.push(`ATS score ${totalAts} below minimum ${drive.minimum_ats_score || 70}`);
+        }
       }
 
       await prisma.studentJobEvaluation.upsert({
@@ -589,11 +693,7 @@ async function main() {
           matched_skills: JSON.stringify(matched),
           missing_skills: JSON.stringify(missing),
           eligibility_status: status,
-          eligibility_reasons: JSON.stringify(
-            passedAcademic
-              ? ["Academic prerequisites passed", `ATS score: ${totalAts}`]
-              : ["Academic check failed"]
-          ),
+          eligibility_reasons: JSON.stringify(reasons),
         },
         create: {
           student_id: st.id,
@@ -607,11 +707,7 @@ async function main() {
           matched_skills: JSON.stringify(matched),
           missing_skills: JSON.stringify(missing),
           eligibility_status: status,
-          eligibility_reasons: JSON.stringify(
-            passedAcademic
-              ? ["Academic prerequisites passed", `ATS score: ${totalAts}`]
-              : ["Academic check failed"]
-          ),
+          eligibility_reasons: JSON.stringify(reasons),
         },
       });
     }
@@ -647,8 +743,8 @@ async function main() {
   console.log("=================================================\n");
 }
 
-main()
-  .catch((e) => {
+seedFromExcel()
+  .catch((e: any) => {
     console.error("Prisma seed failed:", e);
     process.exit(1);
   })

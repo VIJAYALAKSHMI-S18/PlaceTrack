@@ -20,6 +20,8 @@ import { Card } from "../ui/Card";
 import { Role } from "@/types";
 import { StudentExcelImportModal } from "./StudentExcelImportModal";
 import { StudentFormModal } from "./StudentFormModal";
+import { ExportButtons } from "@/components/common/ExportButtons";
+import { exportTableToExcel, exportTableToPdf } from "@/lib/export-utils";
 
 interface StudentTableProps {
   role: Role;
@@ -43,6 +45,70 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
 
   const isAdmin = role === "ADMIN";
 
+  const handleExportExcel = async () => {
+    const res = await fetch(`/api/students?limit=500&isTerminated=${activeTab === "TERMINATED"}`);
+    const json = await res.json();
+    const list = json.data || [];
+    const headers = [
+      "Reg Number",
+      "Name",
+      "Department",
+      "UG %",
+      "CGPA",
+      "10th %",
+      "12th %",
+      "Backlogs",
+      "Status",
+      "Email",
+      "Phone",
+    ];
+    const rows = list.map((s: any) => [
+      s.register_number,
+      s.name,
+      s.department,
+      s.ug_percentage,
+      s.cgpa || "N/A",
+      s.sslc_percentage || "N/A",
+      s.hsc_percentage || "N/A",
+      s.backlogs || 0,
+      s.placement_status,
+      s.email,
+      s.phone_number || "N/A",
+    ]);
+    exportTableToExcel("RGU_Students_Roster", "Students", headers, rows);
+  };
+
+  const handleExportPdf = async () => {
+    const res = await fetch(`/api/students?limit=500&isTerminated=${activeTab === "TERMINATED"}`);
+    const json = await res.json();
+    const list = json.data || [];
+    const headers = [
+      "Reg Number",
+      "Student Name",
+      "Department",
+      "UG %",
+      "CGPA",
+      "Backlogs",
+      "Placement Status",
+    ];
+    const rows = list.map((s: any) => [
+      s.register_number,
+      s.name,
+      s.department,
+      `${s.ug_percentage}%`,
+      s.cgpa || "-",
+      s.backlogs || 0,
+      s.placement_status.replace("_", " "),
+    ]);
+    exportTableToPdf({
+      title: "RGU Student Academic & Placement Master Roster",
+      subtitle: `Official Student Cohort (${list.length} Total Candidates)`,
+      filename: "RGU_Students_Roster",
+      headers,
+      data: rows,
+    });
+  };
+
   const fetchStudents = async () => {
     setLoading(true);
     try {
@@ -57,11 +123,17 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
       if (placementStatus !== "ALL") params.append("placementStatus", placementStatus);
 
       const res = await fetch(`/api/students?${params.toString()}`);
+      if (res.status === 401) {
+        window.location.href = "/login";
+        return;
+      }
       if (res.ok) {
         const json = await res.json();
         setStudents(json.data || []);
         setTotalPages(json.meta?.totalPages || 1);
         setTotalCount(json.meta?.total || 0);
+      } else {
+        console.error("Failed to fetch students:", res.status);
       }
     } catch (e) {
       console.error(e);
@@ -107,23 +179,27 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
           </p>
         </div>
 
-        {isAdmin && (
-          <div className="flex items-center gap-2.5">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsImportOpen(true)}
-              className="border-[#6366F1]/40 text-[#818CF8] hover:bg-[#6366F1]/10"
-            >
-              <FileSpreadsheet className="h-4 w-4" />
-              Bulk Excel Import
-            </Button>
-            <Button size="sm" onClick={() => setIsAddOpen(true)}>
-              <Plus className="h-4 w-4" />
-              Add New Student
-            </Button>
-          </div>
-        )}
+        <div className="flex items-center gap-2.5">
+          <ExportButtons onExportExcel={handleExportExcel} onExportPdf={handleExportPdf} />
+
+          {isAdmin && (
+            <>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsImportOpen(true)}
+                className="border-[#6366F1]/40 text-[#818CF8] hover:bg-[#6366F1]/10"
+              >
+                <FileSpreadsheet className="h-4 w-4" />
+                Bulk Import
+              </Button>
+              <Button size="sm" onClick={() => setIsAddOpen(true)}>
+                <Plus className="h-4 w-4" />
+                Add Student
+              </Button>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Tabs */}
@@ -241,7 +317,21 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
             ) : students.length === 0 ? (
               <tr>
                 <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
-                  No student records found matching your filters.
+                  <div className="flex flex-col items-center justify-center gap-2">
+                    <span>No student records found matching your filters.</span>
+                    <button
+                      onClick={() => {
+                        setSearch("");
+                        setDepartment("ALL");
+                        setStudentType("ALL");
+                        setPlacementStatus("ALL");
+                        fetchStudents();
+                      }}
+                      className="rounded-lg border border-purple-500/30 bg-purple-500/10 px-3 py-1.5 text-xs font-semibold text-purple-300 hover:bg-purple-500/20 transition"
+                    >
+                      Reset Filters & Reload
+                    </button>
+                  </div>
                 </td>
               </tr>
             ) : (

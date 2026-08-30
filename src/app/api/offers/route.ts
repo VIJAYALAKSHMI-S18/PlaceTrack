@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth, requireRole, handleAuthError } from "@/lib/rbac";
+import { requireApiAuth, requireApiRole, handleAuthError } from "@/lib/rbac";
 import { getOffers, createOffer } from "@/services/offer.service";
 import { offerCreateSchema } from "@/validators/offer.validator";
 
 export async function GET(req: NextRequest) {
   try {
-    await requireAuth();
+    await requireApiAuth();
     const searchParams = req.nextUrl.searchParams;
 
     const filters = {
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     // Admin or Placement Team can record offers
-    const user = await requireRole(["ADMIN", "PLACEMENT_TEAM"]);
+    const user = await requireApiRole(["ADMIN", "PLACEMENT_TEAM"]);
     const body = await req.json();
 
     const validated = offerCreateSchema.safeParse(body);
