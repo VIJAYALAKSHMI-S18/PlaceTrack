@@ -102,17 +102,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       >
         {/* Sidebar Header / Rathinam Branding */}
-        <div className="flex flex-col border-b border-[#1E293B] px-4 py-3 bg-[#0B1120]/60">
-          <div className="flex items-center justify-center rounded-xl bg-white p-2 shadow-sm border border-[#334155]/30">
+        <div className="flex flex-col border-b border-[#1E293B] px-4 py-4 bg-gradient-to-b from-[#1E1B4B]/30 via-[#0F172A]/80 to-[#111827]">
+          <div className="flex items-center justify-center rounded-2xl bg-white/95 p-3 shadow-lg shadow-purple-950/40 border border-white/20 hover:scale-[1.02] transition-transform duration-200">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/rgu-logo.webp"
               alt="Rathinam Global University"
-              className="h-8 w-auto object-contain"
+              className="h-10 w-auto object-contain drop-shadow-sm"
             />
           </div>
-          <div className="mt-2 text-center">
-            <span className="text-[10px] font-bold tracking-widest text-[#0EA5E9] uppercase">
+          <div className="mt-2.5 flex items-center justify-center gap-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-[10px] font-black tracking-widest bg-gradient-to-r from-purple-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent uppercase">
               Placement & Career Cell
             </span>
           </div>

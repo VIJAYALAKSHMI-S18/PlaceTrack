@@ -51,23 +51,26 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#7C2D87]/25 via-[#0B0F19] to-[#05070D] p-4">
       <div className="w-full max-w-md space-y-6">
         {/* Rathinam Branding & Logo */}
-        <div className="text-center space-y-3">
-          <div className="inline-flex rounded-2xl bg-white p-3.5 shadow-2xl shadow-purple-900/30 border border-[#334155]/40">
+        <div className="text-center space-y-4">
+          <div className="inline-flex rounded-3xl bg-white/95 p-4 shadow-2xl shadow-purple-900/50 border border-white/30 backdrop-blur-xl transition-transform duration-300 hover:scale-[1.02]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/rgu-logo.webp"
               alt="Rathinam Global University Logo"
-              className="h-12 w-auto object-contain max-w-[280px]"
+              className="h-14 w-auto object-contain max-w-[320px] drop-shadow-md"
             />
           </div>
           <div>
             <h1 className="text-xl font-black tracking-wide text-[#F8FAFC]">
               RATHINAM GLOBAL DEEMED TO BE UNIVERSITY
             </h1>
-            <p className="text-[11px] font-bold tracking-widest text-[#0EA5E9] uppercase mt-0.5">
-              Placement & Career Development Cell
-            </p>
-            <p className="text-xs text-[#94A3B8] mt-1">
+            <div className="flex items-center justify-center gap-2 mt-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <p className="text-[11px] font-bold tracking-widest bg-gradient-to-r from-purple-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent uppercase">
+                Placement & Career Development Cell
+              </p>
+            </div>
+            <p className="text-xs text-[#94A3B8] mt-1.5">
               Campus Recruitment Drives, Student ATS Matching & Offer Tracking Portal
             </p>
           </div>
