@@ -9,7 +9,6 @@ export default async function ManagerOffersPage() {
   const user = await requireRole(["MANAGER", "ADMIN"]);
 
   const offers = await prisma.offer.findMany({
-    where: { deleted_at: null },
     include: {
       student: true,
       company: true,

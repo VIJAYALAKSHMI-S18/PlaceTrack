@@ -232,6 +232,7 @@ export async function calculateDriveStatistics(driveId: string): Promise<DriveSt
 export async function evaluateAllStudentsForDrive(driveId: string) {
   const drive = await prisma.placementDrive.findUnique({
     where: { id: driveId },
+    include: { company: true },
   });
   if (!drive) throw new Error("Placement drive not found.");
 
