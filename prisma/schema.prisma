@@ -1,0 +1,299 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  role          String    @default("PLACEMENT_TEAM") // ADMIN, MANAGER, PLACEMENT_TEAM
+  departmentId  String?
+  phone         String?
+  avatarUrl     String?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+
+  companySubmissionsSubmitted CompanySubmission[] @relation("SubmissionsBy")
+  companySubmissionsReviewed  CompanySubmission[] @relation("SubmissionsReviewed")
+  auditLogs                   AuditLog[]
+  placementTeamProfile        PlacementTeam?
+
+  @@index([email])
+  @@index([role])
+}
+
+model Department {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Student {
+  id                 String    @id @default(cuid())
+  name               String
+  register_number    String    @unique
+  department         String
+  student_type       String
+  email              String    @unique
+  phone_number       String
+  sslc_percentage    Float
+  hsc_percentage     Float
+  ug_percentage      Float
+  pg_percentage      Float?
+  resume_url         String?
+  self_intro_url     String?
+  linkedin_url       String?
+  github_url         String?
+  portfolio_url      String?
+
+  // Internal extended fields
+  graduation_year    Int?
+  cgpa               Float?
+  backlogs           Int       @default(0)
+  placement_status   String    @default("NOT_PLACED") // NOT_PLACED, PLACED, MULTIPLE_OFFERS, WITHDRAWN
+  skills             String?   // JSON array of strings
+  parsed_resume_text String?
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
+  deleted_at         DateTime?
+
+  evaluations        StudentJobEvaluation[]
+  offers             Offer[]
+  driveApplications  DriveStudent[]
+
+  @@index([register_number])
+  @@index([email])
+  @@index([department])
+  @@index([placement_status])
+}
+
+model Company {
+  id                   String              @id @default(cuid())
+  company_name         String
+  location             String
+  website              String?
+  company_size         String?
+  company_address      String?
+  google_maps_location String?
+  latitude             Float?
+  longitude            Float?
+  formatted_address    String?
+  google_maps_url      String?
+  contact_person_name  String?
+  contact_person_phone String?
+  contact_person_email String?
+  company_description  String?
+  company_logo         String?
+  industry             String?
+  founded_year         Int?
+  company_type         String?
+  linkedin_url         String?
+  careers_url          String?
+  status               String              @default("PENDING_APPROVAL") // DRAFT, PENDING_APPROVAL, APPROVED, REJECTED, ARCHIVED
+  created_by_id        String?
+  created_at           DateTime            @default(now())
+  updated_at           DateTime            @updatedAt
+  deleted_at           DateTime?
+
+  drives               PlacementDrive[]
+  submissions          CompanySubmission[]
+  offers               Offer[]
+
+  @@index([company_name])
+  @@index([status])
+  @@index([industry])
+}
+
+model CompanySubmission {
+  id               String    @id @default(cuid())
+  company_id       String
+  submitted_by_id   String
+  status           String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  rejection_reason String?
+  reviewed_by_id   String?
+  reviewed_at      DateTime?
+  created_at       DateTime  @default(now())
+
+  company          Company   @relation(fields: [company_id], references: [id], onDelete: Cascade)
+  submittedBy      User      @relation("SubmissionsBy", fields: [submitted_by_id], references: [id])
+  reviewedBy       User?     @relation("SubmissionsReviewed", fields: [reviewed_by_id], references: [id])
+
+  @@index([company_id])
+  @@index([status])
+}
+
+model PlacementDrive {
+  id                         String                 @id @default(cuid())
+  company_id                 String
+  job_title                  String
+  job_role                   String?
+  drive_date                 DateTime?
+  drive_location             String?
+  drive_type                 String                 @default("ON_CAMPUS") // ON_CAMPUS, OFF_CAMPUS, VIRTUAL, POOLED
+  eligible_departments       String                 // JSON Array: ["CSE", "IT"]
+  minimum_cgpa               Float?
+  maximum_backlogs           Int                    @default(0)
+  eligible_graduation_years  String?                // JSON Array: [2025, 2026]
+  minimum_ug_percentage      Float?
+  minimum_hsc_percentage     Float?
+  minimum_sslc_percentage    Float?
+  minimum_ats_score          Float                  @default(70)
+  job_description_summary    String?
+  jd_pdf_url                 String?
+  official_careers_url       String?
+  ctc_lpa                    Float?
+  drive_status               String                 @default("UPCOMING") // UPCOMING, ONGOING, COMPLETED, CANCELLED
+  opportunity_status         String                 @default("OPEN") // OPEN, CLOSED
+  required_skills            String?                // JSON Array: ["Python", "SQL"]
+  preferred_skills           String?                // JSON Array: ["Docker", "AWS"]
+  created_by_id              String?
+  created_at                 DateTime               @default(now())
+  updated_at                 DateTime               @updatedAt
+  deleted_at                 DateTime?
+
+  company                    Company                @relation(fields: [company_id], references: [id], onDelete: Cascade)
+  students                   DriveStudent[]
+  evaluations                StudentJobEvaluation[]
+  offers                     Offer[]
+
+  @@index([company_id])
+  @@index([drive_status])
+  @@index([opportunity_status])
+}
+
+model DriveStudent {
+  id                 String         @id @default(cuid())
+  placement_drive_id String
+  student_id         String
+  status             String         @default("APPLIED") // APPLIED, SHORTLISTED, REJECTED, ATTENDED, CLEARED_ROUND_1, CLEARED_ROUND_2, OFFERED
+  notes              String?
+  created_at         DateTime       @default(now())
+  updated_at         DateTime       @updatedAt
+
+  drive              PlacementDrive @relation(fields: [placement_drive_id], references: [id], onDelete: Cascade)
+  student            Student        @relation(fields: [student_id], references: [id], onDelete: Cascade)
+
+  @@unique([placement_drive_id, student_id])
+  @@index([placement_drive_id])
+  @@index([student_id])
+  @@index([status])
+}
+
+model StudentJobEvaluation {
+  id                   String         @id @default(cuid())
+  student_id           String
+  placement_drive_id   String
+  ats_score            Float
+  skill_match_score    Float
+  semantic_match_score Float
+  education_score      Float
+  experience_score     Float
+  project_score        Float
+  matched_skills       String         // JSON Array
+  missing_skills       String         // JSON Array
+  eligibility_status   String         // ELIGIBLE, CONDITIONALLY_ELIGIBLE, NOT_ELIGIBLE, EVALUATION_FAILED
+  eligibility_reasons  String         // JSON Array
+  resume_version       String?
+  jd_version           String?
+  evaluated_at         DateTime       @default(now())
+
+  student              Student        @relation(fields: [student_id], references: [id], onDelete: Cascade)
+  drive                PlacementDrive @relation(fields: [placement_drive_id], references: [id], onDelete: Cascade)
+
+  @@unique([student_id, placement_drive_id])
+  @@index([student_id])
+  @@index([placement_drive_id])
+  @@index([eligibility_status])
+}
+
+model Offer {
+  id                 String          @id @default(cuid())
+  student_id         String
+  company_id         String
+  placement_drive_id String?
+  job_role           String
+  offer_date         DateTime        @default(now())
+  ctc_lpa            Float
+  offer_status       String          @default("OFFERED") // OFFERED, ACCEPTED, REJECTED, JOINED
+  offer_letter_url   String?
+  created_at         DateTime        @default(now())
+  updated_at         DateTime        @updatedAt
+
+  student            Student         @relation(fields: [student_id], references: [id], onDelete: Cascade)
+  company            Company         @relation(fields: [company_id], references: [id], onDelete: Cascade)
+  drive              PlacementDrive? @relation(fields: [placement_drive_id], references: [id], onDelete: SetNull)
+
+  @@index([student_id])
+  @@index([company_id])
+  @@index([placement_drive_id])
+  @@index([offer_status])
+}
+
+model PlacementTeam {
+  id                   String   @id @default(cuid())
+  user_id              String   @unique
+  designation          String?
+  assigned_departments String?  // JSON Array: ["CSE", "IT"]
+  created_at           DateTime @default(now())
+
+  user                 User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  user_id    String?
+  user_email String?
+  role       String?
+  action     String
+  entity     String
+  entity_id  String?
+  ip_address String?
+  old_value  String?  // JSON
+  new_value  String?  // JSON
+  timestamp  DateTime @default(now())
+
+  user       User?    @relation(fields: [user_id], references: [id], onDelete: SetNull)
+
+  @@index([user_id])
+  @@index([action])
+  @@index([entity])
+  @@index([timestamp])
+}
+
+model Notification {
+  id             String   @id @default(cuid())
+  title          String
+  message        String
+  type           String
+  target_role    String?  // "ADMIN", "MANAGER", "PLACEMENT_TEAM", or null
+  target_user_id String?
+  is_read        Boolean  @default(false)
+  created_at     DateTime @default(now())
+
+  @@index([target_role])
+  @@index([target_user_id])
+  @@index([is_read])
+}
+
+model SystemSettings {
+  id                    String   @id @default("default")
+  ats_skill_weight      Float    @default(50)
+  ats_semantic_weight   Float    @default(20)
+  ats_education_weight  Float    @default(10)
+  ats_experience_weight Float    @default(10)
+  ats_project_weight    Float    @default(10)
+  default_ats_threshold Float    @default(70)
+  conditional_tolerance Float    @default(5)
+  departments           String?  // JSON Array
+  student_types         String?  // JSON Array
+  updated_at            DateTime @updatedAt
+}
