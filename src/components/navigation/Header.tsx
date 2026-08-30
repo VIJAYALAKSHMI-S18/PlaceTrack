@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Bell, Menu, LogOut, User as UserIcon, Check } from "lucide-react";
 import { SessionUser } from "@/types";
 import { Badge } from "../ui/Badge";
-import { RathinamLogo } from "@/components/common/RathinamLogo";
 
 interface HeaderProps {
   user?: SessionUser | null;
@@ -77,7 +76,12 @@ export const Header: React.FC<HeaderProps> = ({
           <Menu className="h-5 w-5" />
         </button>
         <div className="hidden sm:flex items-center gap-3">
-          <RathinamLogo className="h-9 w-auto" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/rgu-emblem.svg"
+            alt="Rathinam Emblem"
+            className="h-8 w-8 rounded-xl object-contain shadow-md shadow-purple-950/40"
+          />
           <div className="flex flex-col">
             <span className="text-xs font-bold text-[#F8FAFC]">
               Rathinam Global Deemed to be University
