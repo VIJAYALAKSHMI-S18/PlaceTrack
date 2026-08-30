@@ -102,13 +102,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       >
         {/* Sidebar Header / Rathinam Branding */}
-        <div className="flex flex-col border-b border-[#1E293B] px-3.5 py-4 bg-gradient-to-b from-[#1E1B4B]/40 via-[#0F172A]/90 to-[#111827]">
-          <Link href={`/${role.toLowerCase().replace("_", "-")}/dashboard`} className="block transition-transform duration-200 hover:scale-[1.02]">
+        <div className="flex flex-col border-b border-[#1E293B] px-3.5 py-4 bg-gradient-to-b from-[#7C2D87]/20 via-[#0F172A] to-[#111827]">
+          <Link href={`/${role.toLowerCase().replace("_", "-")}/dashboard`} className="flex items-center justify-center transition-transform duration-200 hover:scale-105">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/rgu-logo.svg"
+              src="/rgu-logo.png"
               alt="Rathinam Global University"
-              className="w-full h-auto max-h-14 object-contain filter drop-shadow-[0_4px_12px_rgba(147,51,234,0.25)]"
+              className="w-full h-auto max-h-12 object-contain"
             />
           </Link>
         </div>

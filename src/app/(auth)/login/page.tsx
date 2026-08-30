@@ -52,21 +52,21 @@ export default function LoginPage() {
       <div className="w-full max-w-md space-y-6">
         {/* Rathinam Branding & Logo */}
         <div className="text-center space-y-4">
-          <div className="inline-flex rounded-3xl bg-gradient-to-b from-[#1E1B4B]/80 via-[#0F172A]/90 to-[#0B0F19] p-5 shadow-2xl shadow-purple-950/60 border border-purple-500/30 backdrop-blur-xl transition-transform duration-300 hover:scale-[1.02]">
+          <div className="flex justify-center transition-transform duration-300 hover:scale-105">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/rgu-logo.svg"
-              alt="Rathinam Global University Logo"
-              className="h-16 w-auto object-contain max-w-[340px] drop-shadow-[0_8px_20px_rgba(168,85,247,0.3)]"
+              src="/rgu-logo.png"
+              alt="Rathinam Global University - NAAC A++ Accredited"
+              className="h-16 sm:h-20 w-auto object-contain max-w-[440px] drop-shadow-[0_8px_24px_rgba(124,45,135,0.4)]"
             />
           </div>
           <div>
             <h1 className="text-xl font-black tracking-wide text-[#F8FAFC]">
               RATHINAM GLOBAL DEEMED TO BE UNIVERSITY
             </h1>
-            <div className="flex items-center justify-center gap-2 mt-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <p className="text-[11px] font-bold tracking-widest bg-gradient-to-r from-purple-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent uppercase">
+            <div className="flex items-center justify-center gap-2 mt-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#84CC16] animate-pulse"></span>
+              <p className="text-[11px] font-bold tracking-widest bg-gradient-to-r from-[#C084FC] via-[#38BDF8] to-[#A3E635] bg-clip-text text-transparent uppercase">
                 Placement & Career Development Cell
               </p>
             </div>
