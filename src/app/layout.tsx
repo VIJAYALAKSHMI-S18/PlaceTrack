@@ -4,6 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Rathinam Global University — Placement & Career Portal",
   description: "Official Campus Placement, Recruitment Drives, and ATS Matching Portal for Rathinam Global University (RGU).",
+  icons: {
+    icon: "/images/rgu-logo.webp",
+    shortcut: "/images/rgu-logo.webp",
+    apple: "/images/rgu-logo.webp",
+  },
 };
 
 export default function RootLayout({
