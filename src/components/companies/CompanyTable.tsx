@@ -140,10 +140,10 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
       {/* Top Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
             Companies Directory
           </h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <p className="text-xs font-medium text-slate-600">
             RECRUITING PARTNERS & JOB OPPORTUNITIES
           </p>
         </div>
@@ -169,7 +169,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
               placeholder="Search Company Name, Location, Industry..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:border-[#6366F1] focus:outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-white pl-9 pr-3 py-2 text-xs text-slate-900 placeholder-[#64748B] focus:border-[#0284C7] focus:outline-none"
             />
           </div>
 
@@ -179,7 +179,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
               setStatus(e.target.value);
               setPage(1);
             }}
-            className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
           >
             <option value="ALL">All Statuses</option>
             <option value="APPROVED">Approved (Active)</option>
@@ -193,7 +193,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
               setIndustry(e.target.value);
               setPage(1);
             }}
-            className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
           >
             <option value="ALL">All Industries</option>
             <option value="Information Technology & Cloud">IT & Cloud</option>
@@ -222,44 +222,44 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
           <tbody className="divide-y divide-[#1E293B]">
             {loading ? (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
+                <td colSpan={7} className="p-8 text-center text-slate-600">
                   Loading companies...
                 </td>
               </tr>
             ) : companies.length === 0 ? (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
+                <td colSpan={7} className="p-8 text-center text-slate-600">
                   No companies found.
                 </td>
               </tr>
             ) : (
               companies.map((company) => (
                 <tr key={company.id} className="table-row">
-                  <td className="px-4 py-3.5 font-semibold text-[#F8FAFC]">
+                  <td className="px-4 py-3.5 font-semibold text-slate-900">
                     <Link
                       href={`/companies/${company.id}`}
-                      className="flex items-center gap-2 hover:text-[#818CF8]"
+                      className="flex items-center gap-2 hover:text-[#0284C7]"
                     >
-                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1E293B] text-[#818CF8]">
+                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1E293B] text-[#0284C7]">
                         <Building2 className="h-4 w-4" />
                       </div>
                       <span>{company.company_name}</span>
                     </Link>
                   </td>
-                  <td className="px-4 py-3.5 text-[#94A3B8]">
+                  <td className="px-4 py-3.5 text-slate-600">
                     <span className="flex items-center gap-1">
                       <MapPin className="h-3.5 w-3.5 text-[#64748B]" />
                       {company.location}
                     </span>
                   </td>
-                  <td className="px-4 py-3.5 text-[#94A3B8]">
+                  <td className="px-4 py-3.5 text-slate-600">
                     {company.industry || "—"}
                   </td>
-                  <td className="px-4 py-3.5 text-[#94A3B8]">
+                  <td className="px-4 py-3.5 text-slate-600">
                     {company.company_size || "—"}
                   </td>
                   <td className="px-4 py-3.5">
-                    <span className="rounded bg-[#1E293B] px-2 py-0.5 font-semibold text-[#818CF8]">
+                    <span className="rounded bg-[#1E293B] px-2 py-0.5 font-semibold text-[#0284C7]">
                       {company._count?.drives || 0} JDs
                     </span>
                   </td>
@@ -279,7 +279,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
                   <td className="px-4 py-3.5 text-right space-x-1">
                     <Link
                       href={`/companies/${company.id}`}
-                      className="inline-flex items-center rounded p-1.5 text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC]"
+                      className="inline-flex items-center rounded p-1.5 text-slate-600 hover:bg-blue-50/50 hover:text-slate-900"
                       title="View Company & JDs"
                     >
                       <ExternalLink className="h-4 w-4" />
@@ -287,7 +287,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
                     {isAdmin && (
                       <button
                         onClick={() => handleDelete(company.id, company.company_name)}
-                        className="inline-flex items-center rounded p-1.5 text-[#94A3B8] hover:bg-[#EF4444]/10 hover:text-[#EF4444]"
+                        className="inline-flex items-center rounded p-1.5 text-slate-600 hover:bg-[#EF4444]/10 hover:text-[#EF4444]"
                         title="Delete Company"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -301,7 +301,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
         </table>
 
         {/* Pagination Footer */}
-        <div className="flex items-center justify-between border-t border-[#1E293B] px-4 py-3 text-xs text-[#94A3B8]">
+        <div className="flex items-center justify-between border-t border-slate-200 px-4 py-3 text-xs text-slate-600">
           <span>
             Showing {companies.length} of {totalCount} companies
           </span>
@@ -314,7 +314,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
             >
               <ChevronLeft className="h-3.5 w-3.5" /> Prev
             </Button>
-            <span className="font-semibold text-[#F8FAFC]">
+            <span className="font-semibold text-slate-900">
               Page {page} of {totalPages}
             </span>
             <Button

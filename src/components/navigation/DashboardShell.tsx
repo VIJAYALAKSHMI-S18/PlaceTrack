@@ -19,7 +19,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#0F172A]">
+    <div className="flex min-h-screen bg-[#F8FAFC]">
       <Sidebar
         role={role}
         user={user}

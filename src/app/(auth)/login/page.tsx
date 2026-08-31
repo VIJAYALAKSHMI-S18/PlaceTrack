@@ -49,132 +49,117 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#7C2D87]/25 via-[#0B0F19] to-[#05070D] p-4">
+    <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/60 via-slate-50 to-white p-4">
       <div className="w-full max-w-md space-y-6">
         {/* Rathinam Branding & Logo */}
         <div className="text-center space-y-4">
           <div className="flex justify-center transition-transform duration-300 hover:scale-105">
-            <RathinamLogo className="h-16 sm:h-20 w-auto max-w-[440px] drop-shadow-[0_8px_24px_rgba(139,36,144,0.35)]" />
+            <RathinamLogo className="h-16 sm:h-20 w-auto max-w-[440px] drop-shadow-md" />
           </div>
           <div>
-            <h1 className="text-xl font-black tracking-wide text-[#F8FAFC]">
+            <h1 className="text-xl font-black tracking-wide text-slate-900">
               RATHINAM GLOBAL DEEMED TO BE UNIVERSITY
             </h1>
-            <div className="flex items-center justify-center gap-2 mt-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#84CC16] animate-pulse"></span>
-              <p className="text-[11px] font-bold tracking-widest bg-gradient-to-r from-[#C084FC] via-[#38BDF8] to-[#A3E635] bg-clip-text text-transparent uppercase">
-                Placement & Career Development Cell
-              </p>
-            </div>
-            <p className="text-xs text-[#94A3B8] mt-1.5">
-              Campus Recruitment Drives, Student ATS Matching & Offer Tracking Portal
+            <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-[#0284C7]">
+              Campus Placement & Career Development Portal
             </p>
           </div>
         </div>
 
-        {/* Login Form Card */}
-        <Card className="border-[#1E293B] bg-[#111827] p-6 shadow-2xl">
+        {/* Login Card */}
+        <Card className="border-slate-200 bg-white/95 p-6 shadow-xl backdrop-blur-md">
           <form onSubmit={handleLogin} className="space-y-4">
             {error && (
-              <div className="rounded-lg border border-[#EF4444]/30 bg-[#EF4444]/10 p-3 text-xs text-[#EF4444]">
+              <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-600 font-medium">
                 {error}
               </div>
             )}
 
-            <div className="space-y-1">
-              <label className="block text-xs font-medium text-[#94A3B8]">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-700">
                 Official Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-2.5 h-4 w-4 text-[#64748B]" />
+                <Mail className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                 <input
                   type="email"
+                  required
+                  placeholder="name@rathinam.ac.in"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@college.edu or demo email"
-                  required
-                  className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:border-[#6366F1] focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 bg-white pl-9 pr-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#0284C7] focus:outline-none focus:ring-1 focus:ring-[#0284C7] shadow-sm"
                 />
               </div>
             </div>
 
-            <div className="space-y-1">
-              <label className="block text-xs font-medium text-[#94A3B8]">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-700">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-2.5 h-4 w-4 text-[#64748B]" />
+                <Lock className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                 <input
                   type="password"
+                  required
+                  placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  required
-                  className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:border-[#6366F1] focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 bg-white pl-9 pr-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#0284C7] focus:outline-none focus:ring-1 focus:ring-[#0284C7] shadow-sm"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-xs">
-              <label className="flex items-center gap-2 text-[#94A3B8] cursor-pointer">
+            <div className="flex items-center justify-between pt-1">
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded border-[#1E293B] bg-[#0F172A] text-[#6366F1] focus:ring-[#6366F1]"
+                  className="h-4 w-4 rounded border-slate-300 text-[#0284C7] focus:ring-[#0284C7]"
                 />
-                Remember session
+                <span className="text-xs text-slate-600 font-medium">Remember session</span>
               </label>
-              <span className="text-[#818CF8] hover:underline cursor-pointer">
-                Forgot password?
-              </span>
             </div>
 
             <Button
               type="submit"
-              className="w-full font-semibold shadow-lg shadow-purple-900/25"
               isLoading={loading}
+              className="w-full rgu-btn-gradient text-white py-2.5 font-semibold text-sm shadow-md"
             >
-              Sign In to PlaceTrack Portal
+              Sign In to Placement Portal
             </Button>
           </form>
 
-          {/* Quick Demo Accounts Selection */}
-          <div className="mt-6 border-t border-[#1E293B] pt-4">
-            <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-wider text-[#64748B]">
-              Quick Demo Accounts (Development)
+          {/* Quick Demo Accounts Helper */}
+          <div className="mt-6 border-t border-slate-100 pt-4">
+            <p className="text-center text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2.5">
+              Instant Demo Access
             </p>
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
                 onClick={() => setDemoAccount("admin@example.com", "admin123")}
-                className="rounded-lg border border-[#EF4444]/30 bg-[#EF4444]/10 p-2 text-center text-[10px] font-bold text-[#EF4444] transition hover:bg-[#EF4444]/20"
+                className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-xs font-semibold text-slate-700 transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
               >
-                ADMIN
+                Admin
               </button>
               <button
                 type="button"
                 onClick={() => setDemoAccount("manager@example.com", "manager123")}
-                className="rounded-lg border border-[#F59E0B]/30 bg-[#F59E0B]/10 p-2 text-center text-[10px] font-bold text-[#F59E0B] transition hover:bg-[#F59E0B]/20"
+                className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-xs font-semibold text-slate-700 transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
               >
-                MANAGER
+                Manager
               </button>
               <button
                 type="button"
                 onClick={() => setDemoAccount("placement@example.com", "placement123")}
-                className="rounded-lg border border-[#3B82F6]/30 bg-[#3B82F6]/10 p-2 text-center text-[10px] font-bold text-[#818CF8] transition hover:bg-[#3B82F6]/20"
+                className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-xs font-semibold text-slate-700 transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
               >
-                TEAM
+                Placement
               </button>
             </div>
           </div>
         </Card>
-
-        {/* Security assurance */}
-        <div className="flex items-center justify-center gap-2 text-[11px] text-[#64748B]">
-          <Shield className="h-3.5 w-3.5 text-[#10B981]" />
-          <span>Encrypted Session • Role-Based Server Authorization</span>
-        </div>
       </div>
     </div>
   );

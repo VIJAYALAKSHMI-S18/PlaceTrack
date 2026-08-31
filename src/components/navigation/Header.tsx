@@ -30,22 +30,21 @@ export const Header: React.FC<HeaderProps> = ({
       const res = await fetch("/api/notifications");
       if (res.ok) {
         const json = await res.json();
-        if (json.success) {
-          setNotifications(json.data.notifications || []);
-          setUnreadCount(json.data.unreadCount || 0);
-        }
+        const list = json.data || [];
+        setNotifications(list);
+        setUnreadCount(list.filter((n: any) => !n.is_read).length);
       }
     } catch {
       // ignore
     }
   };
 
-  const handleMarkAllRead = async () => {
+  const markAllRead = async () => {
     try {
       await fetch("/api/notifications", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ markAllRead: true }),
+        body: JSON.stringify({ markAll: true }),
       });
       setUnreadCount(0);
       setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })));
@@ -65,13 +64,13 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-[#1E293B] bg-[#0F172A]/95 px-6 backdrop-blur-md relative">
+    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-slate-200 bg-white/95 px-6 backdrop-blur-md relative shadow-sm">
       {/* Rathinam Signature Tri-Color Gradient Strip */}
       <div className="absolute bottom-0 left-0 right-0 h-[2px] rgu-gradient-bar" />
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenMobileSidebar}
-          className="rounded-lg p-2 text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC] lg:hidden"
+          className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-800 lg:hidden"
         >
           <Menu className="h-5 w-5" />
         </button>
@@ -80,13 +79,13 @@ export const Header: React.FC<HeaderProps> = ({
           <img
             src="/rgu-emblem.svg"
             alt="Rathinam Emblem"
-            className="h-8 w-8 rounded-xl object-contain shadow-md shadow-purple-950/40"
+            className="h-8 w-8 rounded-xl object-contain shadow-sm border border-slate-200"
           />
           <div className="flex flex-col">
-            <span className="text-xs font-bold text-[#F8FAFC]">
+            <span className="text-xs font-bold text-slate-900">
               Rathinam Global Deemed to be University
             </span>
-            <span className="text-[10px] text-[#0EA5E9] font-medium">
+            <span className="text-[10px] text-[#0284C7] font-semibold">
               Placement & Career Development Cell
             </span>
           </div>
@@ -95,7 +94,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       <div className="flex items-center gap-4">
         {/* Date Display */}
-        <span className="hidden md:inline-block text-xs font-medium text-[#94A3B8]">
+        <span className="hidden md:inline-block text-xs font-medium text-slate-500">
           {new Date().toLocaleDateString("en-US", {
             weekday: "long",
             year: "numeric",
@@ -111,42 +110,52 @@ export const Header: React.FC<HeaderProps> = ({
               setShowNotifications(!showNotifications);
               setShowUserMenu(false);
             }}
-            className="relative rounded-lg p-2 text-[#94A3B8] transition hover:bg-[#1E293B] hover:text-[#F8FAFC]"
+            className="relative rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-800"
+            title="Notifications"
           >
             <Bell className="h-5 w-5" />
             {unreadCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#EF4444] text-[9px] font-bold text-white shadow">
+              <span className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#0284C7] text-[9px] font-bold text-white shadow-sm">
                 {unreadCount}
               </span>
             )}
           </button>
 
           {showNotifications && (
-            <div className="absolute right-0 mt-2 w-80 rounded-xl border border-[#1E293B] bg-[#111827] p-4 shadow-2xl z-50">
-              <div className="flex items-center justify-between border-b border-[#1E293B] pb-3">
-                <span className="text-xs font-bold text-[#F8FAFC]">Notifications</span>
+            <div className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-3 shadow-xl z-50">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                <span className="text-xs font-bold text-slate-900">
+                  Notifications
+                </span>
                 {unreadCount > 0 && (
                   <button
-                    onClick={handleMarkAllRead}
-                    className="flex items-center gap-1 text-[10px] text-[#818CF8] hover:underline"
+                    onClick={markAllRead}
+                    className="flex items-center gap-1 text-[10px] text-[#0284C7] hover:underline font-medium"
                   >
                     <Check className="h-3 w-3" /> Mark all read
                   </button>
                 )}
               </div>
-              <div className="mt-3 max-h-64 space-y-2 overflow-y-auto pr-1">
+
+              <div className="max-h-60 space-y-2 overflow-y-auto pt-2">
                 {notifications.length === 0 ? (
-                  <p className="py-4 text-center text-xs text-[#64748B]">No notifications</p>
+                  <p className="py-4 text-center text-xs text-slate-400">
+                    No recent notifications
+                  </p>
                 ) : (
                   notifications.map((n) => (
                     <div
                       key={n.id}
-                      className={`rounded-lg p-2.5 text-xs transition ${
-                        n.is_read ? "bg-[#0F172A]/40 text-[#94A3B8]" : "bg-[#1E293B]/80 text-[#F8FAFC] border-l-2 border-[#6366F1]"
+                      className={`rounded-lg p-2 text-xs transition ${
+                        n.is_read
+                          ? "text-slate-500 hover:bg-slate-50"
+                          : "bg-blue-50/60 text-slate-800 border-l-2 border-[#0284C7]"
                       }`}
                     >
-                      <div className="font-semibold">{n.title}</div>
-                      <div className="text-[11px] text-[#94A3B8] mt-0.5">{n.message}</div>
+                      <p className="font-semibold">{n.title}</p>
+                      <p className="mt-0.5 text-[11px] text-slate-600">
+                        {n.message}
+                      </p>
                     </div>
                   ))
                 )}
@@ -155,54 +164,48 @@ export const Header: React.FC<HeaderProps> = ({
           )}
         </div>
 
-        {/* User Badge & Menu */}
+        {/* User Profile Avatar */}
         <div className="relative">
           <button
             onClick={() => {
               setShowUserMenu(!showUserMenu);
               setShowNotifications(false);
             }}
-            className="flex items-center gap-2.5 rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-1.5 transition hover:border-[#334155]"
+            className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50 p-1.5 pr-3 transition hover:bg-slate-100"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#6366F1]/20 text-[#818CF8]">
-              <UserIcon className="h-4 w-4" />
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#0284C7] text-xs font-bold text-white">
+              {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
             </div>
             <div className="hidden text-left sm:block">
-              <div className="text-xs font-semibold text-[#F8FAFC] leading-none">
-                {user?.name || "User"}
-              </div>
-              <div className="text-[10px] text-[#64748B] mt-0.5">
-                {user?.email}
-              </div>
+              <p className="text-xs font-bold text-slate-900 leading-tight">
+                {user?.name || "Dr. Sivasubramaniam"}
+              </p>
+              <p className="text-[10px] text-slate-500 leading-tight">
+                {user?.role || "ADMIN"}
+              </p>
             </div>
-            <Badge
-              variant={
-                user?.role === "ADMIN"
-                  ? "danger"
-                  : user?.role === "MANAGER"
-                  ? "warning"
-                  : "info"
-              }
-              size="sm"
-              className="ml-1 uppercase text-[10px]"
-            >
-              {user?.role?.replace("_", " ")}
-            </Badge>
           </button>
 
           {showUserMenu && (
-            <div className="absolute right-0 mt-2 w-56 rounded-xl border border-[#1E293B] bg-[#111827] p-2 shadow-2xl z-50">
-              <div className="px-3 py-2 border-b border-[#1E293B]">
-                <p className="text-xs font-bold text-[#F8FAFC]">{user?.name}</p>
-                <p className="text-[11px] text-[#64748B]">{user?.email}</p>
+            <div className="absolute right-0 mt-2 w-48 rounded-xl border border-slate-200 bg-white p-2 shadow-xl z-50">
+              <div className="border-b border-slate-100 px-3 py-2">
+                <p className="text-xs font-bold text-slate-900 truncate">
+                  {user?.name || "Dr. Sivasubramaniam"}
+                </p>
+                <p className="text-[10px] text-slate-500 truncate">
+                  {user?.email || "admin@rathinam.ac.in"}
+                </p>
               </div>
-              <button
-                onClick={handleLogout}
-                className="mt-1 flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium text-[#EF4444] transition hover:bg-[#EF4444]/10"
-              >
-                <LogOut className="h-4 w-4" />
-                Sign Out
-              </button>
+
+              <div className="pt-1">
+                <button
+                  onClick={handleLogout}
+                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium text-red-600 transition hover:bg-red-50"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout Session
+                </button>
+              </div>
             </div>
           )}
         </div>

@@ -2,9 +2,14 @@ import React from "react";
 
 interface RathinamLogoProps {
   className?: string;
+  isDark?: boolean;
 }
 
-export const RathinamLogo: React.FC<RathinamLogoProps> = ({ className = "h-16 w-auto" }) => {
+export const RathinamLogo: React.FC<RathinamLogoProps> = ({ className = "h-16 w-auto", isDark = false }) => {
+  const mainTextColor = isDark ? "#FFFFFF" : "#0F172A";
+  const subTextColor = isDark ? "#94A3B8" : "#475569";
+  const lineCol = isDark ? "#475569" : "#CBD5E1";
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +41,7 @@ export const RathinamLogo: React.FC<RathinamLogoProps> = ({ className = "h-16 w-
 
       {/* 1. LEFT: THE 3 ICONIC RATHINAM CIRCLES / RINGS EMBLEM */}
       <g transform="translate(10, 10)">
-        <text x="50" y="14" textAnchor="middle" fontFamily="'Brush Script MT', 'Segoe Script', cursive, sans-serif" fontStyle="italic" fontSize="11" fill="#E2E8F0" letterSpacing="0.5">Celebrate life</text>
+        <text x="50" y="14" textAnchor="middle" fontFamily="'Brush Script MT', 'Segoe Script', cursive, sans-serif" fontStyle="italic" fontSize="11" fill={subTextColor} letterSpacing="0.5">Celebrate life</text>
 
         {/* Top Ring (Orange) */}
         <circle cx="50" cy="38" r="17" fill="none" stroke="url(#ringOrange)" strokeWidth="7" />
@@ -57,7 +62,7 @@ export const RathinamLogo: React.FC<RathinamLogoProps> = ({ className = "h-16 w-
       </g>
 
       {/* Vertical Divider 1 */}
-      <line x1="115" y1="15" x2="115" y2="120" stroke="#475569" strokeWidth="2" strokeLinecap="round" />
+      <line x1="115" y1="15" x2="115" y2="120" stroke={lineCol} strokeWidth="2" strokeLinecap="round" />
 
       {/* 2. MIDDLE: RGU & GLOBAL UNIVERSITY TYPOGRAPHY */}
       <g transform="translate(130, 10)">
@@ -79,40 +84,40 @@ export const RathinamLogo: React.FC<RathinamLogoProps> = ({ className = "h-16 w-
           </g>
 
           <text x="0" y="58" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="700" fontSize="12" fill="#84BD00" letterSpacing="0.5">Deemed to be</text>
-          <text x="0" y="72" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="14" fill="#FFFFFF" letterSpacing="1.5">UNIVERSITY</text>
+          <text x="0" y="72" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="14" fill={mainTextColor} letterSpacing="1.5">UNIVERSITY</text>
         </g>
 
         <rect x="0" y="82" width="330" height="3.5" rx="1.5" fill="url(#fullBarGrad)" />
 
-        <text x="165" y="98" textAnchor="middle" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="700" fontSize="8.5" fill="#94A3B8" letterSpacing="0.6">
+        <text x="165" y="98" textAnchor="middle" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="700" fontSize="8.5" fill={subTextColor} letterSpacing="0.6">
           (DECLARED UNDER SECTION 3 OF UGC ACT, 1956)
         </text>
 
         <g transform="translate(165, 113)">
-          <line x1="-130" y1="-3.5" x2="-68" y2="-3.5" stroke="#64748B" strokeWidth="1"/>
-          <text x="0" y="0" textAnchor="middle" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="600" fontSize="9.5" fill="#E2E8F0" letterSpacing="0.5">
+          <line x1="-130" y1="-3.5" x2="-68" y2="-3.5" stroke={lineCol} strokeWidth="1"/>
+          <text x="0" y="0" textAnchor="middle" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="600" fontSize="9.5" fill={subTextColor} letterSpacing="0.5">
             University of the Future
           </text>
-          <line x1="68" y1="-3.5" x2="130" y2="-3.5" stroke="#64748B" strokeWidth="1"/>
+          <line x1="68" y1="-3.5" x2="130" y2="-3.5" stroke={lineCol} strokeWidth="1"/>
         </g>
       </g>
 
       {/* Vertical Divider 2 */}
-      <line x1="535" y1="15" x2="535" y2="120" stroke="#475569" strokeWidth="2" strokeLinecap="round" />
+      <line x1="535" y1="15" x2="535" y2="120" stroke={lineCol} strokeWidth="2" strokeLinecap="round" />
 
       {/* 3. RIGHT: NAAC GRADE A++ ACCREDITED */}
       <g transform="translate(565, 15)">
         <text x="0" y="34" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="36" fill="#8B2490" letterSpacing="2">NAAC</text>
-        <text x="0" y="66" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="32" fill="#FFFFFF" letterSpacing="2">GRADE</text>
+        <text x="0" y="66" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="32" fill={mainTextColor} letterSpacing="2">GRADE</text>
 
         <g transform="translate(148, 66)">
           <text x="0" y="0" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="68" fill="#8B2490">A</text>
-          <text x="48" y="-14" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="38" fill="#FFFFFF">++</text>
+          <text x="48" y="-14" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="38" fill={mainTextColor}>++</text>
         </g>
 
         <line x1="0" y1="84" x2="295" y2="84" stroke="#8B2490" strokeWidth="2.5" />
 
-        <text x="147" y="103" textAnchor="middle" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="800" fontSize="13" fill="#FFFFFF" letterSpacing="7">
+        <text x="147" y="103" textAnchor="middle" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="800" fontSize="13" fill={mainTextColor} letterSpacing="7">
           ACCREDITED
         </text>
       </g>

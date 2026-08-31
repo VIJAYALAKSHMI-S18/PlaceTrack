@@ -3,66 +3,70 @@
 @tailwind utilities;
 
 :root {
-  --background: #070B14;
-  --foreground: #F8FAFC;
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --border: #E2E8F0;
+  --rgu-blue: #0284C7;
+  --rgu-blue-light: #38BDF8;
+  --rgu-blue-dark: #0369A1;
   --rgu-purple: #7C2D87;
   --rgu-purple-light: #A855F7;
-  --rgu-blue: #0EA5E9;
-  --rgu-blue-light: #38BDF8;
-  --rgu-green: #84CC16;
-  --rgu-green-light: #A3E635;
-  --rgu-orange: #F97316;
-  --rgu-orange-light: #FB923C;
+  --rgu-green: #16A34A;
+  --rgu-green-light: #22C55E;
+  --rgu-orange: #EA580C;
+  --rgu-orange-light: #F97316;
 }
 
 body {
   color: var(--foreground);
-  background: #070B14;
+  background: #F8FAFC;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   min-height: 100vh;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(124, 45, 135, 0.12) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.10) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(132, 204, 22, 0.06) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(56, 189, 248, 0.07) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(124, 45, 135, 0.04) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
-/* Rathinam Brand Gradient bar */
+/* Rathinam Brand Signature Gradient bar (White & Blue palette) */
 .rgu-gradient-bar {
-  background: linear-gradient(90deg, #7C2D87 0%, #9333EA 25%, #0EA5E9 60%, #84CC16 100%);
+  background: linear-gradient(90deg, #0284C7 0%, #38BDF8 30%, #7C2D87 70%, #16A34A 100%);
 }
 
 .rgu-gradient-text {
-  background: linear-gradient(135deg, #D8B4FE 0%, #38BDF8 50%, #A3E635 100%);
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 50%, #7C2D87 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .rgu-gradient-purple-blue {
-  background: linear-gradient(135deg, #7C2D87 0%, #0EA5E9 100%);
+  background: linear-gradient(135deg, #0284C7 0%, #7C2D87 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .rgu-btn-gradient {
-  background: linear-gradient(135deg, #7C2D87 0%, #0284C7 100%);
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
   transition: all 0.2s ease-in-out;
 }
 
 .rgu-btn-gradient:hover {
-  background: linear-gradient(135deg, #6B21A8 0%, #0369A1 100%);
-  box-shadow: 0 4px 20px -2px rgba(124, 45, 135, 0.4);
+  background: linear-gradient(135deg, #0369A1 0%, #075985 100%);
+  box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.35);
 }
 
 .rgu-glass-card {
-  background: rgba(17, 24, 39, 0.75);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.06);
 }
 
 .rgu-glass-card:hover {
-  border-color: rgba(124, 45, 135, 0.35);
-  box-shadow: 0 8px 32px -4px rgba(124, 45, 135, 0.15);
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 8px 30px -4px rgba(2, 132, 199, 0.12);
 }
 
 /* Custom modern scrollbars */
@@ -72,27 +76,27 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #070B14;
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #CBD5E1;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #7C2D87;
+  background: #0284C7;
 }
 
 /* Table styling utilities */
 .table-container {
-  @apply w-full overflow-x-auto rounded-2xl border border-white/10 bg-[#0F172A]/80 shadow-2xl backdrop-blur-md;
+  @apply w-full overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm;
 }
 
 .table-header {
-  @apply bg-[#111827] text-left text-xs font-semibold uppercase tracking-wider text-[#94A3B8] border-b border-white/10;
+  @apply bg-slate-50 text-left text-xs font-semibold uppercase tracking-wider text-slate-600 border-b border-slate-200;
 }
 
 .table-row {
-  @apply border-b border-white/5 transition-colors hover:bg-white/[0.03];
+  @apply border-b border-slate-100 transition-colors hover:bg-blue-50/40 text-slate-800;
 }

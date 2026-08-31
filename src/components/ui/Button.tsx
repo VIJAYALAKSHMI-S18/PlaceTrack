@@ -16,15 +16,15 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = "inline-flex items-center justify-center font-medium rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0F172A] disabled:opacity-50 disabled:cursor-not-allowed";
+  const baseStyles = "inline-flex items-center justify-center font-medium rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed";
 
   const variants = {
-    primary: "bg-gradient-to-r from-[#7C2D87] to-[#0284C7] hover:from-[#6B21A8] hover:to-[#0369A1] text-white focus:ring-[#7C2D87] shadow-sm shadow-purple-900/20",
-    secondary: "bg-[#1E293B] hover:bg-[#334155] text-[#F8FAFC] border border-[#334155] focus:ring-[#64748B]",
-    success: "bg-[#84CC16] hover:bg-[#65A30D] text-slate-950 font-semibold focus:ring-[#84CC16]",
-    danger: "bg-[#EF4444] hover:bg-[#DC2626] text-white focus:ring-[#EF4444]",
-    outline: "bg-transparent border border-[#1E293B] hover:bg-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] focus:ring-[#7C2D87]",
-    ghost: "bg-transparent hover:bg-[#1E293B]/60 text-[#94A3B8] hover:text-[#F8FAFC]",
+    primary: "bg-gradient-to-r from-[#0284C7] to-[#0369A1] hover:from-[#0369A1] hover:to-[#075985] text-white focus:ring-[#0284C7] shadow-sm shadow-blue-500/20",
+    secondary: "bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 focus:ring-slate-400",
+    success: "bg-[#16A34A] hover:bg-[#15803D] text-white font-semibold focus:ring-[#16A34A]",
+    danger: "bg-[#DC2626] hover:bg-[#B91C1C] text-white focus:ring-[#DC2626]",
+    outline: "bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 hover:text-slate-900 focus:ring-[#0284C7]",
+    ghost: "bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-900",
   };
 
   const sizes = {

@@ -15,12 +15,12 @@ export const Badge: React.FC<BadgeProps> = ({
   size = "sm",
 }) => {
   const variants = {
-    success: "bg-[#84CC16]/20 text-[#A3E635] border-[#84CC16]/40",
-    warning: "bg-[#F97316]/20 text-[#FB923C] border-[#F97316]/40",
-    danger: "bg-[#EF4444]/15 text-[#EF4444] border-[#EF4444]/30",
-    info: "bg-[#0EA5E9]/20 text-[#38BDF8] border-[#0EA5E9]/40",
-    primary: "bg-[#7C2D87]/20 text-[#D8B4FE] border-[#7C2D87]/40",
-    neutral: "bg-[#1E293B] text-[#94A3B8] border-[#334155]",
+    success: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    warning: "bg-amber-50 text-amber-700 border-amber-200",
+    danger: "bg-rose-50 text-rose-700 border-rose-200",
+    info: "bg-sky-50 text-sky-700 border-sky-200",
+    primary: "bg-blue-50 text-blue-700 border-blue-200",
+    neutral: "bg-slate-100 text-slate-600 border-slate-200",
   };
 
   const sizes = {

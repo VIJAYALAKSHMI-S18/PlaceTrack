@@ -143,10 +143,10 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
       {/* Top Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
             Placement Drives
           </h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <p className="text-xs font-medium text-slate-600">
             JOB OPPORTUNITIES, ELIGIBILITY & RECRUITMENT SCHEDULE
           </p>
         </div>
@@ -172,7 +172,7 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
               placeholder="Search Role, Company, Location..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:border-[#6366F1] focus:outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-white pl-9 pr-3 py-2 text-xs text-slate-900 placeholder-[#64748B] focus:border-[#0284C7] focus:outline-none"
             />
           </div>
 
@@ -182,7 +182,7 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
               setDriveStatus(e.target.value);
               setPage(1);
             }}
-            className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
           >
             <option value="ALL">All Drive Statuses</option>
             <option value="UPCOMING">Upcoming</option>
@@ -210,13 +210,13 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
           <tbody className="divide-y divide-[#1E293B]">
             {loading ? (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
+                <td colSpan={7} className="p-8 text-center text-slate-600">
                   Loading placement drives...
                 </td>
               </tr>
             ) : drives.length === 0 ? (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
+                <td colSpan={7} className="p-8 text-center text-slate-600">
                   No placement drives found.
                 </td>
               </tr>
@@ -225,29 +225,29 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
                 const depts = parseJsonSafe<string[]>(drive.eligible_departments, []);
                 return (
                   <tr key={drive.id} className="table-row">
-                    <td className="px-4 py-3.5 font-semibold text-[#F8FAFC]">
+                    <td className="px-4 py-3.5 font-semibold text-slate-900">
                       <Link
                         href={`/drives/${drive.id}`}
-                        className="hover:text-[#818CF8]"
+                        className="hover:text-[#0284C7]"
                       >
                         {drive.company?.company_name}
                       </Link>
                     </td>
                     <td className="px-4 py-3.5">
-                      <div className="font-semibold text-[#F8FAFC]">{drive.job_title}</div>
+                      <div className="font-semibold text-slate-900">{drive.job_title}</div>
                       <div className="text-[11px] font-bold text-[#10B981]">
                         {formatLPA(drive.ctc_lpa)}
                       </div>
                     </td>
-                    <td className="px-4 py-3.5 text-[#94A3B8]">
+                    <td className="px-4 py-3.5 text-slate-600">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-3.5 w-3.5 text-[#64748B]" />
                         {formatDate(drive.drive_date)}
                       </span>
                     </td>
-                    <td className="px-4 py-3.5 text-[#94A3B8]">
+                    <td className="px-4 py-3.5 text-slate-600">
                       <div>{drive.drive_location || "Campus / Virtual"}</div>
-                      <span className="text-[10px] text-[#818CF8] font-medium">
+                      <span className="text-[10px] text-[#0284C7] font-medium">
                         {drive.drive_type.replace("_", " ")}
                       </span>
                     </td>
@@ -256,7 +256,7 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
                         {depts.slice(0, 3).map((d) => (
                           <span
                             key={d}
-                            className="rounded bg-[#1E293B] px-1.5 py-0.5 text-[10px] font-bold text-[#94A3B8]"
+                            className="rounded bg-[#1E293B] px-1.5 py-0.5 text-[10px] font-bold text-slate-600"
                           >
                             {d}
                           </span>
@@ -295,7 +295,7 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
                     <td className="px-4 py-3.5 text-right space-x-1">
                       <Link
                         href={`/drives/${drive.id}`}
-                        className="inline-flex items-center rounded p-1.5 text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC]"
+                        className="inline-flex items-center rounded p-1.5 text-slate-600 hover:bg-blue-50/50 hover:text-slate-900"
                         title="View Drive Portal"
                       >
                         <ExternalLink className="h-4 w-4" />
@@ -303,7 +303,7 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
                       {isAdmin && (
                         <button
                           onClick={() => handleDelete(drive.id, drive.job_title)}
-                          className="inline-flex items-center rounded p-1.5 text-[#94A3B8] hover:bg-[#EF4444]/10 hover:text-[#EF4444]"
+                          className="inline-flex items-center rounded p-1.5 text-slate-600 hover:bg-[#EF4444]/10 hover:text-[#EF4444]"
                           title="Delete Drive"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -318,7 +318,7 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
         </table>
 
         {/* Pagination Footer */}
-        <div className="flex items-center justify-between border-t border-[#1E293B] px-4 py-3 text-xs text-[#94A3B8]">
+        <div className="flex items-center justify-between border-t border-slate-200 px-4 py-3 text-xs text-slate-600">
           <span>
             Showing {drives.length} of {totalCount} placement drives
           </span>
@@ -331,7 +331,7 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
             >
               <ChevronLeft className="h-3.5 w-3.5" /> Prev
             </Button>
-            <span className="font-semibold text-[#F8FAFC]">
+            <span className="font-semibold text-slate-900">
               Page {page} of {totalPages}
             </span>
             <Button

@@ -171,10 +171,10 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
       {/* Top Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
             Students Repository
           </h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <p className="text-xs font-medium text-slate-600">
             MANAGE ACADEMIC RECORDS AND FILES
           </p>
         </div>
@@ -188,7 +188,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
                 variant="outline"
                 size="sm"
                 onClick={() => setIsImportOpen(true)}
-                className="border-[#6366F1]/40 text-[#818CF8] hover:bg-[#6366F1]/10"
+                className="border-[#0284C7]/40 text-[#0284C7] hover:bg-[#0284C7]/10"
               >
                 <FileSpreadsheet className="h-4 w-4" />
                 Bulk Import
@@ -203,7 +203,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-[#1E293B]">
+      <div className="flex border-b border-slate-200">
         <button
           onClick={() => {
             setActiveTab("ACTIVE");
@@ -211,8 +211,8 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
           }}
           className={`border-b-2 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition ${
             activeTab === "ACTIVE"
-              ? "border-[#6366F1] text-[#818CF8]"
-              : "border-transparent text-[#94A3B8] hover:text-[#F8FAFC]"
+              ? "border-[#0284C7] text-[#0284C7]"
+              : "border-transparent text-slate-600 hover:text-slate-900"
           }`}
         >
           ACTIVE STUDENTS
@@ -225,7 +225,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
           className={`border-b-2 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition ${
             activeTab === "TERMINATED"
               ? "border-[#EF4444] text-[#EF4444]"
-              : "border-transparent text-[#94A3B8] hover:text-[#F8FAFC]"
+              : "border-transparent text-slate-600 hover:text-slate-900"
           }`}
         >
           TERMINATED STUDENTS LIST
@@ -242,7 +242,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
               placeholder="Search Name, Reg No, Email, Phone..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:border-[#6366F1] focus:outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-white pl-9 pr-3 py-2 text-xs text-slate-900 placeholder-[#64748B] focus:border-[#0284C7] focus:outline-none"
             />
           </div>
 
@@ -252,7 +252,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
               setDepartment(e.target.value);
               setPage(1);
             }}
-            className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
           >
             <option value="ALL">All Departments</option>
             <option value="Computer Science">Computer Science (CSE)</option>
@@ -271,7 +271,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
               setStudentType(e.target.value);
               setPage(1);
             }}
-            className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
           >
             <option value="ALL">All Student Types</option>
             <option value="Day Scholar">Day Scholar (53)</option>
@@ -286,7 +286,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
               setPlacementStatus(e.target.value);
               setPage(1);
             }}
-            className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
           >
             <option value="ALL">All Placement Statuses</option>
             <option value="PLACED">Placed Candidates (70)</option>
@@ -314,13 +314,13 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
           <tbody className="divide-y divide-[#1E293B]">
             {loading ? (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
+                <td colSpan={7} className="p-8 text-center text-slate-600">
                   Loading students records...
                 </td>
               </tr>
             ) : students.length === 0 ? (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
+                <td colSpan={7} className="p-8 text-center text-slate-600">
                   <div className="flex flex-col items-center justify-center gap-2">
                     <span>No student records found matching your filters.</span>
                     <button
@@ -341,24 +341,24 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
             ) : (
               students.map((student) => (
                 <tr key={student.id} className="table-row">
-                  <td className="px-4 py-3.5 font-medium text-[#F8FAFC]">
+                  <td className="px-4 py-3.5 font-medium text-slate-900">
                     <Link
                       href={`/students/${student.id}`}
-                      className="hover:text-[#818CF8] hover:underline"
+                      className="hover:text-[#0284C7] hover:underline"
                     >
                       {student.name}
                     </Link>
                   </td>
-                  <td className="px-4 py-3.5 font-mono text-[#818CF8]">
+                  <td className="px-4 py-3.5 font-mono text-[#0284C7]">
                     {student.register_number}
                   </td>
                   <td className="px-4 py-3.5">
-                    <span className="rounded bg-[#1E293B] px-2 py-0.5 font-semibold text-[#94A3B8]">
+                    <span className="rounded bg-[#1E293B] px-2 py-0.5 font-semibold text-slate-600">
                       {student.department}
                     </span>
                   </td>
-                  <td className="px-4 py-3.5 text-[#94A3B8]">{student.email}</td>
-                  <td className="px-4 py-3.5 text-[#94A3B8]">{student.phone_number}</td>
+                  <td className="px-4 py-3.5 text-slate-600">{student.email}</td>
+                  <td className="px-4 py-3.5 text-slate-600">{student.phone_number}</td>
                   <td className="px-4 py-3.5">
                     <Badge
                       variant={
@@ -377,7 +377,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
                   <td className="px-4 py-3.5 text-right space-x-1">
                     <Link
                       href={`/students/${student.id}`}
-                      className="inline-flex items-center rounded p-1.5 text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC]"
+                      className="inline-flex items-center rounded p-1.5 text-slate-600 hover:bg-blue-50/50 hover:text-slate-900"
                       title="View Profile"
                     >
                       <ExternalLink className="h-4 w-4" />
@@ -386,14 +386,14 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
                       <>
                         <button
                           onClick={() => setEditingStudent(student)}
-                          className="inline-flex items-center rounded p-1.5 text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#818CF8]"
+                          className="inline-flex items-center rounded p-1.5 text-slate-600 hover:bg-blue-50/50 hover:text-[#0284C7]"
                           title="Edit Student"
                         >
                           <Edit2 className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(student.id, student.name)}
-                          className="inline-flex items-center rounded p-1.5 text-[#94A3B8] hover:bg-[#EF4444]/10 hover:text-[#EF4444]"
+                          className="inline-flex items-center rounded p-1.5 text-slate-600 hover:bg-[#EF4444]/10 hover:text-[#EF4444]"
                           title="Terminate Student"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -408,7 +408,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
         </table>
 
         {/* Pagination Footer */}
-        <div className="flex items-center justify-between border-t border-[#1E293B] px-4 py-3 text-xs text-[#94A3B8]">
+        <div className="flex items-center justify-between border-t border-slate-200 px-4 py-3 text-xs text-slate-600">
           <span>
             Showing {students.length} of {totalCount} students
           </span>
@@ -421,7 +421,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
             >
               <ChevronLeft className="h-3.5 w-3.5" /> Prev
             </Button>
-            <span className="font-semibold text-[#F8FAFC]">
+            <span className="font-semibold text-slate-900">
               Page {page} of {totalPages}
             </span>
             <Button

@@ -9,9 +9,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
 } from "recharts";
 import { Card, CardHeader, CardTitle, CardDescription } from "../ui/Card";
 
@@ -31,19 +28,21 @@ export const DepartmentPlacementChart: React.FC<DepartmentPlacementChartProps> =
       <div className="h-64 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
             <XAxis dataKey="department" stroke="#64748B" fontSize={11} />
             <YAxis stroke="#64748B" fontSize={11} />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#111827",
-                borderColor: "#1E293B",
+                backgroundColor: "#FFFFFF",
+                borderColor: "#E2E8F0",
                 borderRadius: "8px",
                 fontSize: "12px",
+                color: "#0F172A",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
               }}
             />
-            <Bar dataKey="placed" name="Placed" fill="#10B981" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="unplaced" name="Unplaced" fill="#334155" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="placed" name="Placed" fill="#0284C7" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="unplaced" name="Unplaced" fill="#E2E8F0" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -67,18 +66,20 @@ export const PackageDistributionChart: React.FC<PackageDistributionChartProps> =
       <div className="h-64 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
             <XAxis dataKey="range" stroke="#64748B" fontSize={11} />
             <YAxis stroke="#64748B" fontSize={11} allowDecimals={false} />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#111827",
-                borderColor: "#1E293B",
+                backgroundColor: "#FFFFFF",
+                borderColor: "#E2E8F0",
                 borderRadius: "8px",
                 fontSize: "12px",
+                color: "#0F172A",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
               }}
             />
-            <Bar dataKey="count" name="Offers" fill="#6366F1" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="count" name="Offers" fill="#0369A1" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -106,24 +107,26 @@ export const CompanyOffersChart: React.FC<CompanyOffersChartProps> = ({ data }) 
             layout="vertical"
             margin={{ top: 10, right: 20, left: 30, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
             <XAxis type="number" stroke="#64748B" fontSize={11} allowDecimals={false} />
             <YAxis
               type="category"
               dataKey="company"
-              stroke="#94A3B8"
+              stroke="#64748B"
               fontSize={10}
               width={100}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#111827",
-                borderColor: "#1E293B",
+                backgroundColor: "#FFFFFF",
+                borderColor: "#E2E8F0",
                 borderRadius: "8px",
                 fontSize: "12px",
+                color: "#0F172A",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
               }}
             />
-            <Bar dataKey="offers" name="Offers Given" fill="#818CF8" radius={[0, 4, 4, 0]} />
+            <Bar dataKey="offers" name="Offers Given" fill="#0284C7" radius={[0, 4, 4, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -132,22 +132,22 @@ export function InteractiveMetricCards({
         {/* Total Students Card */}
         <Card
           onClick={() => openModal("STUDENTS")}
-          className="group relative cursor-pointer overflow-hidden p-4 transition-all duration-300 hover:scale-[1.02] hover:border-[#818CF8]/60 hover:bg-[#818CF8]/5 hover:shadow-lg hover:shadow-[#818CF8]/10"
+          className="group relative cursor-pointer overflow-hidden p-4 transition-all duration-300 hover:scale-[1.02] hover:border-[#0284C7]/60 hover:bg-[#0284C7]/5 hover:shadow-lg hover:shadow-[#0284C7]/10"
         >
-          <div className="flex items-center justify-between text-xs text-[#94A3B8]">
-            <span className="font-medium group-hover:text-[#818CF8]">Total Students</span>
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#818CF8]/10 text-[#818CF8] group-hover:bg-[#818CF8] group-hover:text-white transition-colors">
+          <div className="flex items-center justify-between text-xs text-slate-500">
+            <span className="font-medium group-hover:text-[#0284C7]">Total Students</span>
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#0284C7]/10 text-[#0284C7] group-hover:bg-[#0284C7] group-hover:text-white transition-colors">
               <Users className="h-4 w-4" />
             </div>
           </div>
-          <div className="mt-2 text-2xl font-bold text-[#F8FAFC] group-hover:text-[#818CF8]">
+          <div className="mt-2 text-2xl font-bold text-slate-900 group-hover:text-[#0284C7]">
             {stats.totalStudents}
           </div>
           <div className="mt-1 flex items-center justify-between">
             <span className="text-[11px] font-medium text-[#10B981]">
               {stats.placementPercentage ?? 70}% Placed
             </span>
-            <span className="text-[10px] text-[#94A3B8] opacity-0 transition-opacity group-hover:opacity-100 flex items-center gap-0.5">
+            <span className="text-[10px] text-slate-500 opacity-0 transition-opacity group-hover:opacity-100 flex items-center gap-0.5">
               View List <ArrowRight className="h-2.5 w-2.5" />
             </span>
           </div>
@@ -158,7 +158,7 @@ export function InteractiveMetricCards({
           onClick={() => openModal("COMPANIES")}
           className="group relative cursor-pointer overflow-hidden p-4 transition-all duration-300 hover:scale-[1.02] hover:border-[#3B82F6]/60 hover:bg-[#3B82F6]/5 hover:shadow-lg hover:shadow-[#3B82F6]/10"
         >
-          <div className="flex items-center justify-between text-xs text-[#94A3B8]">
+          <div className="flex items-center justify-between text-xs text-slate-500">
             <span className="font-medium group-hover:text-[#3B82F6]">Active Companies</span>
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#3B82F6]/10 text-[#3B82F6] group-hover:bg-[#3B82F6] group-hover:text-white transition-colors">
               <Building2 className="h-4 w-4" />
@@ -171,7 +171,7 @@ export function InteractiveMetricCards({
             <span className="text-[11px] font-medium text-[#F59E0B]">
               {stats.pendingCompanies} in queue
             </span>
-            <span className="text-[10px] text-[#94A3B8] opacity-0 transition-opacity group-hover:opacity-100 flex items-center gap-0.5">
+            <span className="text-[10px] text-slate-500 opacity-0 transition-opacity group-hover:opacity-100 flex items-center gap-0.5">
               View List <ArrowRight className="h-2.5 w-2.5" />
             </span>
           </div>
@@ -182,7 +182,7 @@ export function InteractiveMetricCards({
           onClick={() => openModal("DRIVES")}
           className="group relative cursor-pointer overflow-hidden p-4 transition-all duration-300 hover:scale-[1.02] hover:border-[#EC4899]/60 hover:bg-[#EC4899]/5 hover:shadow-lg hover:shadow-[#EC4899]/10"
         >
-          <div className="flex items-center justify-between text-xs text-[#94A3B8]">
+          <div className="flex items-center justify-between text-xs text-slate-500">
             <span className="font-medium group-hover:text-[#EC4899]">Completed Drives</span>
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#EC4899]/10 text-[#EC4899] group-hover:bg-[#EC4899] group-hover:text-white transition-colors">
               <Briefcase className="h-4 w-4" />
@@ -192,10 +192,10 @@ export function InteractiveMetricCards({
             {stats.completedDrives}
           </div>
           <div className="mt-1 flex items-center justify-between">
-            <span className="text-[11px] font-medium text-[#94A3B8]">
+            <span className="text-[11px] font-medium text-slate-500">
               {stats.upcomingDrives} Upcoming
             </span>
-            <span className="text-[10px] text-[#94A3B8] opacity-0 transition-opacity group-hover:opacity-100 flex items-center gap-0.5">
+            <span className="text-[10px] text-slate-500 opacity-0 transition-opacity group-hover:opacity-100 flex items-center gap-0.5">
               View List <ArrowRight className="h-2.5 w-2.5" />
             </span>
           </div>
@@ -206,7 +206,7 @@ export function InteractiveMetricCards({
           onClick={() => openModal("OFFERS")}
           className="group relative cursor-pointer overflow-hidden p-4 transition-all duration-300 hover:scale-[1.02] hover:border-[#10B981]/60 hover:bg-[#10B981]/5 hover:shadow-lg hover:shadow-[#10B981]/10"
         >
-          <div className="flex items-center justify-between text-xs text-[#94A3B8]">
+          <div className="flex items-center justify-between text-xs text-slate-500">
             <span className="font-medium group-hover:text-[#10B981]">Total Offers</span>
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#10B981]/10 text-[#10B981] group-hover:bg-[#10B981] group-hover:text-white transition-colors">
               <Award className="h-4 w-4" />
@@ -216,10 +216,10 @@ export function InteractiveMetricCards({
             {stats.totalOffers}
           </div>
           <div className="mt-1 flex items-center justify-between">
-            <span className="text-[11px] font-medium text-[#94A3B8]">
+            <span className="text-[11px] font-medium text-slate-500">
               Avg: {formatLPA(stats.averagePackage || 11.49)}
             </span>
-            <span className="text-[10px] text-[#94A3B8] opacity-0 transition-opacity group-hover:opacity-100 flex items-center gap-0.5">
+            <span className="text-[10px] text-slate-500 opacity-0 transition-opacity group-hover:opacity-100 flex items-center gap-0.5">
               View List <ArrowRight className="h-2.5 w-2.5" />
             </span>
           </div>
@@ -234,10 +234,10 @@ export function InteractiveMetricCards({
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-[#111827]/80">
+            <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-white/80">
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
-                  {activeModal === "STUDENTS" && <Users className="h-5 w-5 text-[#818CF8]" />}
+                  {activeModal === "STUDENTS" && <Users className="h-5 w-5 text-[#0284C7]" />}
                   {activeModal === "COMPANIES" && <Building2 className="h-5 w-5 text-[#3B82F6]" />}
                   {activeModal === "DRIVES" && <Briefcase className="h-5 w-5 text-[#EC4899]" />}
                   {activeModal === "OFFERS" && <Award className="h-5 w-5 text-[#10B981]" />}
@@ -255,7 +255,7 @@ export function InteractiveMetricCards({
                       {activeModal === "OFFERS" && `${filteredOffers.length} Offers`}
                     </Badge>
                   </h3>
-                  <p className="text-xs text-[#94A3B8]">
+                  <p className="text-xs text-slate-500">
                     {activeModal === "STUDENTS" && "Browse institutional candidate roster with department and placement status"}
                     {activeModal === "COMPANIES" && "Active verified hiring partners conducting campus recruitment drives"}
                     {activeModal === "DRIVES" && "Finished placement drives, packages, and candidate participation"}
@@ -299,7 +299,7 @@ export function InteractiveMetricCards({
                     className={`rounded-lg px-2.5 py-1.5 font-medium transition-colors ${
                       statusFilter === "ALL"
                         ? "bg-purple-600 text-white"
-                        : "bg-white/5 text-[#94A3B8] hover:text-white"
+                        : "bg-white/5 text-slate-500 hover:text-white"
                     }`}
                   >
                     All ({studentsList.length})
@@ -309,7 +309,7 @@ export function InteractiveMetricCards({
                     className={`rounded-lg px-2.5 py-1.5 font-medium transition-colors ${
                       statusFilter === "PLACED"
                         ? "bg-emerald-600 text-white"
-                        : "bg-white/5 text-[#94A3B8] hover:text-white"
+                        : "bg-white/5 text-slate-500 hover:text-white"
                     }`}
                   >
                     Placed ({studentsList.filter((s) => s.placement_status === "PLACED").length})
@@ -319,7 +319,7 @@ export function InteractiveMetricCards({
                     className={`rounded-lg px-2.5 py-1.5 font-medium transition-colors ${
                       statusFilter === "NOT_PLACED"
                         ? "bg-amber-600 text-white"
-                        : "bg-white/5 text-[#94A3B8] hover:text-white"
+                        : "bg-white/5 text-slate-500 hover:text-white"
                     }`}
                   >
                     Unplaced ({studentsList.filter((s) => s.placement_status !== "PLACED").length})
@@ -334,7 +334,7 @@ export function InteractiveMetricCards({
               {activeModal === "STUDENTS" && (
                 <>
                   {filteredStudents.length === 0 ? (
-                    <div className="py-12 text-center text-xs text-[#94A3B8]">
+                    <div className="py-12 text-center text-xs text-slate-500">
                       No students matching your search criteria.
                     </div>
                   ) : (
@@ -350,11 +350,11 @@ export function InteractiveMetricCards({
                           <div>
                             <div className="flex items-center gap-2">
                               <span className="text-sm font-semibold text-white">{st.name}</span>
-                              <span className="text-[11px] font-mono text-[#94A3B8]">
+                              <span className="text-[11px] font-mono text-slate-500">
                                 ({st.register_number})
                               </span>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-[#94A3B8] mt-0.5">
+                            <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
                               <span>{st.department}</span>
                               <span>•</span>
                               <span>UG: {st.ug_percentage}%</span>
@@ -391,7 +391,7 @@ export function InteractiveMetricCards({
               {activeModal === "COMPANIES" && (
                 <>
                   {filteredCompanies.length === 0 ? (
-                    <div className="py-12 text-center text-xs text-[#94A3B8]">
+                    <div className="py-12 text-center text-xs text-slate-500">
                       No companies matching your search criteria.
                     </div>
                   ) : (
@@ -413,7 +413,7 @@ export function InteractiveMetricCards({
                                 Approved Partner
                               </Badge>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-[#94A3B8] mt-0.5">
+                            <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
                               <span>📍 {c.location || "India"}</span>
                               <span>•</span>
                               <span>{c.industry || "Information Technology"}</span>
@@ -439,7 +439,7 @@ export function InteractiveMetricCards({
               {activeModal === "DRIVES" && (
                 <>
                   {filteredDrives.length === 0 ? (
-                    <div className="py-12 text-center text-xs text-[#94A3B8]">
+                    <div className="py-12 text-center text-xs text-slate-500">
                       No completed drives matching your search criteria.
                     </div>
                   ) : (
@@ -461,7 +461,7 @@ export function InteractiveMetricCards({
                                 — {d.job_title}
                               </span>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-[#94A3B8] mt-0.5">
+                            <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
                               <span className="text-emerald-400 font-medium">
                                 💰 {d.ctc_lpa ? `${d.ctc_lpa} LPA` : "Standard"}
                               </span>
@@ -493,7 +493,7 @@ export function InteractiveMetricCards({
               {activeModal === "OFFERS" && (
                 <>
                   {filteredOffers.length === 0 ? (
-                    <div className="py-12 text-center text-xs text-[#94A3B8]">
+                    <div className="py-12 text-center text-xs text-slate-500">
                       No student offers matching your search criteria.
                     </div>
                   ) : (
@@ -511,11 +511,11 @@ export function InteractiveMetricCards({
                               <span className="text-sm font-semibold text-white">
                                 {o.student?.name}
                               </span>
-                              <span className="text-xs text-[#94A3B8]">
+                              <span className="text-xs text-slate-500">
                                 ({o.student?.register_number})
                               </span>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-[#94A3B8] mt-0.5">
+                            <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
                               <span className="text-white font-medium">
                                 🏢 {o.company?.company_name}
                               </span>
@@ -550,8 +550,8 @@ export function InteractiveMetricCards({
             </div>
 
             {/* Modal Footer */}
-            <div className="flex items-center justify-between border-t border-white/10 px-6 py-3 bg-[#111827]/80">
-              <Button variant="ghost" size="sm" onClick={closeModal} className="text-xs text-[#94A3B8]">
+            <div className="flex items-center justify-between border-t border-white/10 px-6 py-3 bg-white/80">
+              <Button variant="ghost" size="sm" onClick={closeModal} className="text-xs text-slate-500">
                 Close Window
               </Button>
               <Link
