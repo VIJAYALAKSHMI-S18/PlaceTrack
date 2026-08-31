@@ -536,66 +536,6 @@ Projects & Experience: Completed advanced capstone projects, hands-on labs, soft
     console.log(`Successfully mapped ${offerCreatedCount} individual student offers from Placements & Drives sheet!`);
   }
 
-  // Ensure one pending approval company is in the system
-  const pendingSample = await prisma.company.create({
-    data: {
-      company_name: "Vertex AI Solutions",
-      location: "Bengaluru, India",
-      status: "PENDING_APPROVAL",
-      company_description: "Enterprise AI solutions provider proposing campus hiring for AI/ML and Cloud Engineer tracks.",
-      industry: "Artificial Intelligence & Cloud Computing",
-      created_by_id: placementOfficer!.id,
-    },
-  });
-
-  await prisma.companySubmission.create({
-    data: {
-      company_id: pendingSample.id,
-      submitted_by_id: placementOfficer!.id,
-      status: "PENDING",
-    },
-  });
-
-  await prisma.placementDrive.create({
-    data: {
-      company_id: pendingSample.id,
-      job_title: "AI & Cloud Solutions Engineer",
-      job_role: "AI & Cloud Solutions Engineer",
-      ctc_lpa: 14.0,
-      drive_location: "Campus / Virtual",
-      drive_date: new Date(Date.now() + 15 * 86400000),
-      drive_status: "UPCOMING",
-      opportunity_status: "WARM",
-      eligible_departments: JSON.stringify(["CSE", "IT", "AIDS", "ECE"]),
-      required_skills: JSON.stringify(["Python", "PyTorch", "AWS", "Docker", "Machine Learning", "Git"]),
-      minimum_ug_percentage: 65,
-      minimum_ats_score: 70,
-      job_description_summary: "Proposed campus recruitment drive for AI & Cloud Solutions Engineer at Vertex AI Solutions. Seeking high-caliber graduates with deep expertise in neural architectures, cloud microservices, and distributed inference.",
-      created_by_id: placementOfficer!.id,
-    },
-  });
-
-  // Ensure at least one rejected company is in the system
-  const rejectedSample = await prisma.company.create({
-    data: {
-      company_name: "Unverified Recruitment Agency",
-      location: "Remote / Unknown",
-      status: "REJECTED",
-      company_description: "Failed institution security accreditation guidelines.",
-      industry: "Staffing & Recruiting",
-      created_by_id: placementOfficer!.id,
-    },
-  });
-
-  await prisma.companySubmission.create({
-    data: {
-      company_id: rejectedSample.id,
-      submitted_by_id: placementOfficer!.id,
-      status: "REJECTED",
-      rejection_reason: "Third-party staffing agencies not eligible for direct on-campus hiring.",
-    },
-  });
-
   console.log(`Successfully imported ${createdCompaniesMap.size} companies & ${createdDrivesList.length} placement drives from Companies_List.xlsx!`);
 
   // 6. Generate Realistic ATS Evaluations across all 100 imported students and drives
