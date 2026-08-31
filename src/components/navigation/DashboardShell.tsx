@@ -19,7 +19,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#F8FAFC]">
+    <div className="flex min-h-screen bg-[#F1F5F9]">
       <Sidebar
         role={role}
         user={user}
@@ -31,7 +31,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
           user={user}
           onOpenMobileSidebar={() => setMobileOpen(true)}
         />
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-[#F1F5F9]">
           <div className="mx-auto max-w-7xl space-y-6">{children}</div>
         </main>
       </div>

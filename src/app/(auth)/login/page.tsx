@@ -49,25 +49,29 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/60 via-slate-50 to-white p-4">
-      <div className="w-full max-w-md space-y-6">
-        {/* Rathinam Branding & Logo */}
-        <div className="text-center space-y-4">
-          <div className="flex justify-center transition-transform duration-300 hover:scale-105">
-            <RathinamLogo className="h-16 sm:h-20 w-auto max-w-[440px] drop-shadow-md" />
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#0F172A] via-[#0369A1] to-[#0284C7] p-4 relative overflow-hidden">
+      {/* Decorative Blue ambient glow orbs */}
+      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-sky-400/20 blur-3xl" />
+      <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-blue-600/30 blur-3xl" />
+
+      <div className="relative z-10 w-full max-w-md space-y-6">
+        {/* Rathinam Branding & Logo (White Card container for logo so it pops) */}
+        <div className="text-center space-y-3">
+          <div className="inline-flex justify-center rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-md transition-transform duration-300 hover:scale-105 border border-white/40">
+            <RathinamLogo className="h-16 sm:h-20 w-auto max-w-[440px]" isDark={false} />
           </div>
           <div>
-            <h1 className="text-xl font-black tracking-wide text-slate-900">
-              RATHINAM GLOBAL DEEMED TO BE UNIVERSITY
+            <h1 className="text-xl font-black tracking-wide text-white drop-shadow-md">
+              RATHINAM GLOBAL UNIVERSITY
             </h1>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-[#0284C7]">
+            <p className="text-xs font-semibold uppercase tracking-wider text-sky-200">
               Campus Placement & Career Development Portal
             </p>
           </div>
         </div>
 
-        {/* Login Card */}
-        <Card className="border-slate-200 bg-white/95 p-6 shadow-xl backdrop-blur-md">
+        {/* Crisp White Login Card */}
+        <Card className="border border-white/60 bg-white p-7 shadow-2xl rounded-2xl">
           <form onSubmit={handleLogin} className="space-y-4">
             {error && (
               <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-600 font-medium">
@@ -76,7 +80,7 @@ export default function LoginPage() {
             )}
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-slate-700">
+              <label className="block text-xs font-bold text-slate-700">
                 Official Email Address
               </label>
               <div className="relative">
@@ -87,13 +91,13 @@ export default function LoginPage() {
                   placeholder="name@rathinam.ac.in"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 bg-white pl-9 pr-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#0284C7] focus:outline-none focus:ring-1 focus:ring-[#0284C7] shadow-sm"
+                  className="w-full rounded-lg border border-slate-300 bg-slate-50 pl-9 pr-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-[#0284C7] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284C7]/20 shadow-sm transition"
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-slate-700">
+              <label className="block text-xs font-bold text-slate-700">
                 Password
               </label>
               <div className="relative">
@@ -104,7 +108,7 @@ export default function LoginPage() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 bg-white pl-9 pr-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#0284C7] focus:outline-none focus:ring-1 focus:ring-[#0284C7] shadow-sm"
+                  className="w-full rounded-lg border border-slate-300 bg-slate-50 pl-9 pr-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-[#0284C7] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284C7]/20 shadow-sm transition"
                 />
               </div>
             </div>
@@ -124,7 +128,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               isLoading={loading}
-              className="w-full rgu-btn-gradient text-white py-2.5 font-semibold text-sm shadow-md"
+              className="w-full bg-gradient-to-r from-[#0284C7] to-[#0369A1] hover:from-[#0369A1] hover:to-[#075985] text-white py-2.5 font-bold text-sm shadow-lg shadow-sky-500/25"
             >
               Sign In to Placement Portal
             </Button>
@@ -132,28 +136,28 @@ export default function LoginPage() {
 
           {/* Quick Demo Accounts Helper */}
           <div className="mt-6 border-t border-slate-100 pt-4">
-            <p className="text-center text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2.5">
+            <p className="text-center text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2.5">
               Instant Demo Access
             </p>
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
                 onClick={() => setDemoAccount("admin@example.com", "admin123")}
-                className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-xs font-semibold text-slate-700 transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
+                className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-xs font-bold text-slate-700 transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
               >
                 Admin
               </button>
               <button
                 type="button"
                 onClick={() => setDemoAccount("manager@example.com", "manager123")}
-                className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-xs font-semibold text-slate-700 transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
+                className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-xs font-bold text-slate-700 transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
               >
                 Manager
               </button>
               <button
                 type="button"
                 onClick={() => setDemoAccount("placement@example.com", "placement123")}
-                className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-xs font-semibold text-slate-700 transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
+                className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-xs font-bold text-slate-700 transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
               >
                 Placement
               </button>
