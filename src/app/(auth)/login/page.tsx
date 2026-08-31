@@ -55,10 +55,10 @@ export default function LoginPage() {
       <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-blue-600/30 blur-3xl" />
 
       <div className="relative z-10 w-full max-w-md space-y-6">
-        {/* Rathinam Branding & Logo (White Card container for logo so it pops) */}
+        {/* Rathinam Branding & Logo */}
         <div className="text-center space-y-3">
-          <div className="inline-flex justify-center rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-md transition-transform duration-300 hover:scale-105 border border-white/40">
-            <RathinamLogo className="h-16 sm:h-20 w-auto max-w-[440px]" isDark={false} />
+          <div className="flex justify-center transition-transform duration-300 hover:scale-105">
+            <RathinamLogo className="h-16 sm:h-20 w-auto max-w-[440px] drop-shadow-xl" isDark={true} />
           </div>
           <div>
             <h1 className="text-xl font-black tracking-wide text-white drop-shadow-md">
