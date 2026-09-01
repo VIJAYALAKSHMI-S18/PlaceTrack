@@ -341,10 +341,10 @@ export default function AdminReportsPage() {
       <div className="space-y-6">
         {/* Header */}
         <div className="flex flex-col gap-2">
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
             Placement Reports & Custom Filtered Export Hub
           </h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <p className="text-xs font-medium text-slate-600">
             FILTER BY DEPARTMENT, STATUS, CTC TIER & DOWNLOAD TAILORED EXCEL (.XLSX) AND PDF (.PDF) REPORTS
           </p>
         </div>
@@ -356,7 +356,7 @@ export default function AdminReportsPage() {
             className={`flex items-center gap-3 rounded-2xl border p-4 text-left transition-all ${
               activeTab === "STUDENTS"
                 ? "border-purple-500/60 bg-gradient-to-r from-purple-500/20 to-purple-500/5 text-white shadow-lg shadow-purple-950/20"
-                : "border-white/10 bg-[#111827] text-[#94A3B8] hover:border-white/20 hover:text-white"
+                : "border-slate-200 bg-white text-slate-600 hover:border-white/20 hover:text-white"
             }`}
           >
             <div className="h-10 w-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
@@ -375,7 +375,7 @@ export default function AdminReportsPage() {
             className={`flex items-center gap-3 rounded-2xl border p-4 text-left transition-all ${
               activeTab === "COMPANIES"
                 ? "border-blue-500/60 bg-gradient-to-r from-blue-500/20 to-blue-500/5 text-white shadow-lg shadow-blue-950/20"
-                : "border-white/10 bg-[#111827] text-[#94A3B8] hover:border-white/20 hover:text-white"
+                : "border-slate-200 bg-white text-slate-600 hover:border-white/20 hover:text-white"
             }`}
           >
             <div className="h-10 w-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
@@ -394,7 +394,7 @@ export default function AdminReportsPage() {
             className={`flex items-center gap-3 rounded-2xl border p-4 text-left transition-all ${
               activeTab === "DRIVES"
                 ? "border-pink-500/60 bg-gradient-to-r from-pink-500/20 to-pink-500/5 text-white shadow-lg shadow-pink-950/20"
-                : "border-white/10 bg-[#111827] text-[#94A3B8] hover:border-white/20 hover:text-white"
+                : "border-slate-200 bg-white text-slate-600 hover:border-white/20 hover:text-white"
             }`}
           >
             <div className="h-10 w-10 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center">
@@ -413,7 +413,7 @@ export default function AdminReportsPage() {
             className={`flex items-center gap-3 rounded-2xl border p-4 text-left transition-all ${
               activeTab === "OFFERS"
                 ? "border-emerald-500/60 bg-gradient-to-r from-emerald-500/20 to-emerald-500/5 text-white shadow-lg shadow-emerald-950/20"
-                : "border-white/10 bg-[#111827] text-[#94A3B8] hover:border-white/20 hover:text-white"
+                : "border-slate-200 bg-white text-slate-600 hover:border-white/20 hover:text-white"
             }`}
           >
             <div className="h-10 w-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
@@ -432,7 +432,7 @@ export default function AdminReportsPage() {
         {activeTab === "STUDENTS" && (
           <div className="space-y-6">
             <Card className="p-6 space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-white/10 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2 text-purple-400 font-bold text-sm">
                   <SlidersHorizontal className="h-4 w-4" />
                   <span>Configure Student Filter Criteria</span>
@@ -459,11 +459,11 @@ export default function AdminReportsPage() {
               {/* 5 Filter Selectors */}
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Department</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Department</label>
                   <select
                     value={studentDept}
                     onChange={(e) => setStudentDept(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
                   >
                     <option value="ALL">All Departments</option>
                     <option value="Computer Science and Engineering">Computer Science and Engineering (CSE)</option>
@@ -476,11 +476,11 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Placement Status</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Placement Status</label>
                   <select
                     value={studentStatus}
                     onChange={(e) => setStudentStatus(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
                   >
                     <option value="ALL">All Placement Statuses</option>
                     <option value="PLACED">Placed Candidates (70)</option>
@@ -489,11 +489,11 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Minimum Academic % (UG)</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Minimum Academic % (UG)</label>
                   <select
                     value={studentMinUg}
                     onChange={(e) => setStudentMinUg(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
                   >
                     <option value="ALL">All Percentage Ranges</option>
                     <option value="60">60% & Above (Standard Cutoff)</option>
@@ -504,11 +504,11 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Standing Backlogs</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Standing Backlogs</label>
                   <select
                     value={studentBacklogs}
                     onChange={(e) => setStudentBacklogs(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
                   >
                     <option value="ALL">All Backlog Statuses</option>
                     <option value="ZERO">0 Backlogs (100% Eligible)</option>
@@ -517,11 +517,11 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Student Type</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Student Type</label>
                   <select
                     value={studentType}
                     onChange={(e) => setStudentType(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
                   >
                     <option value="ALL">All Student Types</option>
                     <option value="Day Scholar">Day Scholar</option>
@@ -530,7 +530,7 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Search Candidate</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Search Candidate</label>
                   <div className="relative">
                     <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#64748B]" />
                     <input
@@ -538,7 +538,7 @@ export default function AdminReportsPage() {
                       placeholder="Search Name or Reg No..."
                       value={studentSearch}
                       onChange={(e) => setStudentSearch(e.target.value)}
-                      className="w-full rounded-xl border border-white/10 bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
+                      className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -548,7 +548,7 @@ export default function AdminReportsPage() {
             {/* Live Filter Results Preview */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#94A3B8]">
+                <span className="text-xs font-bold text-slate-600">
                   LIVE FILTER PREVIEW ({filteredStudents.length} MATCHING CANDIDATES)
                 </span>
                 <span className="text-[11px] text-purple-400 font-medium">
@@ -572,7 +572,7 @@ export default function AdminReportsPage() {
                   <tbody className="divide-y divide-white/5">
                     {filteredStudents.length === 0 ? (
                       <tr>
-                        <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
+                        <td colSpan={7} className="p-8 text-center text-slate-600">
                           No candidates match the selected filter combination.
                         </td>
                       </tr>
@@ -580,10 +580,10 @@ export default function AdminReportsPage() {
                       filteredStudents.slice(0, 5).map((s) => (
                         <tr key={s.id} className="table-row">
                           <td className="px-4 py-3 font-semibold text-white">{s.name}</td>
-                          <td className="px-4 py-3 font-mono text-[#818CF8]">{s.register_number}</td>
-                          <td className="px-4 py-3 text-[#94A3B8]">{s.department}</td>
+                          <td className="px-4 py-3 font-mono text-[#0284C7]">{s.register_number}</td>
+                          <td className="px-4 py-3 text-slate-600">{s.department}</td>
                           <td className="px-4 py-3 font-bold text-white">{s.ug_percentage}%</td>
-                          <td className="px-4 py-3 text-[#94A3B8]">{s.cgpa || "—"}</td>
+                          <td className="px-4 py-3 text-slate-600">{s.cgpa || "—"}</td>
                           <td className="px-4 py-3">
                             <span
                               className={`font-bold ${
@@ -612,7 +612,7 @@ export default function AdminReportsPage() {
         {activeTab === "COMPANIES" && (
           <div className="space-y-6">
             <Card className="p-6 space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-white/10 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2 text-blue-400 font-bold text-sm">
                   <SlidersHorizontal className="h-4 w-4" />
                   <span>Configure Corporate Partner Filters</span>
@@ -637,11 +637,11 @@ export default function AdminReportsPage() {
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Approval Status</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Approval Status</label>
                   <select
                     value={companyStatus}
                     onChange={(e) => setCompanyStatus(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-blue-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-blue-500 focus:outline-none"
                   >
                     <option value="ALL">All Statuses</option>
                     <option value="APPROVED">Approved Partners (19)</option>
@@ -650,11 +650,11 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Industry Sector</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Industry Sector</label>
                   <select
                     value={companyIndustry}
                     onChange={(e) => setCompanyIndustry(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-blue-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-blue-500 focus:outline-none"
                   >
                     <option value="ALL">All Industries</option>
                     <option value="Information Technology">Information Technology</option>
@@ -666,7 +666,7 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Search Company</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Search Company</label>
                   <div className="relative">
                     <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#64748B]" />
                     <input
@@ -674,7 +674,7 @@ export default function AdminReportsPage() {
                       placeholder="Search Company Name..."
                       value={companySearch}
                       onChange={(e) => setCompanySearch(e.target.value)}
-                      className="w-full rounded-xl border border-white/10 bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-white focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-3 py-2 text-xs text-white focus:border-blue-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -696,8 +696,8 @@ export default function AdminReportsPage() {
                   {filteredCompanies.slice(0, 5).map((c) => (
                     <tr key={c.id} className="table-row">
                       <td className="px-4 py-3 font-semibold text-white">{c.company_name}</td>
-                      <td className="px-4 py-3 text-[#94A3B8]">{c.industry || "Technology"}</td>
-                      <td className="px-4 py-3 text-[#94A3B8]">{c.location || "Campus / Virtual"}</td>
+                      <td className="px-4 py-3 text-slate-600">{c.industry || "Technology"}</td>
+                      <td className="px-4 py-3 text-slate-600">{c.location || "Campus / Virtual"}</td>
                       <td className="px-4 py-3 text-white">{c.contact_person || "HR Team"}</td>
                       <td className="px-4 py-3">
                         <Badge variant={c.status === "APPROVED" ? "success" : "warning"}>
@@ -716,7 +716,7 @@ export default function AdminReportsPage() {
         {activeTab === "DRIVES" && (
           <div className="space-y-6">
             <Card className="p-6 space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-white/10 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2 text-pink-400 font-bold text-sm">
                   <SlidersHorizontal className="h-4 w-4" />
                   <span>Configure Recruitment Drive Filters</span>
@@ -741,11 +741,11 @@ export default function AdminReportsPage() {
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Drive Status</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Drive Status</label>
                   <select
                     value={driveStatus}
                     onChange={(e) => setDriveStatus(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-pink-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-pink-500 focus:outline-none"
                   >
                     <option value="ALL">All Drive Statuses</option>
                     <option value="COMPLETED">Completed Drives (19)</option>
@@ -755,11 +755,11 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Minimum CTC Range</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Minimum CTC Range</label>
                   <select
                     value={driveMinCtc}
                     onChange={(e) => setDriveMinCtc(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-pink-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-pink-500 focus:outline-none"
                   >
                     <option value="ALL">All CTC Packages</option>
                     <option value="5">5+ LPA</option>
@@ -769,7 +769,7 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Search Drive / Company</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Search Drive / Company</label>
                   <div className="relative">
                     <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#64748B]" />
                     <input
@@ -777,7 +777,7 @@ export default function AdminReportsPage() {
                       placeholder="Search Company, Role..."
                       value={driveSearch}
                       onChange={(e) => setDriveSearch(e.target.value)}
-                      className="w-full rounded-xl border border-white/10 bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-white focus:border-pink-500 focus:outline-none"
+                      className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-3 py-2 text-xs text-white focus:border-pink-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -799,9 +799,9 @@ export default function AdminReportsPage() {
                   {filteredDrives.slice(0, 5).map((d) => (
                     <tr key={d.id} className="table-row">
                       <td className="px-4 py-3 font-semibold text-white">{d.company?.company_name}</td>
-                      <td className="px-4 py-3 text-[#94A3B8]">{d.job_title}</td>
+                      <td className="px-4 py-3 text-slate-600">{d.job_title}</td>
                       <td className="px-4 py-3 font-bold text-emerald-400">{formatLPA(d.ctc_lpa)}</td>
-                      <td className="px-4 py-3 text-[#94A3B8]">{formatDate(d.drive_date)}</td>
+                      <td className="px-4 py-3 text-slate-600">{formatDate(d.drive_date)}</td>
                       <td className="px-4 py-3">
                         <Badge
                           variant={
@@ -827,7 +827,7 @@ export default function AdminReportsPage() {
         {activeTab === "OFFERS" && (
           <div className="space-y-6">
             <Card className="p-6 space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-white/10 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm">
                   <SlidersHorizontal className="h-4 w-4" />
                   <span>Configure Placement Offers & CTC Filters</span>
@@ -852,11 +852,11 @@ export default function AdminReportsPage() {
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Package Tier</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Package Tier</label>
                   <select
                     value={offerTier}
                     onChange={(e) => setOfferTier(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="ALL">All Packages</option>
                     <option value="SUPER_DREAM">Super Dream (&gt;= 10.00 LPA)</option>
@@ -866,11 +866,11 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Onboarding Status</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Onboarding Status</label>
                   <select
                     value={offerStatus}
                     onChange={(e) => setOfferStatus(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-[#0F172A] px-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="ALL">All Statuses</option>
                     <option value="JOINED">Joined & Onboarded</option>
@@ -880,7 +880,7 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-semibold text-[#94A3B8]">Search Candidate / Company</label>
+                  <label className="text-[11px] font-semibold text-slate-600">Search Candidate / Company</label>
                   <div className="relative">
                     <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#64748B]" />
                     <input
@@ -888,7 +888,7 @@ export default function AdminReportsPage() {
                       placeholder="Search Name, Reg No, Company..."
                       value={offerSearch}
                       onChange={(e) => setOfferSearch(e.target.value)}
-                      className="w-full rounded-xl border border-white/10 bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -911,9 +911,9 @@ export default function AdminReportsPage() {
                   {filteredOffers.slice(0, 5).map((o) => (
                     <tr key={o.id} className="table-row">
                       <td className="px-4 py-3 font-semibold text-white">{o.student?.name}</td>
-                      <td className="px-4 py-3 font-mono text-[#818CF8]">{o.student?.register_number}</td>
+                      <td className="px-4 py-3 font-mono text-[#0284C7]">{o.student?.register_number}</td>
                       <td className="px-4 py-3 text-white">{o.company?.company_name}</td>
-                      <td className="px-4 py-3 text-[#94A3B8]">{o.job_role}</td>
+                      <td className="px-4 py-3 text-slate-600">{o.job_role}</td>
                       <td className="px-4 py-3 font-bold text-emerald-400">{formatLPA(o.ctc_lpa)}</td>
                       <td className="px-4 py-3">
                         <Badge variant={o.offer_status === "JOINED" ? "success" : "info"}>

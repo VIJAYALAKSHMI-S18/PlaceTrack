@@ -137,9 +137,9 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
         <button
           type="button"
           onClick={() => setActiveModal("ATTENDED")}
-          className="group text-left rounded-2xl border border-purple-500/30 bg-[#111827] p-4 transition-all duration-200 hover:border-purple-500/60 hover:bg-[#151C2C] hover:shadow-xl hover:shadow-purple-950/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500/40"
+          className="group text-left rounded-2xl border border-purple-500/30 bg-white p-4 transition-all duration-200 hover:border-purple-500/60 hover:bg-[#151C2C] hover:shadow-xl hover:shadow-purple-950/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500/40"
         >
-          <span className="text-xs text-[#94A3B8] font-medium flex items-center justify-between">
+          <span className="text-xs text-slate-600 font-medium flex items-center justify-between">
             <span className="flex items-center gap-1.5 group-hover:text-purple-300 transition">
               <Building2 className="h-4 w-4 text-purple-400" />
               Companies Attended
@@ -160,9 +160,9 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
         <button
           type="button"
           onClick={() => setActiveModal("ELIGIBLE")}
-          className="group text-left rounded-2xl border border-blue-500/30 bg-[#111827] p-4 transition-all duration-200 hover:border-blue-500/60 hover:bg-[#151C2C] hover:shadow-xl hover:shadow-blue-950/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+          className="group text-left rounded-2xl border border-blue-500/30 bg-white p-4 transition-all duration-200 hover:border-blue-500/60 hover:bg-[#151C2C] hover:shadow-xl hover:shadow-blue-950/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500/40"
         >
-          <span className="text-xs text-[#94A3B8] font-medium flex items-center justify-between">
+          <span className="text-xs text-slate-600 font-medium flex items-center justify-between">
             <span className="flex items-center gap-1.5 group-hover:text-blue-300 transition">
               <Sparkles className="h-4 w-4 text-blue-400" />
               Eligible Shortlists
@@ -181,9 +181,9 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
         <button
           type="button"
           onClick={() => setActiveModal("OFFERS")}
-          className="group text-left rounded-2xl border border-emerald-500/30 bg-[#111827] p-4 transition-all duration-200 hover:border-emerald-500/60 hover:bg-[#151C2C] hover:shadow-xl hover:shadow-emerald-950/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+          className="group text-left rounded-2xl border border-emerald-500/30 bg-white p-4 transition-all duration-200 hover:border-emerald-500/60 hover:bg-[#151C2C] hover:shadow-xl hover:shadow-emerald-950/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
         >
-          <span className="text-xs text-[#94A3B8] font-medium flex items-center justify-between">
+          <span className="text-xs text-slate-600 font-medium flex items-center justify-between">
             <span className="flex items-center gap-1.5 group-hover:text-emerald-300 transition">
               <Award className="h-4 w-4 text-emerald-400" />
               Offers Extended
@@ -194,7 +194,7 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
           </span>
           <div className="mt-1.5 flex items-baseline gap-2">
             <span className="text-2xl font-black text-emerald-400">{offers.length}</span>
-            <span className="text-xs text-[#94A3B8] font-semibold">
+            <span className="text-xs text-slate-600 font-semibold">
               {offers.length > 0 ? "Placed" : "In Progress"}
             </span>
           </div>
@@ -204,9 +204,9 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
         <button
           type="button"
           onClick={() => setActiveModal("HIGHEST_CTC")}
-          className="group text-left rounded-2xl border border-orange-500/30 bg-[#111827] p-4 transition-all duration-200 hover:border-orange-500/60 hover:bg-[#151C2C] hover:shadow-xl hover:shadow-orange-950/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500/40"
+          className="group text-left rounded-2xl border border-orange-500/30 bg-white p-4 transition-all duration-200 hover:border-orange-500/60 hover:bg-[#151C2C] hover:shadow-xl hover:shadow-orange-950/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500/40"
         >
-          <span className="text-xs text-[#94A3B8] font-medium flex items-center justify-between">
+          <span className="text-xs text-slate-600 font-medium flex items-center justify-between">
             <span className="flex items-center gap-1.5 group-hover:text-orange-300 transition">
               <Briefcase className="h-4 w-4 text-orange-400" />
               Highest Package
@@ -230,11 +230,11 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
           onClick={() => setActiveModal(null)}
         >
           <div
-            className="w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-[#0F172A] shadow-2xl animate-in zoom-in-95 duration-150 flex flex-col max-h-[85vh]"
+            className="w-full max-w-3xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl animate-in zoom-in-95 duration-150 flex flex-col max-h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-white/10 bg-[#111827] px-6 py-4">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4">
               <div className="flex items-center gap-3">
                 <div
                   className={`h-10 w-10 rounded-xl flex items-center justify-center ${
@@ -263,7 +263,7 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
                     {activeModal === "HIGHEST_CTC" &&
                       `Highest CTC Package Breakdown (${formatLPA(highestPackage)})`}
                   </h3>
-                  <p className="text-xs text-[#94A3B8]">
+                  <p className="text-xs text-slate-600">
                     Candidate: <strong className="text-white">{student.name}</strong> (
                     {student.register_number} • {student.department})
                   </p>
@@ -287,7 +287,7 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
                 </button>
                 <button
                   onClick={() => setActiveModal(null)}
-                  className="rounded-lg p-2 text-[#94A3B8] hover:bg-white/10 hover:text-white transition"
+                  className="rounded-lg p-2 text-slate-600 hover:bg-white/10 hover:text-white transition"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -314,11 +314,11 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
                     <tbody className="divide-y divide-white/5">
                       {attendedEvaluations.map((ev: any, idx: number) => (
                         <tr key={ev.id} className="table-row">
-                          <td className="px-3 py-2.5 font-mono text-[#818CF8]">#{idx + 1}</td>
+                          <td className="px-3 py-2.5 font-mono text-[#0284C7]">#{idx + 1}</td>
                           <td className="px-3 py-2.5 font-semibold text-white">
                             {ev.drive?.company?.company_name}
                           </td>
-                          <td className="px-3 py-2.5 text-[#94A3B8]">{ev.drive?.job_title}</td>
+                          <td className="px-3 py-2.5 text-slate-600">{ev.drive?.job_title}</td>
                           <td className="px-3 py-2.5 font-bold text-[#10B981]">
                             {formatLPA(ev.drive?.ctc_lpa)}
                           </td>
@@ -341,7 +341,7 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
                           <td className="px-3 py-2.5 text-right">
                             <Link
                               href={`/drives/${ev.placement_drive_id}`}
-                              className="text-[#818CF8] hover:underline inline-flex items-center gap-1 font-semibold"
+                              className="text-[#0284C7] hover:underline inline-flex items-center gap-1 font-semibold"
                             >
                               View <ExternalLink className="h-3 w-3" />
                             </Link>
@@ -357,7 +357,7 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
               {activeModal === "ELIGIBLE" && (
                 <div className="space-y-4">
                   {eligibleEvaluations.length === 0 ? (
-                    <p className="text-center text-xs text-[#94A3B8] py-8">
+                    <p className="text-center text-xs text-slate-600 py-8">
                       No eligible shortlists recorded.
                     </p>
                   ) : (
@@ -378,7 +378,7 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
                             <td className="px-3 py-2.5 font-semibold text-white">
                               {ev.drive?.company?.company_name}
                             </td>
-                            <td className="px-3 py-2.5 text-[#94A3B8]">{ev.drive?.job_title}</td>
+                            <td className="px-3 py-2.5 text-slate-600">{ev.drive?.job_title}</td>
                             <td className="px-3 py-2.5 font-bold text-[#10B981]">
                               {formatLPA(ev.drive?.ctc_lpa)}
                             </td>
@@ -391,7 +391,7 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
                             <td className="px-3 py-2.5 text-right">
                               <Link
                                 href={`/drives/${ev.placement_drive_id}`}
-                                className="text-[#818CF8] hover:underline inline-flex items-center gap-1 font-semibold"
+                                className="text-[#0284C7] hover:underline inline-flex items-center gap-1 font-semibold"
                               >
                                 Portal <ExternalLink className="h-3 w-3" />
                               </Link>
@@ -408,7 +408,7 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
               {activeModal === "OFFERS" && (
                 <div className="space-y-4">
                   {offers.length === 0 ? (
-                    <p className="text-center text-xs text-[#94A3B8] py-8">
+                    <p className="text-center text-xs text-slate-600 py-8">
                       Candidate has not received an offer yet.
                     </p>
                   ) : (
@@ -428,11 +428,11 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
                             <td className="px-3 py-2.5 font-semibold text-white">
                               {offer.company?.company_name}
                             </td>
-                            <td className="px-3 py-2.5 text-[#94A3B8]">{offer.job_role}</td>
+                            <td className="px-3 py-2.5 text-slate-600">{offer.job_role}</td>
                             <td className="px-3 py-2.5 font-bold text-emerald-400">
                               {formatLPA(offer.ctc_lpa)}
                             </td>
-                            <td className="px-3 py-2.5 text-[#94A3B8]">
+                            <td className="px-3 py-2.5 text-slate-600">
                               {formatDate(offer.offer_date)}
                             </td>
                             <td className="px-3 py-2.5">
@@ -474,23 +474,23 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
                         </Badge>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4 text-xs border-t border-white/10 pt-4">
+                      <div className="grid grid-cols-2 gap-4 text-xs border-t border-slate-200 pt-4">
                         <div>
-                          <span className="text-[#94A3B8] block">Hiring Organization</span>
+                          <span className="text-slate-600 block">Hiring Organization</span>
                           <strong className="text-white text-sm">
                             {highestOffer.company?.company_name}
                           </strong>
                         </div>
                         <div>
-                          <span className="text-[#94A3B8] block">Designation / Role</span>
+                          <span className="text-slate-600 block">Designation / Role</span>
                           <strong className="text-white text-sm">{highestOffer.job_role}</strong>
                         </div>
                         <div>
-                          <span className="text-[#94A3B8] block">Offer Issue Date</span>
+                          <span className="text-slate-600 block">Offer Issue Date</span>
                           <span className="text-white">{formatDate(highestOffer.offer_date)}</span>
                         </div>
                         <div>
-                          <span className="text-[#94A3B8] block">Work Location</span>
+                          <span className="text-slate-600 block">Work Location</span>
                           <span className="text-white">
                             {highestOffer.company?.location || "Bangalore / Campus"}
                           </span>
@@ -498,7 +498,7 @@ export const StudentInteractiveMetricCards: React.FC<StudentInteractiveMetricCar
                       </div>
                     </div>
                   ) : (
-                    <p className="text-center text-xs text-[#94A3B8] py-8">
+                    <p className="text-center text-xs text-slate-600 py-8">
                       No offers recorded for this candidate yet.
                     </p>
                   )}

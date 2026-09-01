@@ -240,7 +240,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
                       href={`/companies/${company.id}`}
                       className="flex items-center gap-2 hover:text-[#0284C7]"
                     >
-                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1E293B] text-[#0284C7]">
+                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-50 text-[#0284C7]">
                         <Building2 className="h-4 w-4" />
                       </div>
                       <span>{company.company_name}</span>
@@ -259,7 +259,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({ role }) => {
                     {company.company_size || "—"}
                   </td>
                   <td className="px-4 py-3.5">
-                    <span className="rounded bg-[#1E293B] px-2 py-0.5 font-semibold text-[#0284C7]">
+                    <span className="rounded bg-slate-50 px-2 py-0.5 font-semibold text-[#0284C7]">
                       {company._count?.drives || 0} JDs
                     </span>
                   </td>

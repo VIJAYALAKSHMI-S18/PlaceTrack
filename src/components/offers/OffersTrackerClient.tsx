@@ -84,8 +84,8 @@ export const OffersTrackerClient: React.FC<OffersTrackerClientProps> = ({
       {/* Top Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">{title}</h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">{title}</h1>
+          <p className="text-xs font-medium text-slate-600">
             JOB SELECTIONS, OFFERS & PACKAGE DETAILS ({filteredOffers.length} OFFERS)
           </p>
         </div>
@@ -105,14 +105,14 @@ export const OffersTrackerClient: React.FC<OffersTrackerClientProps> = ({
               placeholder="Search Student, Register No, Company, Job Role..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:border-[#6366F1] focus:outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-white pl-9 pr-3 py-2 text-xs text-slate-900 placeholder-[#64748B] focus:border-[#0284C7] focus:outline-none"
             />
           </div>
 
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
           >
             <option value="ALL">All Offer Statuses</option>
             <option value="OFFERED">Offered</option>
@@ -140,35 +140,35 @@ export const OffersTrackerClient: React.FC<OffersTrackerClientProps> = ({
           <tbody className="divide-y divide-[#1E293B]">
             {filteredOffers.length === 0 ? (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
+                <td colSpan={7} className="p-8 text-center text-slate-600">
                   No matching offers found.
                 </td>
               </tr>
             ) : (
               filteredOffers.map((offer) => (
                 <tr key={offer.id} className="table-row">
-                  <td className="px-4 py-3.5 font-semibold text-[#F8FAFC]">
-                    <Link href={`/students/${offer.student_id}`} className="hover:text-[#818CF8]">
+                  <td className="px-4 py-3.5 font-semibold text-slate-900">
+                    <Link href={`/students/${offer.student_id}`} className="hover:text-[#0284C7]">
                       {offer.student?.name}
                     </Link>
                   </td>
-                  <td className="px-4 py-3.5 font-mono text-[#818CF8]">
+                  <td className="px-4 py-3.5 font-mono text-[#0284C7]">
                     {offer.student?.register_number}
                   </td>
-                  <td className="px-4 py-3.5 text-[#F8FAFC]">
+                  <td className="px-4 py-3.5 text-slate-900">
                     <Link
                       href={`/companies/${offer.company_id}`}
-                      className="flex items-center gap-1.5 hover:text-[#818CF8]"
+                      className="flex items-center gap-1.5 hover:text-[#0284C7]"
                     >
                       <Building2 className="h-3.5 w-3.5 text-[#64748B]" />
                       {offer.company?.company_name}
                     </Link>
                   </td>
-                  <td className="px-4 py-3.5 text-[#94A3B8]">{offer.job_role}</td>
+                  <td className="px-4 py-3.5 text-slate-600">{offer.job_role}</td>
                   <td className="px-4 py-3.5 font-bold text-[#10B981]">
                     {formatLPA(offer.ctc_lpa)}
                   </td>
-                  <td className="px-4 py-3.5 text-[#94A3B8]">
+                  <td className="px-4 py-3.5 text-slate-600">
                     <span className="flex items-center gap-1">
                       <Calendar className="h-3.5 w-3.5 text-[#64748B]" />
                       {formatDate(offer.offer_date)}

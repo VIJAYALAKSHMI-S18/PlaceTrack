@@ -312,7 +312,7 @@ export const StudentFormModal: React.FC<StudentFormModalProps> = ({
           />
         </div>
 
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#1E293B]">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
           <Button type="button" variant="secondary" onClick={onClose} disabled={loading}>
             Cancel
           </Button>

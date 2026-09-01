@@ -42,7 +42,7 @@ export const CandidatePhotoBadge: React.FC<CandidatePhotoBadgeProps> = ({ photoU
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-purple-500/40 bg-[#111827] shadow-lg shadow-purple-950/30 h-16 w-16 shrink-0 transition-transform duration-200 hover:scale-105">
+    <div className="relative overflow-hidden rounded-2xl border border-purple-500/40 bg-white shadow-lg shadow-purple-950/30 h-16 w-16 shrink-0 transition-transform duration-200 hover:scale-105">
       <img
         src={directUrl}
         alt={name}

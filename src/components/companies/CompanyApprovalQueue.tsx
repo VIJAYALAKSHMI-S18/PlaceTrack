@@ -90,10 +90,10 @@ export const CompanyApprovalQueue: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
             Company Approval Requests
           </h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <p className="text-xs font-medium text-slate-600">
             ADMIN REVIEW & VERIFICATION QUEUE
           </p>
         </div>
@@ -106,8 +106,8 @@ export const CompanyApprovalQueue: React.FC = () => {
               onClick={() => setStatusFilter(st)}
               className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
                 statusFilter === st
-                  ? "bg-[#6366F1] text-white"
-                  : "bg-[#1E293B] text-[#94A3B8] hover:bg-[#334155] hover:text-[#F8FAFC]"
+                  ? "bg-[#0284C7] text-white"
+                  : "bg-slate-50 text-slate-600 hover:bg-[#334155] hover:text-slate-900"
               }`}
             >
               {st}
@@ -132,22 +132,22 @@ export const CompanyApprovalQueue: React.FC = () => {
           <tbody className="divide-y divide-[#1E293B]">
             {loading ? (
               <tr>
-                <td colSpan={6} className="p-8 text-center text-[#94A3B8]">
+                <td colSpan={6} className="p-8 text-center text-slate-600">
                   Loading approval requests...
                 </td>
               </tr>
             ) : submissions.length === 0 ? (
               <tr>
-                <td colSpan={6} className="p-8 text-center text-[#94A3B8]">
+                <td colSpan={6} className="p-8 text-center text-slate-600">
                   No {statusFilter.toLowerCase()} company approval requests found.
                 </td>
               </tr>
             ) : (
               submissions.map((sub) => (
                 <tr key={sub.id} className="table-row">
-                  <td className="px-4 py-3.5 font-semibold text-[#F8FAFC]">
+                  <td className="px-4 py-3.5 font-semibold text-slate-900">
                     <div className="flex items-center gap-2">
-                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1E293B] text-[#818CF8]">
+                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-50 text-[#0284C7]">
                         <Building2 className="h-4 w-4" />
                       </div>
                       <div>
@@ -158,7 +158,7 @@ export const CompanyApprovalQueue: React.FC = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3.5 text-[#94A3B8]">
+                  <td className="px-4 py-3.5 text-slate-600">
                     <span className="flex items-center gap-1">
                       <User className="h-3.5 w-3.5 text-[#64748B]" />
                       {sub.submittedBy?.name || "Team Member"}
@@ -169,7 +169,7 @@ export const CompanyApprovalQueue: React.FC = () => {
                       {sub.submittedBy?.role?.replace("_", " ")}
                     </Badge>
                   </td>
-                  <td className="px-4 py-3.5 text-[#94A3B8]">
+                  <td className="px-4 py-3.5 text-slate-600">
                     <span className="flex items-center gap-1">
                       <Clock className="h-3.5 w-3.5 text-[#64748B]" />
                       {formatDate(sub.created_at)}
@@ -196,7 +196,7 @@ export const CompanyApprovalQueue: React.FC = () => {
                   <td className="px-4 py-3.5 text-right space-x-2">
                     <Link
                       href={`/companies/${sub.company_id}`}
-                      className="inline-flex items-center rounded p-1.5 text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC]"
+                      className="inline-flex items-center rounded p-1.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                       title="View Company Details"
                     >
                       <ExternalLink className="h-4 w-4" />
@@ -243,7 +243,7 @@ export const CompanyApprovalQueue: React.FC = () => {
           maxWidth="md"
         >
           <div className="space-y-4 pt-2">
-            <p className="text-xs text-[#94A3B8]">
+            <p className="text-xs text-slate-600">
               Approving this company will authorize placement officers and coordinators to schedule drives, evaluate eligible candidate resumes, and record job offers.
             </p>
             <div className="flex items-center justify-end gap-3 pt-3">
@@ -269,7 +269,7 @@ export const CompanyApprovalQueue: React.FC = () => {
         >
           <div className="space-y-4 pt-2">
             <div>
-              <label className="mb-1.5 block text-xs font-semibold text-[#F8FAFC]">
+              <label className="mb-1.5 block text-xs font-semibold text-slate-900">
                 Rejection Reason *
               </label>
               <textarea
@@ -277,7 +277,7 @@ export const CompanyApprovalQueue: React.FC = () => {
                 value={rejectionReason}
                 onChange={(e) => setRejectionReason(e.target.value)}
                 placeholder="e.g. Unverified recruitment agency, invalid official domain, or non-compliant placement criteria..."
-                className="w-full rounded-lg border border-[#EF4444]/40 bg-[#0F172A] p-3 text-xs text-[#F8FAFC] focus:border-[#EF4444] focus:outline-none"
+                className="w-full rounded-lg border border-[#EF4444]/40 bg-white p-3 text-xs text-slate-900 focus:border-[#EF4444] focus:outline-none"
                 required
               />
             </div>

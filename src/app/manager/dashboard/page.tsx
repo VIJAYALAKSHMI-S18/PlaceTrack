@@ -22,10 +22,10 @@ export default async function ManagerDashboardPage() {
         {/* Welcome Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-[#F8FAFC]">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
               Manager Intelligence Dashboard
             </h1>
-            <p className="text-xs text-[#94A3B8]">
+            <p className="text-xs text-slate-600">
               Welcome, {user.name}. Institutional placement metrics and analytics overview.
             </p>
           </div>

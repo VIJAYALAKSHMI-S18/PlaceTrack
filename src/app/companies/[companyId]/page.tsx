@@ -44,17 +44,17 @@ export default async function CompanyDetailPage({
           <div className="flex items-center gap-3">
             <Link
               href={`/${user.role.toLowerCase().replace("_", "-")}/companies`}
-              className="rounded-lg border border-[#1E293B] bg-[#111827] p-2 text-[#94A3B8] transition hover:bg-[#1E293B] hover:text-[#F8FAFC]"
+              className="rounded-lg border border-slate-200 bg-white p-2 text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
             >
               <ArrowLeft className="h-4 w-4" />
             </Link>
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#6366F1]/20 text-[#818CF8]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0284C7]/20 text-[#0284C7]">
                 <Building2 className="h-6 w-6" />
               </div>
               <div>
                 <div className="flex items-center gap-2.5">
-                  <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+                  <h1 className="text-xl font-bold tracking-tight text-slate-900">
                     {company.company_name}
                   </h1>
                   <Badge
@@ -70,7 +70,7 @@ export default async function CompanyDetailPage({
                     {company.status.replace("_", " ")}
                   </Badge>
                 </div>
-                <p className="text-xs text-[#94A3B8]">
+                <p className="text-xs text-slate-600">
                   {company.location} • {company.industry || "Technology Enterprise"}
                 </p>
               </div>
@@ -86,36 +86,36 @@ export default async function CompanyDetailPage({
               <CardTitle>Company Overview</CardTitle>
             </CardHeader>
 
-            <p className="text-xs leading-relaxed text-[#94A3B8]">
+            <p className="text-xs leading-relaxed text-slate-600">
               {company.company_description ||
                 "No detailed company description provided. Partner organization participating in institutional recruitment programs."}
             </p>
 
-            <div className="grid grid-cols-2 gap-4 border-t border-[#1E293B] pt-4 text-xs">
+            <div className="grid grid-cols-2 gap-4 border-t border-slate-200 pt-4 text-xs">
               <div>
                 <span className="text-[#64748B]">Industry Domain</span>
-                <p className="font-semibold text-[#F8FAFC]">{company.industry || "—"}</p>
+                <p className="font-semibold text-slate-900">{company.industry || "—"}</p>
               </div>
               <div>
                 <span className="text-[#64748B]">Company Size</span>
-                <p className="font-semibold text-[#F8FAFC]">{company.company_size || "—"}</p>
+                <p className="font-semibold text-slate-900">{company.company_size || "—"}</p>
               </div>
               <div>
                 <span className="text-[#64748B]">Founded Year</span>
-                <p className="font-semibold text-[#F8FAFC]">{company.founded_year || "—"}</p>
+                <p className="font-semibold text-slate-900">{company.founded_year || "—"}</p>
               </div>
               <div>
                 <span className="text-[#64748B]">Headquarters Location</span>
-                <p className="font-semibold text-[#F8FAFC]">{company.location}</p>
+                <p className="font-semibold text-slate-900">{company.location}</p>
               </div>
             </div>
 
             {/* Address & Google Maps fallback */}
-            <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-4 text-xs space-y-2">
-              <div className="flex items-center gap-1.5 font-bold text-[#818CF8]">
+            <div className="rounded-xl border border-slate-200 bg-white p-4 text-xs space-y-2">
+              <div className="flex items-center gap-1.5 font-bold text-[#0284C7]">
                 <MapPin className="h-4 w-4" /> Office Address & Map Integration
               </div>
-              <p className="text-[#94A3B8]">
+              <p className="text-slate-600">
                 {company.company_address || company.formatted_address || company.location}
               </p>
               {company.google_maps_url ? (
@@ -123,7 +123,7 @@ export default async function CompanyDetailPage({
                   href={company.google_maps_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] text-[#818CF8] hover:underline"
+                  className="inline-flex items-center gap-1 text-[11px] text-[#0284C7] hover:underline"
                 >
                   <ExternalLink className="h-3 w-3" /> View Location on Google Maps
                 </a>
@@ -146,7 +146,7 @@ export default async function CompanyDetailPage({
                 <User className="h-4 w-4 text-[#64748B]" />
                 <div>
                   <span className="text-[#64748B] block text-[10px]">Contact Person</span>
-                  <span className="font-semibold text-[#F8FAFC]">
+                  <span className="font-semibold text-slate-900">
                     {company.contact_person_name || "HR Placement Desk"}
                   </span>
                 </div>
@@ -156,7 +156,7 @@ export default async function CompanyDetailPage({
                 <Mail className="h-4 w-4 text-[#64748B]" />
                 <div>
                   <span className="text-[#64748B] block text-[10px]">Contact Email</span>
-                  <span className="font-semibold text-[#F8FAFC]">
+                  <span className="font-semibold text-slate-900">
                     {company.contact_person_email || "hr@company.com"}
                   </span>
                 </div>
@@ -166,20 +166,20 @@ export default async function CompanyDetailPage({
                 <Phone className="h-4 w-4 text-[#64748B]" />
                 <div>
                   <span className="text-[#64748B] block text-[10px]">Contact Phone</span>
-                  <span className="font-semibold text-[#F8FAFC]">
+                  <span className="font-semibold text-slate-900">
                     {company.contact_person_phone || "Not specified"}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-2 border-t border-[#1E293B] pt-4">
+            <div className="space-y-2 border-t border-slate-200 pt-4">
               {company.website && (
                 <a
                   href={company.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-2.5 text-xs text-[#94A3B8] transition hover:text-[#F8FAFC]"
+                  className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-600 transition hover:text-slate-900"
                 >
                   <span className="flex items-center gap-2">
                     <Globe className="h-3.5 w-3.5" /> Official Website
@@ -192,7 +192,7 @@ export default async function CompanyDetailPage({
                   href={company.careers_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-2.5 text-xs text-[#818CF8] transition hover:text-[#818CF8]"
+                  className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-[#0284C7] transition hover:text-[#0284C7]"
                 >
                   <span className="flex items-center gap-2">
                     <Briefcase className="h-3.5 w-3.5" /> Official Careers Portal

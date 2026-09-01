@@ -66,10 +66,10 @@ export default function PlacementTeamAddCompanyPage() {
     <DashboardShell role="PLACEMENT_TEAM">
       <div className="mx-auto max-w-3xl space-y-6">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
             Add Recruiting Company
           </h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <p className="text-xs font-medium text-slate-600">
             SUBMIT NEW ENTERPRISE FOR ADMIN APPROVAL
           </p>
         </div>
@@ -79,8 +79,8 @@ export default function PlacementTeamAddCompanyPage() {
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#10B981]/20 text-[#10B981]">
               <CheckCircle2 className="h-8 w-8" />
             </div>
-            <h3 className="text-lg font-bold text-[#F8FAFC]">Company Submitted Successfully!</h3>
-            <p className="mx-auto max-w-md text-xs text-[#94A3B8]">
+            <h3 className="text-lg font-bold text-slate-900">Company Submitted Successfully!</h3>
+            <p className="mx-auto max-w-md text-xs text-slate-600">
               '{formData.company_name}' has been submitted for Admin verification. It will appear across active drives as soon as approved.
             </p>
             <div className="pt-4">
@@ -185,7 +185,7 @@ export default function PlacementTeamAddCompanyPage() {
               </div>
 
               <div>
-                <label className="mb-1.5 block text-xs font-medium text-[#94A3B8]">
+                <label className="mb-1.5 block text-xs font-medium text-slate-600">
                   Company Description
                 </label>
                 <textarea
@@ -193,12 +193,12 @@ export default function PlacementTeamAddCompanyPage() {
                   rows={3}
                   value={formData.company_description}
                   onChange={handleChange}
-                  className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] p-3 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+                  className="w-full rounded-lg border border-slate-200 bg-white p-3 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
                   placeholder="Recruitment focus, hiring profiles, and tech stack..."
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#1E293B]">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
                 <Button type="button" variant="secondary" onClick={() => router.back()}>
                   Cancel
                 </Button>

@@ -52,7 +52,7 @@ export default async function StudentDetailPage({
           <div className="flex items-center gap-3.5">
             <Link
               href={`/${user.role.toLowerCase().replace("_", "-")}/students`}
-              className="rounded-lg border border-[#1E293B] bg-[#111827] p-2 text-[#94A3B8] transition hover:bg-[#1E293B] hover:text-[#F8FAFC]"
+              className="rounded-lg border border-slate-200 bg-white p-2 text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
             >
               <ArrowLeft className="h-4 w-4" />
             </Link>
@@ -65,7 +65,7 @@ export default async function StudentDetailPage({
 
             <div>
               <div className="flex items-center gap-2.5">
-                <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+                <h1 className="text-xl font-bold tracking-tight text-slate-900">
                   {student.name}
                 </h1>
                 <Badge
@@ -81,7 +81,7 @@ export default async function StudentDetailPage({
                   {student.placement_status.replace("_", " ")}
                 </Badge>
               </div>
-              <p className="text-xs font-mono text-[#818CF8]">
+              <p className="text-xs font-mono text-[#0284C7]">
                 {student.register_number} • {student.department} • Class of {student.graduation_year || 2025}
               </p>
             </div>
@@ -98,36 +98,36 @@ export default async function StudentDetailPage({
           {/* Personal Information */}
           <Card className="space-y-4">
             <CardHeader>
-              <div className="flex items-center gap-2 text-[#818CF8]">
+              <div className="flex items-center gap-2 text-[#0284C7]">
                 <User className="h-4 w-4" />
                 <CardTitle>Personal Information</CardTitle>
               </div>
             </CardHeader>
 
             <div className="space-y-3 text-xs">
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">Full Name</span>
-                <span className="font-semibold text-[#F8FAFC]">{student.name}</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">Full Name</span>
+                <span className="font-semibold text-slate-900">{student.name}</span>
               </div>
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">Register Number</span>
-                <span className="font-mono font-bold text-[#818CF8]">{student.register_number}</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">Register Number</span>
+                <span className="font-mono font-bold text-[#0284C7]">{student.register_number}</span>
               </div>
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">Department</span>
-                <span className="font-semibold text-[#F8FAFC]">{student.department}</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">Department</span>
+                <span className="font-semibold text-slate-900">{student.department}</span>
               </div>
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">Student Type</span>
-                <span className="font-semibold text-[#F8FAFC]">{student.student_type}</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">Student Type</span>
+                <span className="font-semibold text-slate-900">{student.student_type}</span>
               </div>
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">Email</span>
-                <span className="text-[#F8FAFC]">{student.email}</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">Email</span>
+                <span className="text-slate-900">{student.email}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#94A3B8]">Phone</span>
-                <span className="text-[#F8FAFC]">{student.phone_number}</span>
+                <span className="text-slate-600">Phone</span>
+                <span className="text-slate-900">{student.phone_number}</span>
               </div>
             </div>
           </Card>
@@ -142,28 +142,28 @@ export default async function StudentDetailPage({
             </CardHeader>
 
             <div className="space-y-3 text-xs">
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">UG Aggregate %</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">UG Aggregate %</span>
                 <span className="font-bold text-[#10B981]">{formatPercentage(student.ug_percentage)}</span>
               </div>
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">CGPA (10 pt scale)</span>
-                <span className="font-bold text-[#818CF8]">{student.cgpa ?? "—"}</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">CGPA (10 pt scale)</span>
+                <span className="font-bold text-[#0284C7]">{student.cgpa ?? "—"}</span>
               </div>
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">HSC (12th) %</span>
-                <span className="text-[#F8FAFC]">{formatPercentage(student.hsc_percentage)}</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">HSC (12th) %</span>
+                <span className="text-slate-900">{formatPercentage(student.hsc_percentage)}</span>
               </div>
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">SSLC (10th) %</span>
-                <span className="text-[#F8FAFC]">{formatPercentage(student.sslc_percentage)}</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">SSLC (10th) %</span>
+                <span className="text-slate-900">{formatPercentage(student.sslc_percentage)}</span>
               </div>
-              <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                <span className="text-[#94A3B8]">PG Percentage</span>
-                <span className="text-[#F8FAFC]">{student.pg_percentage ? `${student.pg_percentage}%` : "N/A"}</span>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-600">PG Percentage</span>
+                <span className="text-slate-900">{student.pg_percentage ? `${student.pg_percentage}%` : "N/A"}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#94A3B8]">Standing Backlogs</span>
+                <span className="text-slate-600">Standing Backlogs</span>
                 <span className={`font-bold ${student.backlogs > 0 ? "text-[#EF4444]" : "text-[#10B981]"}`}>
                   {student.backlogs}
                 </span>
@@ -186,16 +186,16 @@ export default async function StudentDetailPage({
                   href={student.resume_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-3 text-xs transition hover:border-[#6366F1]"
+                  className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-3 text-xs transition hover:border-[#0284C7]"
                 >
-                  <div className="flex items-center gap-2 text-[#818CF8]">
+                  <div className="flex items-center gap-2 text-[#0284C7]">
                     <FileText className="h-4 w-4" />
-                    <span className="font-semibold text-[#F8FAFC]">Official Resume PDF</span>
+                    <span className="font-semibold text-slate-900">Official Resume PDF</span>
                   </div>
                   <ExternalLink className="h-3.5 w-3.5 text-[#64748B]" />
                 </a>
               ) : (
-                <div className="rounded-lg bg-[#0F172A] p-3 text-xs text-[#64748B]">No resume uploaded</div>
+                <div className="rounded-lg bg-white p-3 text-xs text-[#64748B]">No resume uploaded</div>
               )}
 
               {student.self_intro_url && (
@@ -203,11 +203,11 @@ export default async function StudentDetailPage({
                   href={student.self_intro_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-3 text-xs transition hover:border-[#6366F1]"
+                  className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-3 text-xs transition hover:border-[#0284C7]"
                 >
                   <div className="flex items-center gap-2 text-[#EC4899]">
                     <Video className="h-4 w-4" />
-                    <span className="font-semibold text-[#F8FAFC]">Self Introduction Video</span>
+                    <span className="font-semibold text-slate-900">Self Introduction Video</span>
                   </div>
                   <ExternalLink className="h-3.5 w-3.5 text-[#64748B]" />
                 </a>
@@ -218,11 +218,11 @@ export default async function StudentDetailPage({
                   href={(student as any).photo_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-3 text-xs transition hover:border-purple-500"
+                  className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-3 text-xs transition hover:border-purple-500"
                 >
                   <div className="flex items-center gap-2 text-purple-400">
                     <ImageIcon className="h-4 w-4" />
-                    <span className="font-semibold text-[#F8FAFC]">Official Student Photo</span>
+                    <span className="font-semibold text-slate-900">Official Student Photo</span>
                   </div>
                   <ExternalLink className="h-3.5 w-3.5 text-[#64748B]" />
                 </a>
@@ -234,7 +234,7 @@ export default async function StudentDetailPage({
                     href={student.linkedin_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#1E293B] bg-[#0F172A] p-2 text-xs text-[#94A3B8] transition hover:text-[#818CF8]"
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white p-2 text-xs text-slate-600 transition hover:text-[#0284C7]"
                   >
                     <Linkedin className="h-3.5 w-3.5" /> LinkedIn
                   </a>
@@ -244,7 +244,7 @@ export default async function StudentDetailPage({
                     href={student.github_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#1E293B] bg-[#0F172A] p-2 text-xs text-[#94A3B8] transition hover:text-[#818CF8]"
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white p-2 text-xs text-slate-600 transition hover:text-[#0284C7]"
                   >
                     <Github className="h-3.5 w-3.5" /> GitHub
                   </a>
@@ -254,7 +254,7 @@ export default async function StudentDetailPage({
                     href={student.portfolio_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#1E293B] bg-[#0F172A] p-2 text-xs text-[#94A3B8] transition hover:text-[#818CF8]"
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white p-2 text-xs text-slate-600 transition hover:text-[#0284C7]"
                   >
                     <Globe className="h-3.5 w-3.5" /> Portfolio
                   </a>
@@ -267,14 +267,14 @@ export default async function StudentDetailPage({
         {/* Skills Tag Cloud */}
         {skills.length > 0 && (
           <Card className="p-5">
-            <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-600">
               Extracted Technical & Domain Skills
             </h3>
             <div className="flex flex-wrap gap-2">
               {skills.map((skill, idx) => (
                 <span
                   key={idx}
-                  className="rounded-lg border border-[#6366F1]/30 bg-[#6366F1]/10 px-3 py-1 text-xs font-semibold text-[#818CF8]"
+                  className="rounded-lg border border-[#0284C7]/30 bg-[#0284C7]/10 px-3 py-1 text-xs font-semibold text-[#0284C7]"
                 >
                   {skill}
                 </span>
@@ -309,12 +309,12 @@ export default async function StudentDetailPage({
                 <tbody className="divide-y divide-[#1E293B]">
                   {student.offers.map((offer) => (
                     <tr key={offer.id} className="table-row">
-                      <td className="px-4 py-3 font-semibold text-[#F8FAFC]">
+                      <td className="px-4 py-3 font-semibold text-slate-900">
                         {offer.company?.company_name}
                       </td>
-                      <td className="px-4 py-3 text-[#94A3B8]">{offer.job_role}</td>
+                      <td className="px-4 py-3 text-slate-600">{offer.job_role}</td>
                       <td className="px-4 py-3 font-bold text-[#10B981]">{formatLPA(offer.ctc_lpa)}</td>
-                      <td className="px-4 py-3 text-[#94A3B8]">{formatDate(offer.offer_date)}</td>
+                      <td className="px-4 py-3 text-slate-600">{formatDate(offer.offer_date)}</td>
                       <td className="px-4 py-3">
                         <Badge variant="success">{offer.offer_status}</Badge>
                       </td>
@@ -361,15 +361,15 @@ export default async function StudentDetailPage({
                     <tbody className="divide-y divide-[#1E293B]">
                       {completedEvaluations.map((ev) => (
                         <tr key={ev.id} className="table-row">
-                          <td className="px-4 py-3 font-semibold text-[#F8FAFC]">
-                            <Link href={`/drives/${ev.placement_drive_id}`} className="hover:text-[#818CF8]">
+                          <td className="px-4 py-3 font-semibold text-slate-900">
+                            <Link href={`/drives/${ev.placement_drive_id}`} className="hover:text-[#0284C7]">
                               {ev.drive?.job_title}
                             </Link>
                           </td>
-                          <td className="px-4 py-3 text-[#94A3B8]">
+                          <td className="px-4 py-3 text-slate-600">
                             {ev.drive?.company?.company_name}
                           </td>
-                          <td className="px-4 py-3 font-bold text-[#818CF8]">
+                          <td className="px-4 py-3 font-bold text-[#0284C7]">
                             {ev.ats_score} / 100
                           </td>
                           <td className="px-4 py-3 text-[#10B981] font-semibold">
@@ -388,7 +388,7 @@ export default async function StudentDetailPage({
                               {ev.eligibility_status?.replace("_", " ")}
                             </Badge>
                           </td>
-                          <td className="px-4 py-3 text-right text-[#94A3B8]">
+                          <td className="px-4 py-3 text-right text-slate-600">
                             {formatDate(ev.evaluated_at)}
                           </td>
                         </tr>

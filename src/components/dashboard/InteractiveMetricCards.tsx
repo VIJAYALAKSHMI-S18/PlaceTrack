@@ -230,11 +230,11 @@ export function InteractiveMetricCards({
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm animate-in fade-in duration-200">
           <div
-            className="relative w-full max-w-4xl max-h-[85vh] flex flex-col rounded-2xl border border-white/10 bg-[#0B0F19] shadow-2xl shadow-purple-500/10 overflow-hidden"
+            className="relative w-full max-w-4xl max-h-[85vh] flex flex-col rounded-2xl border border-slate-200 bg-[#0B0F19] shadow-2xl shadow-purple-500/10 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-white/80">
+            <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-white/80">
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
                   {activeModal === "STUDENTS" && <Users className="h-5 w-5 text-[#0284C7]" />}
@@ -272,7 +272,7 @@ export function InteractiveMetricCards({
             </div>
 
             {/* Search & Filter Controls */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/5 bg-[#0B0F19] px-6 py-3">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 bg-[#0B0F19] px-6 py-3">
               <div className="relative flex-1 min-w-[240px]">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#64748B]" />
                 <input
@@ -288,7 +288,7 @@ export function InteractiveMetricCards({
                       ? "by company, job role..."
                       : "by student, company, role..."
                   }`}
-                  className="w-full rounded-xl border border-white/10 bg-[#1E293B]/60 pl-9 pr-4 py-2 text-xs text-white placeholder-[#64748B] focus:border-purple-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-100 pl-9 pr-4 py-2 text-xs text-white placeholder-[#64748B] focus:border-purple-500 focus:outline-none"
                 />
               </div>
 
@@ -550,7 +550,7 @@ export function InteractiveMetricCards({
             </div>
 
             {/* Modal Footer */}
-            <div className="flex items-center justify-between border-t border-white/10 px-6 py-3 bg-white/80">
+            <div className="flex items-center justify-between border-t border-slate-200 px-6 py-3 bg-white/80">
               <Button variant="ghost" size="sm" onClick={closeModal} className="text-xs text-slate-500">
                 Close Window
               </Button>

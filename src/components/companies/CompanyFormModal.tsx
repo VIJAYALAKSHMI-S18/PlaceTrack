@@ -147,8 +147,8 @@ export const CompanyFormModal: React.FC<CompanyFormModalProps> = ({
         </div>
 
         {/* Location & Google Maps Abstraction */}
-        <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-4 space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#818CF8]">
+        <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0284C7]">
             <MapPin className="h-4 w-4" /> Location & Map Integration
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -219,7 +219,7 @@ export const CompanyFormModal: React.FC<CompanyFormModalProps> = ({
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-medium text-[#94A3B8]">
+          <label className="mb-1.5 block text-xs font-medium text-slate-600">
             Company Overview / Description
           </label>
           <textarea
@@ -227,12 +227,12 @@ export const CompanyFormModal: React.FC<CompanyFormModalProps> = ({
             rows={3}
             value={formData.company_description}
             onChange={handleChange}
-            className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] p-3 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 bg-white p-3 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
             placeholder="Describe company operations, recruitment domain, and tech stack..."
           />
         </div>
 
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#1E293B]">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
           <Button type="button" variant="secondary" onClick={onClose} disabled={loading}>
             Cancel
           </Button>

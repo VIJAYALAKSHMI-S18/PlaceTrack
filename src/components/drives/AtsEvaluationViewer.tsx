@@ -37,20 +37,20 @@ export const AtsEvaluationViewer: React.FC<AtsEvaluationViewerProps> = ({
     >
       <div className="space-y-6 pt-2">
         {/* Top Summary Card */}
-        <div className="flex flex-col gap-4 rounded-xl border border-[#1E293B] bg-[#0F172A] p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <div className="text-sm font-bold text-[#F8FAFC]">{student?.name}</div>
-            <div className="text-xs text-[#94A3B8]">
+            <div className="text-sm font-bold text-slate-900">{student?.name}</div>
+            <div className="text-xs text-slate-600">
               {student?.department} • UG: {student?.ug_percentage}% • Backlogs: {student?.backlogs ?? 0}
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="text-right">
-              <div className="text-[10px] uppercase font-bold text-[#94A3B8]">
+              <div className="text-[10px] uppercase font-bold text-slate-600">
                 Calculated ATS Score
               </div>
-              <div className="text-2xl font-extrabold text-[#818CF8]">
+              <div className="text-2xl font-extrabold text-[#0284C7]">
                 {evaluation.ats_score}
                 <span className="text-xs text-[#64748B]"> / 100</span>
               </div>
@@ -73,12 +73,12 @@ export const AtsEvaluationViewer: React.FC<AtsEvaluationViewerProps> = ({
 
         {/* 5-Factor Weighted Score Breakdown */}
         <div>
-          <h4 className="mb-3 text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+          <h4 className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-600">
             Weighted 5-Factor ATS Scoring Breakdown
           </h4>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-5 text-center">
-            <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-3">
-              <div className="text-xs text-[#94A3B8]">Skill Match</div>
+            <div className="rounded-xl border border-slate-200 bg-white p-3">
+              <div className="text-xs text-slate-600">Skill Match</div>
               <div className="text-lg font-bold text-[#10B981]">
                 {evaluation.skill_match_score}
                 <span className="text-[10px] text-[#64748B]"> / 50</span>
@@ -86,17 +86,17 @@ export const AtsEvaluationViewer: React.FC<AtsEvaluationViewerProps> = ({
               <div className="text-[10px] text-[#64748B]">50% Weight</div>
             </div>
 
-            <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-3">
-              <div className="text-xs text-[#94A3B8]">Semantic Match</div>
-              <div className="text-lg font-bold text-[#818CF8]">
+            <div className="rounded-xl border border-slate-200 bg-white p-3">
+              <div className="text-xs text-slate-600">Semantic Match</div>
+              <div className="text-lg font-bold text-[#0284C7]">
                 {evaluation.semantic_match_score}
                 <span className="text-[10px] text-[#64748B]"> / 20</span>
               </div>
               <div className="text-[10px] text-[#64748B]">20% Weight</div>
             </div>
 
-            <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-3">
-              <div className="text-xs text-[#94A3B8]">Education</div>
+            <div className="rounded-xl border border-slate-200 bg-white p-3">
+              <div className="text-xs text-slate-600">Education</div>
               <div className="text-lg font-bold text-[#3B82F6]">
                 {evaluation.education_score}
                 <span className="text-[10px] text-[#64748B]"> / 10</span>
@@ -104,8 +104,8 @@ export const AtsEvaluationViewer: React.FC<AtsEvaluationViewerProps> = ({
               <div className="text-[10px] text-[#64748B]">10% Weight</div>
             </div>
 
-            <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-3">
-              <div className="text-xs text-[#94A3B8]">Experience</div>
+            <div className="rounded-xl border border-slate-200 bg-white p-3">
+              <div className="text-xs text-slate-600">Experience</div>
               <div className="text-lg font-bold text-[#F59E0B]">
                 {evaluation.experience_score}
                 <span className="text-[10px] text-[#64748B]"> / 10</span>
@@ -113,8 +113,8 @@ export const AtsEvaluationViewer: React.FC<AtsEvaluationViewerProps> = ({
               <div className="text-[10px] text-[#64748B]">10% Weight</div>
             </div>
 
-            <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-3">
-              <div className="text-xs text-[#94A3B8]">Project Fit</div>
+            <div className="rounded-xl border border-slate-200 bg-white p-3">
+              <div className="text-xs text-slate-600">Project Fit</div>
               <div className="text-lg font-bold text-[#EC4899]">
                 {evaluation.project_score}
                 <span className="text-[10px] text-[#64748B]"> / 10</span>
@@ -170,14 +170,14 @@ export const AtsEvaluationViewer: React.FC<AtsEvaluationViewerProps> = ({
         </div>
 
         {/* Multi-Tier Eligibility Rule Checks */}
-        <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-4">
-          <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-600">
             Academic & ATS Eligibility Diagnostics
           </h4>
-          <ul className="space-y-1.5 text-xs text-[#F8FAFC]">
+          <ul className="space-y-1.5 text-xs text-slate-900">
             {eligibilityReasons.map((reason, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <span className="text-[#818CF8] font-bold">•</span>
+                <span className="text-[#0284C7] font-bold">•</span>
                 <span>{reason}</span>
               </li>
             ))}

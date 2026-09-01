@@ -353,7 +353,7 @@ export const StudentTable: React.FC<StudentTableProps> = ({ role }) => {
                     {student.register_number}
                   </td>
                   <td className="px-4 py-3.5">
-                    <span className="rounded bg-[#1E293B] px-2 py-0.5 font-semibold text-slate-600">
+                    <span className="rounded bg-slate-50 px-2 py-0.5 font-semibold text-slate-600">
                       {student.department}
                     </span>
                   </td>

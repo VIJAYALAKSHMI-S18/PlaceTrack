@@ -21,10 +21,10 @@ export default async function PlacementTeamDashboardPage() {
       <div className="space-y-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-[#F8FAFC]">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
               Placement Officer Workspace
             </h1>
-            <p className="text-xs text-[#94A3B8]">
+            <p className="text-xs text-slate-600">
               Welcome, {user.name}. Manage assigned drives, student shortlists, and partner companies.
             </p>
           </div>
@@ -65,7 +65,7 @@ export default async function PlacementTeamDashboardPage() {
                 <CardTitle>Upcoming Recruitment Drives</CardTitle>
                 <CardDescription>Scheduled placement opportunities</CardDescription>
               </div>
-              <Link href="/placement-team/drives" className="text-xs text-[#818CF8] hover:underline">
+              <Link href="/placement-team/drives" className="text-xs text-[#0284C7] hover:underline">
                 View All
               </Link>
             </CardHeader>
@@ -76,17 +76,17 @@ export default async function PlacementTeamDashboardPage() {
                 stats.recentDrives.map((d: any) => (
                   <div
                     key={d.id}
-                    className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-3 text-xs"
+                    className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-3 text-xs"
                   >
                     <div>
-                      <div className="font-semibold text-[#F8FAFC]">{d.job_title}</div>
-                      <div className="text-[11px] text-[#94A3B8]">
+                      <div className="font-semibold text-slate-900">{d.job_title}</div>
+                      <div className="text-[11px] text-slate-600">
                         {d.company?.company_name} • {formatDate(d.drive_date)}
                       </div>
                     </div>
                     <Link
                       href={`/drives/${d.id}`}
-                      className="rounded bg-[#6366F1]/20 px-2.5 py-1 text-[10px] font-bold text-[#818CF8] hover:bg-[#6366F1]/30"
+                      className="rounded bg-[#0284C7]/20 px-2.5 py-1 text-[10px] font-bold text-[#0284C7] hover:bg-[#0284C7]/30"
                     >
                       Drive Portal
                     </Link>
@@ -103,7 +103,7 @@ export default async function PlacementTeamDashboardPage() {
                 <CardTitle>My Company Submissions</CardTitle>
                 <CardDescription>Approval status of companies you added</CardDescription>
               </div>
-              <Link href="/placement-team/add-company" className="text-xs text-[#818CF8] hover:underline">
+              <Link href="/placement-team/add-company" className="text-xs text-[#0284C7] hover:underline">
                 + New
               </Link>
             </CardHeader>
@@ -116,13 +116,13 @@ export default async function PlacementTeamDashboardPage() {
                 stats.mySubmissions.map((sub: any) => (
                   <div
                     key={sub.id}
-                    className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-3 text-xs"
+                    className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-3 text-xs"
                   >
                     <div>
-                      <div className="font-semibold text-[#F8FAFC]">
+                      <div className="font-semibold text-slate-900">
                         {sub.company?.company_name}
                       </div>
-                      <div className="text-[10px] text-[#94A3B8]">
+                      <div className="text-[10px] text-slate-600">
                         Submitted {formatDate(sub.created_at)}
                       </div>
                     </div>

@@ -26,10 +26,10 @@ export default function ManagerReportsPage() {
     <DashboardShell role="MANAGER">
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
             Placement Statistics & Reports
           </h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <p className="text-xs font-medium text-slate-600">
             EXECUTIVE SUMMARIES & DATA EXPORTS
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function ManagerReportsPage() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           <Card className="flex flex-col justify-between space-y-4 p-6">
             <div className="space-y-2">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#6366F1]/20 text-[#818CF8]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0284C7]/20 text-[#0284C7]">
                 <Users className="h-6 w-6" />
               </div>
               <CardTitle>Students Academic Report</CardTitle>
@@ -45,7 +45,7 @@ export default function ManagerReportsPage() {
                 Overview of student marks, backlogs, and placement statistics across all departments.
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2 pt-4 border-t border-[#1E293B]">
+            <div className="flex items-center gap-2 pt-4 border-t border-slate-200">
               <Button
                 variant="primary"
                 size="sm"
@@ -68,7 +68,7 @@ export default function ManagerReportsPage() {
                 Approved recruiting companies, active placement drives, and offer distributions.
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2 pt-4 border-t border-[#1E293B]">
+            <div className="flex items-center gap-2 pt-4 border-t border-slate-200">
               <Button
                 variant="primary"
                 size="sm"
@@ -91,7 +91,7 @@ export default function ManagerReportsPage() {
                 Recruitment drive outcomes, total selections, and highest / average CTC analysis.
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2 pt-4 border-t border-[#1E293B]">
+            <div className="flex items-center gap-2 pt-4 border-t border-slate-200">
               <Button
                 variant="primary"
                 size="sm"

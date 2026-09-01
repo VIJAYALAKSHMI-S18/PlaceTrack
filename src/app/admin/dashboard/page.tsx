@@ -34,10 +34,10 @@ export default async function AdminDashboardPage() {
         {/* Welcome Header */}
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-[#F8FAFC]">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
               Executive Placement Overview
             </h1>
-            <p className="text-xs text-[#94A3B8]">
+            <p className="text-xs text-slate-600">
               Welcome back, {user.name}. Here is the complete placement operational intelligence.
             </p>
           </div>
@@ -48,44 +48,44 @@ export default async function AdminDashboardPage() {
 
         {/* 12 Key Metric Summary Cards */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          <Card className="p-4 bg-[#111827]">
-            <div className="flex items-center justify-between text-xs text-[#94A3B8]">
+          <Card className="p-4 bg-white">
+            <div className="flex items-center justify-between text-xs text-slate-600">
               <span>Total Students</span>
-              <Users className="h-4 w-4 text-[#818CF8]" />
+              <Users className="h-4 w-4 text-[#0284C7]" />
             </div>
-            <div className="mt-2 text-xl font-bold text-[#F8FAFC]">{ov.totalStudents}</div>
+            <div className="mt-2 text-xl font-bold text-slate-900">{ov.totalStudents}</div>
             <div className="text-[10px] text-[#10B981] mt-1">{ov.placedStudents} Placed ({ov.placementPercentage}%)</div>
           </Card>
 
-          <Card className="p-4 bg-[#111827]">
-            <div className="flex items-center justify-between text-xs text-[#94A3B8]">
+          <Card className="p-4 bg-white">
+            <div className="flex items-center justify-between text-xs text-slate-600">
               <span>Placement %</span>
               <TrendingUp className="h-4 w-4 text-[#10B981]" />
             </div>
             <div className="mt-2 text-xl font-bold text-[#10B981]">{ov.placementPercentage}%</div>
-            <div className="text-[10px] text-[#94A3B8] mt-1">{ov.notPlacedStudents} Unplaced</div>
+            <div className="text-[10px] text-slate-600 mt-1">{ov.notPlacedStudents} Unplaced</div>
           </Card>
 
-          <Card className="p-4 bg-[#111827]">
-            <div className="flex items-center justify-between text-xs text-[#94A3B8]">
+          <Card className="p-4 bg-white">
+            <div className="flex items-center justify-between text-xs text-slate-600">
               <span>Highest Package</span>
               <Award className="h-4 w-4 text-[#F59E0B]" />
             </div>
             <div className="mt-2 text-xl font-bold text-[#F59E0B]">{formatLPA(ov.highestPackage)}</div>
-            <div className="text-[10px] text-[#94A3B8] mt-1">Avg: {formatLPA(ov.averagePackage)}</div>
+            <div className="text-[10px] text-slate-600 mt-1">Avg: {formatLPA(ov.averagePackage)}</div>
           </Card>
 
-          <Card className="p-4 bg-[#111827]">
-            <div className="flex items-center justify-between text-xs text-[#94A3B8]">
+          <Card className="p-4 bg-white">
+            <div className="flex items-center justify-between text-xs text-slate-600">
               <span>Total Offers</span>
-              <Award className="h-4 w-4 text-[#818CF8]" />
+              <Award className="h-4 w-4 text-[#0284C7]" />
             </div>
-            <div className="mt-2 text-xl font-bold text-[#818CF8]">{ov.totalOffers}</div>
+            <div className="mt-2 text-xl font-bold text-[#0284C7]">{ov.totalOffers}</div>
             <div className="text-[10px] text-[#64748B] mt-1">Across all drives</div>
           </Card>
 
-          <Card className="p-4 bg-[#111827]">
-            <div className="flex items-center justify-between text-xs text-[#94A3B8]">
+          <Card className="p-4 bg-white">
+            <div className="flex items-center justify-between text-xs text-slate-600">
               <span>Companies</span>
               <Building2 className="h-4 w-4 text-[#3B82F6]" />
             </div>
@@ -97,15 +97,15 @@ export default async function AdminDashboardPage() {
             </div>
           </Card>
 
-          <Card className="p-4 bg-[#111827]">
-            <div className="flex items-center justify-between text-xs text-[#94A3B8]">
+          <Card className="p-4 bg-white">
+            <div className="flex items-center justify-between text-xs text-slate-600">
               <span>Drives</span>
               <Briefcase className="h-4 w-4 text-[#EC4899]" />
             </div>
             <div className="mt-2 text-xl font-bold text-[#EC4899]">
               {ov.completedDrives + ov.upcomingDrives + ov.ongoingDrives}
             </div>
-            <div className="text-[10px] text-[#94A3B8] mt-1">
+            <div className="text-[10px] text-slate-600 mt-1">
               {ov.completedDrives} Done • {ov.upcomingDrives} Next
             </div>
           </Card>
@@ -130,7 +130,7 @@ export default async function AdminDashboardPage() {
                 <CardTitle>Approval Queue</CardTitle>
                 <CardDescription>Company submissions awaiting review</CardDescription>
               </div>
-              <Link href="/admin/company-approvals" className="text-xs text-[#818CF8] hover:underline">
+              <Link href="/admin/company-approvals" className="text-xs text-[#0284C7] hover:underline">
                 View All
               </Link>
             </CardHeader>
@@ -143,19 +143,19 @@ export default async function AdminDashboardPage() {
                 stats.recentSubmissions.map((sub: any) => (
                   <div
                     key={sub.id}
-                    className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-3 text-xs"
+                    className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-3 text-xs"
                   >
                     <div>
-                      <div className="font-semibold text-[#F8FAFC]">
+                      <div className="font-semibold text-slate-900">
                         {sub.company?.company_name}
                       </div>
-                      <div className="text-[10px] text-[#94A3B8]">
+                      <div className="text-[10px] text-slate-600">
                         By {sub.submittedBy?.name} ({sub.submittedBy?.role})
                       </div>
                     </div>
                     <Link
                       href="/admin/company-approvals"
-                      className="rounded bg-[#6366F1]/20 px-2 py-1 text-[10px] font-bold text-[#818CF8] hover:bg-[#6366F1]/30"
+                      className="rounded bg-[#0284C7]/20 px-2 py-1 text-[10px] font-bold text-[#0284C7] hover:bg-[#0284C7]/30"
                     >
                       Review
                     </Link>

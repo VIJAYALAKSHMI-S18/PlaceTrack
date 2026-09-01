@@ -153,7 +153,7 @@ export default function DrivePortalPage() {
 
   if (loading && !drive) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#0F172A] text-xs text-[#818CF8]">
+      <div className="flex min-h-screen items-center justify-center bg-white text-xs text-[#0284C7]">
         Loading placement drive portal...
       </div>
     );
@@ -165,8 +165,8 @@ export default function DrivePortalPage() {
         <div className="h-12 w-12 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center">
           <Briefcase className="h-6 w-6" />
         </div>
-        <h2 className="text-lg font-bold text-[#F8FAFC]">Placement Drive Record Not Found</h2>
-        <p className="text-xs text-[#94A3B8] max-w-md">
+        <h2 className="text-lg font-bold text-slate-900">Placement Drive Record Not Found</h2>
+        <p className="text-xs text-slate-600 max-w-md">
           This recruitment drive link might be from a previous session or the database was refreshed.
         </p>
         <div className="flex items-center gap-3 pt-2">
@@ -205,20 +205,20 @@ export default function DrivePortalPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-[#F8FAFC]">
+    <div className="min-h-screen bg-white text-slate-900">
       {/* Top sticky bar */}
-      <header className="sticky top-0 z-30 border-b border-[#1E293B] bg-[#111827]/95 px-6 py-4 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 px-6 py-4 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
             <button
               onClick={() => router.back()}
-              className="rounded-lg border border-[#1E293B] bg-[#0F172A] p-2 text-[#94A3B8] transition hover:bg-[#1E293B] hover:text-[#F8FAFC]"
+              className="rounded-lg border border-slate-200 bg-white p-2 text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
             <div>
               <div className="flex items-center gap-2.5">
-                <h1 className="text-lg font-bold tracking-tight text-[#F8FAFC]">
+                <h1 className="text-lg font-bold tracking-tight text-slate-900">
                   {drive.company?.company_name} — {drive.job_title}
                 </h1>
                 {drive.company?.status === "PENDING_APPROVAL" ? (
@@ -240,7 +240,7 @@ export default function DrivePortalPage() {
                   </Badge>
                 )}
               </div>
-              <p className="text-xs text-[#94A3B8]">
+              <p className="text-xs text-slate-600">
                 {formatLPA(drive.ctc_lpa)} • {drive.drive_location || "Campus / Virtual"} • Date: {formatDate(drive.drive_date)}
               </p>
             </div>
@@ -256,7 +256,7 @@ export default function DrivePortalPage() {
             )}
             {drive.official_careers_url && (
               <a href={drive.official_careers_url} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="text-xs text-[#818CF8]">
+                <Button variant="outline" size="sm" className="text-xs text-[#0284C7]">
                   <Globe className="h-3.5 w-3.5" /> Official Careers
                 </Button>
               </a>
@@ -265,7 +265,7 @@ export default function DrivePortalPage() {
         </div>
 
         {/* Tab Navigation */}
-        <div className="mx-auto mt-4 flex max-w-7xl space-x-1 border-b border-[#1E293B]">
+        <div className="mx-auto mt-4 flex max-w-7xl space-x-1 border-b border-slate-200">
           {[
             { id: "overview", label: "Overview" },
             { id: "jd", label: "Job Description (JD)" },
@@ -279,8 +279,8 @@ export default function DrivePortalPage() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`border-b-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider transition ${
                 activeTab === tab.id
-                  ? "border-[#6366F1] text-[#818CF8]"
-                  : "border-transparent text-[#94A3B8] hover:text-[#F8FAFC]"
+                  ? "border-[#0284C7] text-[#0284C7]"
+                  : "border-transparent text-slate-600 hover:text-slate-900"
               }`}
             >
               {tab.label}
@@ -298,15 +298,15 @@ export default function DrivePortalPage() {
               <CardHeader>
                 <CardTitle>Recruitment Opportunity Summary</CardTitle>
               </CardHeader>
-              <p className="text-xs leading-relaxed text-[#94A3B8]">
+              <p className="text-xs leading-relaxed text-slate-600">
                 {drive.job_description_summary ||
                   "No summarized description provided. Refer to the official Job Description tab for skills, eligibility, and recruitment parameters."}
               </p>
 
-              <div className="grid grid-cols-2 gap-4 border-t border-[#1E293B] pt-4 text-xs">
+              <div className="grid grid-cols-2 gap-4 border-t border-slate-200 pt-4 text-xs">
                 <div>
                   <span className="text-[#64748B]">Recruiting Organization</span>
-                  <p className="font-semibold text-[#F8FAFC]">{drive.company?.company_name}</p>
+                  <p className="font-semibold text-slate-900">{drive.company?.company_name}</p>
                 </div>
                 <div>
                   <span className="text-[#64748B]">Offered CTC Package</span>
@@ -314,11 +314,11 @@ export default function DrivePortalPage() {
                 </div>
                 <div>
                   <span className="text-[#64748B]">Drive Format</span>
-                  <p className="font-semibold text-[#F8FAFC]">{drive.drive_type.replace("_", " ")}</p>
+                  <p className="font-semibold text-slate-900">{drive.drive_type.replace("_", " ")}</p>
                 </div>
                 <div>
                   <span className="text-[#64748B]">Drive Date</span>
-                  <p className="font-semibold text-[#F8FAFC]">{formatDate(drive.drive_date)}</p>
+                  <p className="font-semibold text-slate-900">{formatDate(drive.drive_date)}</p>
                 </div>
               </div>
             </Card>
@@ -329,23 +329,23 @@ export default function DrivePortalPage() {
                 <CardTitle>Drive Status & Progress</CardTitle>
               </CardHeader>
               <div className="space-y-3 text-xs">
-                <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                  <span className="text-[#94A3B8]">Candidates Evaluated</span>
-                  <span className="font-bold text-[#818CF8]">{evaluations.length}</span>
+                <div className="flex justify-between border-b border-slate-200 pb-2">
+                  <span className="text-slate-600">Candidates Evaluated</span>
+                  <span className="font-bold text-[#0284C7]">{evaluations.length}</span>
                 </div>
-                <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                  <span className="text-[#94A3B8]">Eligible Candidates</span>
+                <div className="flex justify-between border-b border-slate-200 pb-2">
+                  <span className="text-slate-600">Eligible Candidates</span>
                   <span className="font-bold text-[#10B981]">
                     {evaluations.filter((e) => e.eligibility_status === "ELIGIBLE").length}
                   </span>
                 </div>
-                <div className="flex justify-between border-b border-[#1E293B] pb-2">
-                  <span className="text-[#94A3B8]">Offers Extended</span>
+                <div className="flex justify-between border-b border-slate-200 pb-2">
+                  <span className="text-slate-600">Offers Extended</span>
                   <span className="font-bold text-[#EC4899]">{drive.offers?.length || 0}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#94A3B8]">Min ATS Threshold</span>
-                  <span className="font-bold text-[#F8FAFC]">{drive.minimum_ats_score} / 100</span>
+                  <span className="text-slate-600">Min ATS Threshold</span>
+                  <span className="font-bold text-slate-900">{drive.minimum_ats_score} / 100</span>
                 </div>
               </div>
 
@@ -367,15 +367,15 @@ export default function DrivePortalPage() {
           <div className="space-y-6">
             <Card className="space-y-6 p-6">
               <div>
-                <h3 className="text-base font-bold text-[#F8FAFC]">{drive.job_title}</h3>
-                <p className="text-xs text-[#818CF8] mt-0.5">Role: {drive.job_role || drive.job_title}</p>
+                <h3 className="text-base font-bold text-slate-900">{drive.job_title}</h3>
+                <p className="text-xs text-[#0284C7] mt-0.5">Role: {drive.job_role || drive.job_title}</p>
               </div>
 
               <div>
-                <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+                <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-600">
                   Job Description Summary
                 </h4>
-                <p className="text-xs leading-relaxed text-[#F8FAFC]">
+                <p className="text-xs leading-relaxed text-slate-900">
                   {drive.job_description_summary || "Please refer to the attached official PDF document."}
                 </p>
               </div>
@@ -398,14 +398,14 @@ export default function DrivePortalPage() {
                 </div>
 
                 <div>
-                  <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-[#818CF8]">
+                  <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-[#0284C7]">
                     Preferred Skills
                   </h4>
                   <div className="flex flex-wrap gap-1.5">
                     {prefSkills.map((s, idx) => (
                       <span
                         key={idx}
-                        className="rounded-lg bg-[#6366F1]/15 px-2.5 py-1 text-xs font-semibold text-[#818CF8]"
+                        className="rounded-lg bg-[#0284C7]/15 px-2.5 py-1 text-xs font-semibold text-[#0284C7]"
                       >
                         + {s}
                       </span>
@@ -414,7 +414,7 @@ export default function DrivePortalPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 border-t border-[#1E293B] pt-4">
+              <div className="flex items-center gap-3 border-t border-slate-200 pt-4">
                 {drive.jd_pdf_url && (
                   <a href={drive.jd_pdf_url} target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" size="sm">
@@ -424,7 +424,7 @@ export default function DrivePortalPage() {
                 )}
                 {drive.official_careers_url && (
                   <a href={drive.official_careers_url} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="sm" className="text-[#818CF8]">
+                    <Button variant="outline" size="sm" className="text-[#0284C7]">
                       <Globe className="h-4 w-4" /> Company Careers Link
                     </Button>
                   </a>
@@ -446,32 +446,32 @@ export default function DrivePortalPage() {
               </CardHeader>
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 text-xs">
-                <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-4">
+                <div className="rounded-xl border border-slate-200 bg-white p-4">
                   <span className="text-[#64748B] block mb-1">Eligible Departments</span>
                   <div className="flex flex-wrap gap-1">
                     {eligibleDepts.map((d) => (
-                      <span key={d} className="rounded bg-[#1E293B] px-2 py-0.5 font-bold text-[#818CF8]">
+                      <span key={d} className="rounded bg-slate-50 px-2 py-0.5 font-bold text-[#0284C7]">
                         {d}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-4">
+                <div className="rounded-xl border border-slate-200 bg-white p-4">
                   <span className="text-[#64748B] block mb-1">Minimum Academic Marks</span>
-                  <p className="font-bold text-[#F8FAFC]">UG Aggregate: {drive.minimum_ug_percentage || 60}%</p>
-                  <p className="text-[11px] text-[#94A3B8] mt-1">Min CGPA: {drive.minimum_cgpa ?? "N/A"}</p>
+                  <p className="font-bold text-slate-900">UG Aggregate: {drive.minimum_ug_percentage || 60}%</p>
+                  <p className="text-[11px] text-slate-600 mt-1">Min CGPA: {drive.minimum_cgpa ?? "N/A"}</p>
                 </div>
 
-                <div className="rounded-xl border border-[#1E293B] bg-[#0F172A] p-4">
+                <div className="rounded-xl border border-slate-200 bg-white p-4">
                   <span className="text-[#64748B] block mb-1">Backlogs & ATS Threshold</span>
-                  <p className="font-bold text-[#F8FAFC]">Max Allowed Backlogs: {drive.maximum_backlogs}</p>
-                  <p className="text-[11px] text-[#818CF8] mt-1">Min ATS Score: {drive.minimum_ats_score} / 100</p>
+                  <p className="font-bold text-slate-900">Max Allowed Backlogs: {drive.maximum_backlogs}</p>
+                  <p className="text-[11px] text-[#0284C7] mt-1">Min ATS Score: {drive.minimum_ats_score} / 100</p>
                 </div>
               </div>
 
-              <div className="rounded-lg bg-[#6366F1]/10 border border-[#6366F1]/30 p-4 text-xs text-[#94A3B8]">
-                <strong className="text-[#818CF8]">CRITICAL ELIGIBILITY RULE:</strong> Academic requirements are strict prerequisites. An applicant possessing a high ATS score (e.g. 95) who fails the minimum academic criteria (e.g. UG percentage or backlog limit) will strictly evaluate to <span className="font-bold text-[#EF4444]">NOT_ELIGIBLE</span>.
+              <div className="rounded-lg bg-[#0284C7]/10 border border-[#0284C7]/30 p-4 text-xs text-slate-600">
+                <strong className="text-[#0284C7]">CRITICAL ELIGIBILITY RULE:</strong> Academic requirements are strict prerequisites. An applicant possessing a high ATS score (e.g. 95) who fails the minimum academic criteria (e.g. UG percentage or backlog limit) will strictly evaluate to <span className="font-bold text-[#EF4444]">NOT_ELIGIBLE</span>.
               </div>
             </Card>
           </div>
@@ -491,14 +491,14 @@ export default function DrivePortalPage() {
                       placeholder="Search Candidate Name, Reg No, Dept..."
                       value={atsSearch}
                       onChange={(e) => setAtsSearch(e.target.value)}
-                      className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] pl-9 pr-3 py-2 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:border-[#6366F1] focus:outline-none"
+                      className="w-full rounded-lg border border-slate-200 bg-white pl-9 pr-3 py-2 text-xs text-slate-900 placeholder-[#64748B] focus:border-[#0284C7] focus:outline-none"
                     />
                   </div>
 
                   <select
                     value={atsEligibilityFilter}
                     onChange={(e) => setAtsEligibilityFilter(e.target.value)}
-                    className="w-full rounded-lg border border-[#1E293B] bg-[#0F172A] px-3 py-2 text-xs text-[#F8FAFC] focus:border-[#6366F1] focus:outline-none"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-900 focus:border-[#0284C7] focus:outline-none"
                   >
                     <option value="ALL">All Eligibility Statuses</option>
                     <option value="ELIGIBLE">Eligible Only</option>
@@ -538,30 +538,30 @@ export default function DrivePortalPage() {
                 <tbody className="divide-y divide-[#1E293B]">
                   {filteredEvaluations.length === 0 ? (
                     <tr>
-                      <td colSpan={7} className="p-8 text-center text-[#94A3B8]">
+                      <td colSpan={7} className="p-8 text-center text-slate-600">
                         No candidate evaluations found. Click "Run Eligibility Check" to evaluate students against this drive.
                       </td>
                     </tr>
                   ) : (
                     filteredEvaluations.map((ev) => (
                       <tr key={ev.id} className="table-row">
-                        <td className="px-4 py-3.5 font-semibold text-[#F8FAFC]">
+                        <td className="px-4 py-3.5 font-semibold text-slate-900">
                           <Link
                             href={`/students/${ev.student_id}`}
-                            className="hover:text-[#818CF8]"
+                            className="hover:text-[#0284C7]"
                           >
                             {ev.student?.name}
                           </Link>
                         </td>
-                        <td className="px-4 py-3.5 font-mono text-[#818CF8]">
+                        <td className="px-4 py-3.5 font-mono text-[#0284C7]">
                           {ev.student?.register_number}
                         </td>
-                        <td className="px-4 py-3.5 text-[#94A3B8]">{ev.student?.department}</td>
-                        <td className="px-4 py-3.5 text-[#F8FAFC]">
+                        <td className="px-4 py-3.5 text-slate-600">{ev.student?.department}</td>
+                        <td className="px-4 py-3.5 text-slate-900">
                           {ev.student?.ug_percentage}% ({ev.student?.cgpa ?? "—"})
                         </td>
                         <td className="px-4 py-3.5">
-                          <span className="font-extrabold text-[#818CF8] text-sm">
+                          <span className="font-extrabold text-[#0284C7] text-sm">
                             {ev.ats_score}
                           </span>
                           <span className="text-[10px] text-[#64748B]"> / 100</span>
@@ -629,14 +629,14 @@ export default function DrivePortalPage() {
                     <tbody className="divide-y divide-[#1E293B]">
                       {drive.offers.map((off: any) => (
                         <tr key={off.id} className="table-row">
-                          <td className="px-4 py-3 font-semibold text-[#F8FAFC]">
-                            <Link href={`/students/${off.student_id}`} className="hover:text-[#818CF8]">
+                          <td className="px-4 py-3 font-semibold text-slate-900">
+                            <Link href={`/students/${off.student_id}`} className="hover:text-[#0284C7]">
                               {off.student?.name}
                             </Link>
                           </td>
-                          <td className="px-4 py-3 font-mono text-[#818CF8]">{off.student?.register_number}</td>
-                          <td className="px-4 py-3 text-[#94A3B8]">{off.student?.department}</td>
-                          <td className="px-4 py-3 text-[#94A3B8]">{off.job_role}</td>
+                          <td className="px-4 py-3 font-mono text-[#0284C7]">{off.student?.register_number}</td>
+                          <td className="px-4 py-3 text-slate-600">{off.student?.department}</td>
+                          <td className="px-4 py-3 text-slate-600">{off.job_role}</td>
                           <td className="px-4 py-3 font-bold text-[#10B981]">{formatLPA(off.ctc_lpa)}</td>
                           <td className="px-4 py-3">
                             <Badge variant="success">{off.offer_status}</Badge>
@@ -656,43 +656,43 @@ export default function DrivePortalPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
               <Card className="p-4">
-                <span className="text-[11px] text-[#94A3B8]">Participated</span>
-                <div className="mt-1 text-xl font-bold text-[#F8FAFC]">
+                <span className="text-[11px] text-slate-600">Participated</span>
+                <div className="mt-1 text-xl font-bold text-slate-900">
                   {stats?.studentsParticipated ?? 0}
                 </div>
               </Card>
 
               <Card className="p-4">
-                <span className="text-[11px] text-[#94A3B8]">Selected</span>
+                <span className="text-[11px] text-slate-600">Selected</span>
                 <div className="mt-1 text-xl font-bold text-[#10B981]">
                   {stats?.studentsSelected ?? 0}
                 </div>
               </Card>
 
               <Card className="p-4">
-                <span className="text-[11px] text-[#94A3B8]">Total Offers</span>
-                <div className="mt-1 text-xl font-bold text-[#818CF8]">
+                <span className="text-[11px] text-slate-600">Total Offers</span>
+                <div className="mt-1 text-xl font-bold text-[#0284C7]">
                   {stats?.totalOffers ?? 0}
                 </div>
               </Card>
 
               <Card className="p-4">
-                <span className="text-[11px] text-[#94A3B8]">Highest CTC</span>
+                <span className="text-[11px] text-slate-600">Highest CTC</span>
                 <div className="mt-1 text-xl font-bold text-[#F59E0B]">
                   {formatLPA(stats?.highestCtc)}
                 </div>
               </Card>
 
               <Card className="p-4">
-                <span className="text-[11px] text-[#94A3B8]">Average CTC</span>
+                <span className="text-[11px] text-slate-600">Average CTC</span>
                 <div className="mt-1 text-xl font-bold text-[#10B981]">
                   {formatLPA(stats?.averageCtc)}
                 </div>
               </Card>
 
               <Card className="p-4">
-                <span className="text-[11px] text-[#94A3B8]">Lowest CTC</span>
-                <div className="mt-1 text-xl font-bold text-[#94A3B8]">
+                <span className="text-[11px] text-slate-600">Lowest CTC</span>
+                <div className="mt-1 text-xl font-bold text-slate-600">
                   {formatLPA(stats?.lowestCtc)}
                 </div>
               </Card>

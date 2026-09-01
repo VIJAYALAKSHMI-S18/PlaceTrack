@@ -23,10 +23,10 @@ export default async function ManagerPlacementTeamPage() {
     <DashboardShell role="MANAGER" user={user}>
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
             Placement Team Directory
           </h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <p className="text-xs font-medium text-slate-600">
             DEPARTMENT COORDINATORS & PLACEMENT OFFICERS
           </p>
         </div>
@@ -41,12 +41,12 @@ export default async function ManagerPlacementTeamPage() {
               <Card key={member.id} className="p-5 space-y-4">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#6366F1]/20 text-[#818CF8]">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0284C7]/20 text-[#0284C7]">
                       <UserCheck className="h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-[#F8FAFC]">{member.name}</h3>
-                      <p className="text-[11px] text-[#818CF8]">
+                      <h3 className="text-sm font-bold text-slate-900">{member.name}</h3>
+                      <p className="text-[11px] text-[#0284C7]">
                         {member.placementTeamProfile?.designation || "Placement Officer"}
                       </p>
                     </div>
@@ -54,7 +54,7 @@ export default async function ManagerPlacementTeamPage() {
                   <Badge variant="success" size="sm">Active</Badge>
                 </div>
 
-                <div className="space-y-2 text-xs text-[#94A3B8] border-t border-[#1E293B] pt-3">
+                <div className="space-y-2 text-xs text-slate-600 border-t border-slate-200 pt-3">
                   <div className="flex items-center gap-2">
                     <Mail className="h-3.5 w-3.5 text-[#64748B]" />
                     <span>{member.email}</span>
@@ -65,7 +65,7 @@ export default async function ManagerPlacementTeamPage() {
                   </div>
                 </div>
 
-                <div className="border-t border-[#1E293B] pt-3">
+                <div className="border-t border-slate-200 pt-3">
                   <div className="mb-1.5 text-[10px] font-semibold uppercase text-[#64748B]">
                     Assigned Departments
                   </div>
@@ -73,7 +73,7 @@ export default async function ManagerPlacementTeamPage() {
                     {depts.map((d) => (
                       <span
                         key={d}
-                        className="rounded bg-[#1E293B] px-2 py-0.5 text-xs font-bold text-[#94A3B8]"
+                        className="rounded bg-slate-50 px-2 py-0.5 text-xs font-bold text-slate-600"
                       >
                         {d}
                       </span>

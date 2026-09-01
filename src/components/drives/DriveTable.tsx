@@ -256,7 +256,7 @@ export const DriveTable: React.FC<DriveTableProps> = ({ role }) => {
                         {depts.slice(0, 3).map((d) => (
                           <span
                             key={d}
-                            className="rounded bg-[#1E293B] px-1.5 py-0.5 text-[10px] font-bold text-slate-600"
+                            className="rounded bg-slate-50 px-1.5 py-0.5 text-[10px] font-bold text-slate-600"
                           >
                             {d}
                           </span>

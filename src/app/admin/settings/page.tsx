@@ -77,10 +77,10 @@ export default function AdminSettingsPage() {
     <DashboardShell role="ADMIN">
       <div className="space-y-6 max-w-4xl">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
             System Configuration & ATS Engine Settings
           </h1>
-          <p className="text-xs font-medium text-[#94A3B8]">
+          <p className="text-xs font-medium text-slate-600">
             CONFIGURE WEIGHTED SCORING ENGINE PARAMETERS AND ELIGIBILITY TOLERANCES
           </p>
         </div>

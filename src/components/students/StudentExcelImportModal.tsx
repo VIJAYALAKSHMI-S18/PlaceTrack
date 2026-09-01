@@ -134,8 +134,8 @@ export const StudentExcelImportModal: React.FC<StudentExcelImportModalProps> = (
     >
       <div className="space-y-5">
         {/* Template download row */}
-        <div className="flex items-center justify-between rounded-lg border border-[#1E293B] bg-[#0F172A] p-3">
-          <div className="flex items-center gap-2 text-xs text-[#94A3B8]">
+        <div className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-3">
+          <div className="flex items-center gap-2 text-xs text-slate-600">
             <FileSpreadsheet className="h-4 w-4 text-[#10B981]" />
             <span>Need the official template?</span>
           </div>
@@ -143,16 +143,16 @@ export const StudentExcelImportModal: React.FC<StudentExcelImportModalProps> = (
             variant="ghost"
             size="sm"
             onClick={downloadSampleTemplate}
-            className="text-xs text-[#818CF8]"
+            className="text-xs text-[#0284C7]"
           >
             <Download className="h-3.5 w-3.5" /> Download Template
           </Button>
         </div>
 
         {/* Upload Box */}
-        <label className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#1E293B] bg-[#0F172A]/50 p-6 text-center transition hover:border-[#6366F1] cursor-pointer">
-          <Upload className="h-8 w-8 text-[#818CF8]" />
-          <span className="mt-2 text-xs font-semibold text-[#F8FAFC]">
+        <label className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-200 bg-white/50 p-6 text-center transition hover:border-[#0284C7] cursor-pointer">
+          <Upload className="h-8 w-8 text-[#0284C7]" />
+          <span className="mt-2 text-xs font-semibold text-slate-900">
             {file ? file.name : "Click or drag & drop .xlsx or .xls file"}
           </span>
           <span className="text-[10px] text-[#64748B] mt-1">
@@ -167,22 +167,22 @@ export const StudentExcelImportModal: React.FC<StudentExcelImportModalProps> = (
         </label>
 
         {loading && (
-          <div className="py-4 text-center text-xs text-[#818CF8] animate-pulse">
+          <div className="py-4 text-center text-xs text-[#0284C7] animate-pulse">
             Validating columns, checking duplicates and parsing student records...
           </div>
         )}
 
         {/* Validation Preview Card */}
         {preview && (
-          <div className="space-y-4 rounded-xl border border-[#1E293B] bg-[#0F172A] p-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+          <div className="space-y-4 rounded-xl border border-slate-200 bg-white p-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600">
               Pre-Import Verification Summary
             </h4>
 
             <div className="grid grid-cols-4 gap-2 text-center text-xs">
-              <div className="rounded-lg bg-[#111827] p-2.5 border border-[#1E293B]">
-                <div className="text-base font-bold text-[#F8FAFC]">{preview.totalRows}</div>
-                <div className="text-[10px] text-[#94A3B8]">Total Rows</div>
+              <div className="rounded-lg bg-white p-2.5 border border-slate-200">
+                <div className="text-base font-bold text-slate-900">{preview.totalRows}</div>
+                <div className="text-[10px] text-slate-600">Total Rows</div>
               </div>
               <div className="rounded-lg bg-[#10B981]/10 p-2.5 border border-[#10B981]/30">
                 <div className="text-base font-bold text-[#10B981]">{preview.validCount}</div>
@@ -212,11 +212,11 @@ export const StudentExcelImportModal: React.FC<StudentExcelImportModalProps> = (
                 </Button>
 
                 {showErrors && (
-                  <div className="mt-3 max-h-48 overflow-y-auto rounded-lg border border-[#EF4444]/30 bg-[#111827] p-3 text-xs space-y-2">
+                  <div className="mt-3 max-h-48 overflow-y-auto rounded-lg border border-[#EF4444]/30 bg-white p-3 text-xs space-y-2">
                     {preview.invalidRows.map((inv: any, idx: number) => (
-                      <div key={idx} className="border-b border-[#1E293B] pb-2 last:border-0 last:pb-0">
+                      <div key={idx} className="border-b border-slate-200 pb-2 last:border-0 last:pb-0">
                         <span className="font-bold text-[#EF4444]">Row {inv.row} ({inv.data?.name || "Unnamed"}):</span>
-                        <ul className="list-disc list-inside text-[#94A3B8] text-[11px] mt-0.5">
+                        <ul className="list-disc list-inside text-slate-600 text-[11px] mt-0.5">
                           {inv.errors.map((err: string, eIdx: number) => (
                             <li key={eIdx}>{err}</li>
                           ))}
